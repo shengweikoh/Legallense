@@ -1,0 +1,11 @@
+.typing-container {
+  font-family: 'Bebas Neue', sans-serif;
+    font-size: 50px;
+    color: #444444;
+    margin:30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden; /* Hides excess letters if needed */
+    white-space: nowrap; /* Keeps the letters in a single line */
+  }

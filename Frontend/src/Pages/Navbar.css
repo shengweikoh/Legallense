@@ -1,0 +1,74 @@
+.navbar {
+    
+    background-color: #f4f4f2;
+    height:90px;
+    position: fixed; /* Keeps it at the top */
+    top: 0; /* Aligns it to the top */
+    left: 0;
+    width:100%;
+    z-index: 1000; /* Ensures it stays above other elements */
+    border-bottom: 1px solid rgb(48, 47, 47);
+
+   
+}
+
+.navbar-brand {
+    font-family: 'Bebas Neue', sans-serif !important;
+    font-size: 30px !important;  /* Adjust as needed */
+    padding-left:30px;
+    text-decoration: none; /* Removes default underline */
+    color: inherit; /* Keeps default text color */
+    transition: font-size 0.3s ease; 
+    display: inline-block; 
+ }
+
+ .navbar-brand:hover {
+    font-size: 26px !important; /* Increase font size on hover */
+}
+ 
+
+.upload{
+
+    background-color: rgb(48, 48, 48);
+    width:190px;
+    HEIGHT:50px;
+    border-radius:50px;
+    margin-right:20px;
+    transition: background-color 0.3s ease;
+    border-color:rgb(29, 37, 56);
+}
+
+.login{
+
+    background-color: rgb(48, 48, 48);
+    width:100px;
+    HEIGHT:50px;
+    border-radius:50px;
+    margin-right:20px;
+    transition: background-color 0.3s ease;
+    border-color:rgb(29, 37, 56);
+}
+
+.login:hover {
+
+    background-color: rgb(245, 245, 245);
+    color:rgb(0, 0, 0); /* Changes background color on hover */
+    border-color:rgb(22, 22, 22);
+}
+
+
+
+.upload:hover {
+
+    background-color: rgb(245, 245, 245);
+    color:rgb(0, 0, 0); /* Changes background color on hover */
+    border-color:rgb(22, 22, 22);
+}
+
+.button-container {
+    display: flex; /* Optional: adds space between the buttons */
+    align-items: center; /* Aligns buttons vertically */
+  }
+
+
+
