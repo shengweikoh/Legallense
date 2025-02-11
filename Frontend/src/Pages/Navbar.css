@@ -7,7 +7,7 @@
     left: 0;
     width:100%;
     z-index: 1000; /* Ensures it stays above other elements */
-    border-bottom: 1px solid rgb(48, 47, 47);
+    border-bottom: 1px solid rgb(48, 47, 47,);
 
    
 }
@@ -28,9 +28,10 @@
  
 
 .upload{
-
-    background-color: rgb(48, 48, 48);
-    width:190px;
+    font-size:11.5px;
+    color:white;
+    background-color: rgb(48, 48, 48,0.9);
+    width:100px;
     HEIGHT:50px;
     border-radius:50px;
     margin-right:20px;
@@ -39,8 +40,9 @@
 }
 
 .login{
-
-    background-color: rgb(48, 48, 48);
+    font-size:15px;
+    color:white;
+    background-color: rgb(48, 48, 48,0.9);
     width:100px;
     HEIGHT:50px;
     border-radius:50px;

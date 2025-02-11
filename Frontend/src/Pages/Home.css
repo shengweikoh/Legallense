@@ -20,3 +20,29 @@
     height:3000px;
  }
 
+.description-container{
+
+    width:100%;
+
+    border:bold;
+    margin:40px;
+    padding:40px;
+    border-bottom:1px solid rgb(71, 70, 70,0.2) ;
+
+}
+
+.smoltitle{
+    font-size:14px;
+
+}
+
+.bigtitle{
+
+    font-size:30px;
+
+}
+
+.description {
+    font-size:16px;
+}
+
