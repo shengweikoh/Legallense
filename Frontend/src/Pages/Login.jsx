@@ -8,8 +8,7 @@ const Login = () => {
 
     return (
 
-       
-   
+      
       <div className="login-page">
 
             <motion.div
@@ -55,10 +54,6 @@ const Login = () => {
               </div>
               <button type="submit">Login</button>
             </form>
-
-
-
-
           </div>
         </div>
         
