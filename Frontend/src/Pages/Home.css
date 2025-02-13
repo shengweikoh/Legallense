@@ -3,6 +3,7 @@
     font-family: 'Bebas Neue', sans-serif;
     width:100%;
     font-size:100px;
+    height:1200px;
     padding:350px;
     color:rgb(43, 42, 42);
     transition: font-size 1s ease; 
@@ -11,8 +12,8 @@
 
 .title:hover {
     font-size:120px;
-
 }
+
 .home-container-fluid{
     background-color: #f4f4f2;  /* this is the entire container. */
     margin-top:75px;
@@ -23,11 +24,9 @@
 .description-container{
 
     width:100%;
-
     border:bold;
-    margin:40px;
-    padding:40px;
     border-bottom:1px solid rgb(71, 70, 70,0.2) ;
+    
 
 }
 
@@ -37,7 +36,7 @@
 }
 
 .bigtitle{
-
+    font-family: 'Bebas Neue', sans-serif;
     font-size:30px;
 
 }
@@ -45,4 +44,9 @@
 .description {
     font-size:16px;
 }
+
+
+
+
+
 
