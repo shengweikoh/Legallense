@@ -21,27 +21,29 @@ const Login = () => {
         <div className="content-wrapper" data-aos="zoom-in">
 
           <div className="login-container">
-            <h1>Login to Your Account</h1>
+            <h1 className = "LegaLens">LegaLens.</h1>
             <form>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
+                <label className="user-name">Username</label>
                 <input
+                  className = "userinput"
                   type="text"
-                  id="username"
+                  id="userinput"
                   placeholder="Enter your username"
                   required
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">
+                <label className="password">
                   Password{' '}
                   <span className="toggle-password">
                     Show
                   </span>
                 </label>
                 <input
+                  className = "passwordinput"
                   type="password"
-                  id="password"
+                  id="passwordinput"
                   placeholder="Enter your password"
                   required
                 />
