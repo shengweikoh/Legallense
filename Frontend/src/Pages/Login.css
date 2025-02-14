@@ -3,8 +3,16 @@
     background-color:  #f4f4f2;
     position: relative;
     min-height: 100vh;
+    
 
   }
+
+.LegaLens{
+  color:black !important;
+  font-size:60px !important;
+  font-family: 'Bebas Neue', sans-serif !important;
+  
+}
   
   .content-wrapper {
     display: flex;
@@ -18,9 +26,9 @@
     width: 100%;
     margin: 20px;
     padding: 40px 30px;
-    background-color: rgba(30, 30, 30, 0.9); /* Updated to dark background */
+    background-color: #f4f4f2;/* Updated to dark background */
     border-radius: 30px;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5); /* Increased shadow for contrast */
+    border-bottom: black;
     position: relative;
     opacity: 100;
     transform: translateY(20px);
@@ -88,7 +96,7 @@
   
   .form-group .toggle-password {
     font-size: 0.9rem;
-    color: #00fe9b; /* Bright color for toggle */
+    color: #8debc7; /* Bright color for toggle */
     cursor: pointer;
     user-select: none;
   }
@@ -101,9 +109,36 @@
     text-align: right;
     margin-bottom: 30px;
   }
+
+.user-name{
+  color:black !important;
+
+}
+
+.password{
+  color:black !important;
+}
+
+
+.userinput{
+  background-color: white !important;
+  color:black !important;
+  height:40px;
+  width:80% !important;
+  
+}
+
+
+.passwordinput{
+  background-color: white !important;
+  color:black !important;
+  height:40px;
+
+}
+
   
   .auth-links a {
-    color: #00fe9b;
+    color:black;
     text-decoration: none;
     font-size: 0.9rem;
   }
@@ -122,7 +157,7 @@
   
   button[type='submit'] {
     padding: 14px;
-    background: linear-gradient(90deg, #00fe9b, #ff53cd);
+    background: linear-gradient(90deg, #4c5e99, #a7d5fb);
     color: #ffffff;
     border: none;
     border-radius: 30px;
@@ -132,7 +167,7 @@
   }
   
   button[type='submit']:hover {
-    background: linear-gradient(90deg, #ff53cd, #00fe9b);
+    background: linear-gradient(90deg, #426352, #00fe9b);
   }
   
   /* Responsive styles */
