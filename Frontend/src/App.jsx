@@ -6,7 +6,9 @@ import Home from "./Pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Pages/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Login from './Pages/Login.jsx';    
+import Login from './Pages/Login.jsx';  
+import UploadContract from "./Pages/Upload.jsx";
+import Dashboard  from './Pages/Dashboard.jsx';   
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
     <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/upload" element={<UploadContract />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
 
     </Routes>
