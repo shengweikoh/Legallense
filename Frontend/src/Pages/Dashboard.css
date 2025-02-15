@@ -1,0 +1,42 @@
+/* Dashboard.css */
+
+/* Custom styles for the Dashboard component */
+
+/* You can adjust container padding, card styling, etc. as needed */
+
+.headcontainer{
+    height:900px;
+    padding:100px;
+    width:100%;
+    background-color: #f4f4f2; 
+
+}
+
+.history{
+  background-color:#0D6EFD;
+  color:white;
+}
+.container {
+    background-color: #f4f4f2; 
+    /* Example: max-width: 1200px; */
+  }
+  
+  /* Optional: Customize card headers or titles */
+  .card-header h5 {
+    margin-bottom: 0;
+  }
+
+.lead{
+    font-size:30px;
+}
+  
+  /* Adjust spacing or font colors if desired */
+  h1,
+  h2,
+  h5 {
+    /* Example: color: #333; */
+  }
+
+  
+  /* If needed, override Bootstrap defaults or add additional styles */
+  

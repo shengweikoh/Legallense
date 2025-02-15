@@ -1,0 +1,17 @@
+.custom-bg{
+    background-color:  #f4f4f2;
+
+}
+
+.card-header{
+    background-color:white;
+}
+
+.btn.btn-primary.Analyze {
+    background-color:#0D6EFD; /* Use your desired color */
+    background-image: none !important;
+  }
+
+  .btn.btn-primary.Analyze:hover {
+    background-color: #0A58CA !important; /* Darker on hover */
+  }
