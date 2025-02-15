@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./Upload.css";
+import { motion } from "framer-motion";
 
 export default function UploadContract() {
   const [file, setFile] = useState(null);
@@ -24,7 +25,13 @@ export default function UploadContract() {
   };
 
   return (
+
     <div className="container-fluid min-vh-100 d-flex align-items-center justify-content-center custom-bg" >
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 2, y: 0 }}
+            transition={{ duration:0.5 }}>
+              
       <div className="card mx-auto" style={{ maxWidth: '2000px' }}>
         <div className="card-header">
           <h5 className="card-title">Upload Contract</h5>
@@ -69,6 +76,8 @@ export default function UploadContract() {
           </form>
         </div>
       </div>
+      </motion.div>
     </div>
+   
   );
 }
