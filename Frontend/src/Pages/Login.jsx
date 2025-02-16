@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import NavBar from './Navbar.jsx';
 import './Login.css';
 import { motion } from "framer-motion";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Login = () => {
 

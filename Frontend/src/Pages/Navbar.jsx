@@ -3,6 +3,7 @@ import "./Navbar.css";
 import Logo from "./Animation/LegalLense.png"
 import { useNavigate } from 'react-router-dom';
 import { GavelIcon, HistoryIcon, UploadIcon, HomeIcon, Home } from "lucide-react";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
 const Navbar = () => {
@@ -26,7 +27,7 @@ const Navbar = () => {
                 <Link to="/Dashboard">
                     <button className="upload">Find out more</button>
                 </Link>
-                <button className = "login" onClick = {handleLoginClick}>Login</button>
+                <button className = "login">Login</button>
                 </div>
             </div>
 

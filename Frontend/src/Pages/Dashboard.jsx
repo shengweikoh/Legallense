@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import "./Dashboard.css"; // Import custom CSS
 import { motion } from "framer-motion";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 export default function Dashboard() {
   return (

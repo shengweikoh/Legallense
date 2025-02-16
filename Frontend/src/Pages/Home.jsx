@@ -5,6 +5,7 @@ import TypingEffect from "./Animation/Typing";
 import chatbotGif from "./Animation/Chatbot.gif";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
 gsap.registerPlugin(ScrollTrigger);
