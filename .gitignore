@@ -1,0 +1,8 @@
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+### DS_Store ###
+/serviceAccountKey.json
