@@ -1,0 +1,35 @@
+.custom-bg{
+    background-color:  #f4f4f2;
+    padding-top:120px;
+
+
+}
+
+.card-header{
+    background-color:white;
+}
+
+.btn.btn-primary.Analyze {
+    background-color:#0D6EFD; /* Use your desired color */
+    background-image: none !important;
+    width:150px;
+  }
+
+  .btn.btn-primary.Analyze:hover {
+    background-color: #0A58CA !important; /* Darker on hover */
+  }
+.contractdetails{
+    width:60%;
+}
+
+.Analyze2{
+    margin-left:930px;
+    margin-top:-10px;
+    border-radius:10px;
+    background-color:#0D6EFD;
+    height:40px;
+}
+.Analyze2:hover {
+    background-color: #0A58CA !important; /* Darker on hover */
+  }
+
