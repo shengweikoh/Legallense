@@ -3,24 +3,31 @@
     background-color:  #f4f4f2;
     position: relative;
     min-height: 100vh;
-
   }
+
+.LegaLens{
+  color:black !important;
+  font-size:100px !important;
+  font-family: 'Bebas Neue', sans-serif !important;
+  padding-right:30px;
+  
+}
   
   .content-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: 80vh;
   }
   
   .login-container {
-    max-width: 600px;
+    max-width: 450px;
     width: 100%;
-    margin: 20px;
-    padding: 40px 30px;
-    background-color: rgba(30, 30, 30, 0.9); /* Updated to dark background */
+    margin-left: 31%;
+    padding: 30px 20px;
+    background-color:  #f4f4f2;/* Updated to dark background */
     border-radius: 30px;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5); /* Increased shadow for contrast */
+    border-bottom: black;
     position: relative;
     opacity: 100;
     transform: translateY(20px);
@@ -88,7 +95,7 @@
   
   .form-group .toggle-password {
     font-size: 0.9rem;
-    color: #00fe9b; /* Bright color for toggle */
+    color: #8debc7; /* Bright color for toggle */
     cursor: pointer;
     user-select: none;
   }
@@ -101,9 +108,41 @@
     text-align: right;
     margin-bottom: 30px;
   }
+
+.user-name{
+  color:black !important;
+
+}
+
+.password{
+  color:black !important;
+}
+
+
+.userinput{
+  background-color: white !important;
+  color:black !important;
+  height:40px;
+  width:100% !important;
+  border-color:rgb(184, 184, 184) !important;
+  
+  
+}
+
+
+.passwordinput{
+  background-color: white !important;
+  color:black !important;
+  height:40px;
+  width:100% !important;
+  border-color:rgb(184, 184, 184) !important;
+
+
+}
+
   
   .auth-links a {
-    color: #00fe9b;
+    color:black;
     text-decoration: none;
     font-size: 0.9rem;
   }
@@ -113,26 +152,28 @@
   }
   
   .register-link {
-    margin-right: 110px;
+    margin-right: 130px;
   }
+
   
   .forgot-password-link {
-    margin-left: auto;
+    margin-left: 200px;
+
   }
   
   button[type='submit'] {
-    padding: 14px;
-    background: linear-gradient(90deg, #00fe9b, #ff53cd);
+    padding: 10px;
+    background: linear-gradient(90deg, #4c5b8d, #4c5b8d);
     color: #ffffff;
-    border: none;
-    border-radius: 30px;
+    height:50px;
+    border-radius: 10px;
     font-size: 1.1rem;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
   }
   
   button[type='submit']:hover {
-    background: linear-gradient(90deg, #ff53cd, #00fe9b);
+    background: linear-gradient(90deg, #61a38a, #61a38a);
   }
   
   /* Responsive styles */

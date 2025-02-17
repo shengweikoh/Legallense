@@ -13,7 +13,7 @@
     "bootstrap": "^5.3.3",
     "framer-motion": "^12.4.1",
     "gsap": "^3.12.7",
-    "my-react-app": "file:",
+    "lucide-react": "^0.475.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.5"

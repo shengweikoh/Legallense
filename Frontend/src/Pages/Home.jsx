@@ -1,13 +1,51 @@
 import "./Home.css";
-import React from "react";
+import React, { useEffect, useRef } from 'react';
 import { motion } from "framer-motion";
 import TypingEffect from "./Animation/Typing";
-import chatbotGif from "./Animation/Chatbot.gif"
-import MyComponent from "./Animation/ScrollEffect.jsx"
+import chatbotGif from "./Animation/Chatbot.gif";
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 const Home = () => {
+    
+    const descriptionRef = useRef(null);
+    useEffect(() => {
+        // Select all elements with the class 'description'
+        const descriptions = gsap.utils.toArray('.description');
+        
+        // Loop over each element and apply the animation
+        descriptions.forEach((el) => {
+          gsap.fromTo(
+            el,
+            {
+              // Initial state: no padding/margin and fully transparent
+              padding: "0px",
+              margin: "0px",
+              opacity: 30,
+            },
+            {
+              // Final state: desired padding/margin and fully visible
+              padding: "20px",  // adjust these values as needed
+              margin: "20px",
+              opacity: 1,
+              duration: 0.5,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top bottom-=100", // when the top of the element reaches 90% of the viewport height
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        });
+      }, []);
+
+
     return (
         <div className="home-container-fluid">
             <div className="title">
@@ -25,80 +63,86 @@ const Home = () => {
             </div>
 
 
-           <MyComponent/>
 
-            <div class="description-container">
-                <div class="row g-10">
-                    <div class="col-md-1">
-                    <div class="p-2 smoltitle">01/</div>
+           <div className="description-container">
+
+                <div className="row g-10">
+                    <div className="col-md-1">
+                    <div className="p-2 smoltitle">01/</div>
                     </div>
-                    <div class="col-md-5">
-                    <div class="bigtitle ">What we do </div>
+                    <div className="col-md-5">
+                    <div className="bigtitle">What we do</div>
                     </div>
-                    <div class="col-md-5">
-                    <div class="p-3 description ">Description Description Description Description Description Description Description Description</div>
-                    </div>
-                </div>
-                </div>
-
-
-                <div class="description-container">
-                <div class="row g-10 c-20">
-                    <div class="col-md-1">
-                    <div class="p-2 smoltitle">02/</div>
-                    </div>
-                    <div class="col-md-5">
-                    <div class="bigtitle ">How we provide </div>
-                    </div>
-                    <div class="col-md-5">
-                    <div class="p-3 description ">Description Description Description Description Description Description Description Description
-
-                    Description Description Description Description Description Description Description Description
-                    Description Description Description Description Description Description Description Description
-                    Description Description Description Description Description Description Description Description
-                    Description Description Description Description Description Description Description Description
-
-
-
-                    </div>
+                    <div className="col-md-5">
+                    <div ref={descriptionRef} className="p-3 description">
+                            hi
+                        </div>
                     </div>
                 </div>
                 </div>
 
-                <div class="description-container">
-                <div class="row g-10">
-                    <div class="col-md-1">
-                    <div class="p-2 smoltitle">03/</div>
+                    <div className="description-container">
+                    <div className="row g-10 c-20">
+                        <div className="col-md-1">
+                        <div className="p-2 smoltitle">02/</div>
+                        </div>
+                        <div className="col-md-5">
+                        <div className="bigtitle">How we provide</div>
+                        </div>
+                        <div className="col-md-5">
+                        <div ref={descriptionRef} className="p-3 description">
+                            Description Description Description Description Description Description Description
+                            Description Description Description Description Description Description Description
+                            Description Description Description Description Description Description Description
+                            Description Description Description Description Description Description Description
+                            Description Description Description Description Description Description Description
+                        </div>
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                    <div class="bigtitle ">What we do </div>
                     </div>
-                    <div class="col-md-5">
-                    <div class="p-3 description ">Description Description Description Description Description Description Description Description</div>
+
+                    <div className="description-container">
+                    <div className="row g-10">
+                        <div className="col-md-1">
+                        <div className="p-2 smoltitle">03/</div>
+                        </div>
+                        <div className="col-md-5">
+                        <div className="bigtitle">What we do</div>
+                        </div>
+                        <div className="col-md-5">
+                        <div className="p-3 description">
+                            Description Description Description Description Description Description Description
+                            Description Description Description Description Description Description Description
+                            Description Description Description Description Description Description Description
+                            Description Description Description Description Description Description Description
+                            Description Description Description Description Description Description Description
+                        </div>
+                        </div>
                     </div>
-                </div>
-                </div>
-
-                <div class="description-container">
-                <div class="row g-10">
-                    <div class="col-md-1">
-                    <div class="p-2 smoltitle">04/</div>
                     </div>
-                    <div class="col-md-5">
-                    <div class="bigtitle ">What we do </div>
-                    </div>
-                    <div class="col-md-5">
-                    <div class="p-3 description ">Description Description Description Description Description Description Description Description</div>
-                    </div>
-                </div>
-                </div>
+
+                        <div className="description-container">
+                        <div className="row g-10">
+                            <div className="col-md-1">
+                            <div className="p-2 smoltitle">04/</div>
+                            </div>
+                            <div className="col-md-5">
+                            <div className="bigtitle">What we do</div>
+                            </div>
+                            <div className="col-md-5">
+                            <div className="p-3 description">
+                                Description Description Description Description Description Description Description
+                                Description Description Description Description Description Description Description
+                                Description Description Description Description Description Description Description
+                                Description Description Description Description Description Description Description
+                                Description Description Description Description Description Description Description
+                            </div>
+                            </div>
+                        </div>
+                        </div>
 
 
-
-
-
-
-
+         
 
 
 
