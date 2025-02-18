@@ -1,0 +1,26 @@
+.page{
+    background-color: #f4f4f2; 
+    width:100vw;
+    height:100vh;    !important;
+}
+
+.analysiscontainer {
+    display: flex;
+    justify-content: center;  /* Centers horizontally */
+    align-items: center;  /* Centers vertically (if needed) */
+    text-align: center;
+      /* Centers text inside */
+    padding-top:10vh;
+}
+
+.contractdetails2{
+    margin-right:10vh;
+
+}
+.card.result{
+    width:43vw;
+    margin-right:100px;
+   
+}
+
+
