@@ -27,7 +27,10 @@ const Navbar = () => {
                 <Link to="/Dashboard">
                     <button className="upload">Find out more</button>
                 </Link>
+
+                <Link to = "/Login">
                 <button className = "login">Login</button>
+                </Link>
                 </div>
             </div>
 

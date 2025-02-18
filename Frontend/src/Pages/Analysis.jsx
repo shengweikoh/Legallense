@@ -1,15 +1,17 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import "./Analysis.css";
 
 
 export default function AnalysisPage() {
   return (
-    <div className="container-fluid m-5">
-      <div className="row">
+   <div className = "page">
+    <div className="container-fluid m-5 analysiscontainer">
+      <div className="row ">
         {/* Left Section: Contract Details */}
-        <div className="col-md-7">
-          <div className="card contractdetails mb-4">
+        <div className="col-md-6">
+          <div className="card contractdetails2 mb-4">
             <div className="card-header">
               <h5 className="card-title">Contract Details</h5>
             </div>
@@ -18,6 +20,7 @@ export default function AnalysisPage() {
                 className="overflow-auto"
                 style={{
                   height: "270px",
+                  width:"100%",  
                   border: "1px solid #ddd",
                   padding: "10px",
                 }}
@@ -39,8 +42,8 @@ export default function AnalysisPage() {
         </div>
 
         {/* Right Section: Tabs */}
-        <div className="col-md-5">
-          <div className="card">
+        <div className="col-md-6">
+          <div className="card  result">
             <div className="card-header">
               <ul className="nav nav-tabs card-header-tabs" id="analysisTabs" role="tablist">
                 <li className="nav-item">
@@ -136,6 +139,8 @@ export default function AnalysisPage() {
           </div>
         </div>
       </div>  
+    </div>
+
     </div>
   );
 }
