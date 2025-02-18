@@ -2,6 +2,7 @@
     background-color: #f4f4f2; 
     width:100vw;
     height:100vh;    !important;
+
 }
 
 .analysiscontainer {
@@ -10,10 +11,11 @@
     align-items: center;  /* Centers vertically (if needed) */
     text-align: center;
       /* Centers text inside */
-    padding-top:10vh;
+    padding-top:9vh;
 }
 
 .contractdetails2{
+    width:98vh;
     margin-right:10vh;
 
 }
