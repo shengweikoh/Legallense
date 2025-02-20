@@ -31,6 +31,8 @@ const Navbar = () => {
                 <Link to = "/Login">
                 <button className = "login">Login</button>
                 </Link>
+
+                
                 </div>
             </div>
 

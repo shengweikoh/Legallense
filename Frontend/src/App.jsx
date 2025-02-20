@@ -9,8 +9,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from './Pages/Login.jsx';  
 import UploadContract from "./Pages/Upload.jsx";
 import Dashboard  from './Pages/Dashboard.jsx'; 
-import AnalysisPage from './Pages/Analysis.jsx';  
-
+import AnalysisPage from './Pages/Analysis.jsx'; 
+import History from './Pages/History.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -26,6 +26,7 @@ function App() {
         <Route path="/upload" element={<UploadContract />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/analysis" element={<AnalysisPage />} />
+        <Route path="/history" element={<History />} />
 
 
     </Routes>
