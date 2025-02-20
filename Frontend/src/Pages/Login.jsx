@@ -64,8 +64,8 @@ const Login = () => {
             <button type="submit">Login</button>
             <div>Or</div>
 
-            
 
+              
           </form>
         </div>
       </div>
