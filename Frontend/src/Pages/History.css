@@ -2,9 +2,32 @@
 
 
     width:100vw;
-    height:100vh;
-    background-color:#f4f4f2;
+    min-height:100vh;
+    padding-bottom:100px;
 
+    background-color:#f4f4f2;
+    
     
 
+}
+
+
+.historytitle{
+    font-family: 'Bebas Neue', sans-serif;
+    padding-top:10vh;
+}
+
+.historyspace{
+    width:80vw;
+
+}
+
+
+.historymaincard{
+
+    margin-bottom:5px;
+   
+
+    
+  
 }
