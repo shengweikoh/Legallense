@@ -62,9 +62,9 @@ export default function Dashboard() {
               <small className="text-muted">Compare across 2 contracts. Note that you can only compare paid contracts</small>
             </div>
             <div className="card-body d-flex align-items-center justify-content-center">
-              <Link to="/history" className="history btn btn-primary w-100">
+              <Link to="/compare" className="history btn btn-primary w-100">
                 <HistoryIcon className="me-2" size={16} />
-                View History
+                Compare Contracts
               </Link>
             </div>
           </div>
