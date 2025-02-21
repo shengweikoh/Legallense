@@ -1,0 +1,31 @@
+ompare-container {
+    min-height: 80vh;
+    min-width: 100vw;
+    background-color: #f4f4f2;  /* Light gray background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  }
+
+.comparison-title{
+    font-family: 'Bebas Neue', sans-serif;
+    
+
+}
+
+.background-contract{ /* this is the background*/
+    background-color:#f4f4f2; 
+    min-height:100vh;
+    min-width:100vh;
+    padding:120px;
+}
+
+
+
+  
+ 
+ 
+  .border-primary {
+    border: 2px solid #007bff !important;
+  }
