@@ -10,6 +10,7 @@
   font-size:100px !important;
   font-family: 'Bebas Neue', sans-serif !important;
   padding-right:30px;
+  margin-top:5vh;
   
 }
   
@@ -32,6 +33,7 @@
     opacity: 100;
     transform: translateY(20px);
     transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    
   }
 
   .login-container.fade-in {
@@ -52,10 +54,36 @@
   .login-container form {
     display: flex;
     flex-direction: column;
+
+  
   }
 
 
+
+.or{
+  border-top:1px solid rgb(71, 70, 70,0.2);
+
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 20px;
   
+}
+
+.text::before,
+.text::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid rgba(71, 70, 70, 0.5);
+  margin: 0 10px;
+  /* to set the text OR in the middle of the lines.*/
+}
+
   .form-group {
     margin-bottom: 25px;
     position: relative;
@@ -170,6 +198,7 @@
     font-size: 1.1rem;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
+    margin-bottom:20px;
   }
   
   button[type='submit']:hover {
