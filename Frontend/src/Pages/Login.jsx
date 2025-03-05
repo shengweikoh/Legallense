@@ -4,13 +4,14 @@ import NavBar from './Navbar.jsx';
 import './Login.css';
 import { motion } from "framer-motion";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import GoogleCustomButton from  "./GoogleButton.jsx";
 
 const Login = () => {
 
     return (
 
       
-      <div className="login-page">
+  <div className="login-page">
             <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 2, y: 0 }}
@@ -62,13 +63,20 @@ const Login = () => {
               <Link to="/forgot-password">Forgot your password?</Link>
             </div>
             <button type="submit">Login</button>
-            <div>Or</div>
 
+            <small className="text">Or</small>
+
+            <GoogleCustomButton></GoogleCustomButton>
 
               
           </form>
+
+
+
         </div>
       </div>
+
+      <div>Or</div>
     </div>
   </div>
 </div>
