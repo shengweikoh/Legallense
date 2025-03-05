@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import Logo from "./Animation/LegalLense.png"
 import { useNavigate } from 'react-router-dom';
-import { GavelIcon, HistoryIcon, UploadIcon, HomeIcon, Home } from "lucide-react";
+import { GavelIcon, HistoryIcon, UploadIcon, HomeIcon, Home ,CircleUserRound} from "lucide-react";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 
 const Navbar = () => {
@@ -29,7 +30,9 @@ const Navbar = () => {
                 </Link>
 
                 <Link to = "/Login">
-                <button className = "login">Login</button>
+                
+                < button className = "login">
+                 <CircleUserRound> </CircleUserRound> Login</button>
                 </Link>
 
                 

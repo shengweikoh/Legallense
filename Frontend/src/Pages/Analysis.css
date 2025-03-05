@@ -5,6 +5,10 @@
 
 }
 
+.page-content{
+    margin-top:90px;
+}
+
 .analysiscontainer {
     display: flex;
     justify-content: center;  /* Centers horizontally */
@@ -22,7 +26,6 @@
 .card.result{
     width:43vw;
     margin-right:100px;
-   
 }
 
 

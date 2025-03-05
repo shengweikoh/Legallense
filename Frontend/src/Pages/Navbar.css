@@ -29,32 +29,31 @@
 
 .upload{
     font-size:11.5px;
-    color:white;
-    background-color: rgb(48, 48, 48,0.9);
+    color:rgb(57, 57, 57);
+    background-color:  #f4f4f2;
     width:100px;
-    HEIGHT:50px;
-    border-radius:50px;
+    HEIGHT:60px;
     margin-right:20px;
+    border-radius:10px;
     transition: background-color 0.3s ease;
-    border-color:rgb(29, 37, 56);
+   
 }
 
 .login{
     font-size:15px;
-    color:white;
-    background-color: rgb(48, 48, 48,0.9);
+    color:rgb(58, 58, 58);
+    background-color:  #f4f4f2;
     width:100px;
-    HEIGHT:50px;
-    border-radius:50px;
+    HEIGHT:60px;
+    border-radius:10px;
     margin-right:20px;
     transition: background-color 0.3s ease;
-    border-color:rgb(29, 37, 56);
 }
 
 .login:hover {
 
-    background-color: rgb(245, 245, 245);
-    color:rgb(0, 0, 0); /* Changes background color on hover */
+    background-color: rgb(28, 27, 27);
+    color:rgb(196, 196, 196); /* Changes background color on hover */
     border-color:rgb(22, 22, 22);
 }
 
@@ -62,8 +61,8 @@
 
 .upload:hover {
 
-    background-color: rgb(245, 245, 245);
-    color:rgb(0, 0, 0); /* Changes background color on hover */
+    background-color: rgb(4, 4, 4);
+    color:rgb(209, 209, 209); /* Changes background color on hover */
     border-color:rgb(22, 22, 22);
 }
 
