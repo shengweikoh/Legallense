@@ -65,7 +65,7 @@
 
 }
 
-.text {
+.text2{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,8 +75,8 @@
   
 }
 
-.text::before,
-.text::after {
+.text2::before,
+.text2::after {
   content: "";
   flex: 1;
   border-bottom: 1px solid rgba(71, 70, 70, 0.5);
@@ -191,7 +191,7 @@
   
   button[type='submit'] {
     padding: 10px;
-    background: linear-gradient(90deg, #4c5b8d, #4c5b8d);
+    background:  #106cfc;
     color: #ffffff;
     height:50px;
     border-radius: 10px;
@@ -199,10 +199,12 @@
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
     margin-bottom:20px;
+    transition: background-color 0.3s ease;
   }
   
   button[type='submit']:hover {
-    background: linear-gradient(90deg, #61a38a, #61a38a);
+    background:black;
+    transition: background-color 0.3s ease;
   }
   
   /* Responsive styles */
