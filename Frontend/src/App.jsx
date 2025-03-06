@@ -12,6 +12,7 @@ import Dashboard  from './Pages/Dashboard.jsx';
 import AnalysisPage from './Pages/Analysis.jsx'; 
 import History from './Pages/History.jsx'
 import ContractCompare from './Pages/CompareContracts.jsx';
+import ContractComparison from './Pages/ContractComparison.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,7 @@ function App() {
         <Route path="/analysis" element={<AnalysisPage />} />
         <Route path="/history" element={<History />} />
         <Route path="/compare" element={<ContractCompare />} />
+        <Route path = "/contractcompare" element = { <ContractComparison/>}/>
 
 
     </Routes>
