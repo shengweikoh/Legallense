@@ -1,0 +1,74 @@
+.ContractComparisonBackground{
+
+    height:100vh;
+    width:100vw;
+    background-color:#f4f4f2; 
+
+}
+
+.card.job-card{
+    margin-top: 20vh;
+    height:60vh;
+    width:2000px;
+}
+
+.job-card {
+    width: 90%;
+    margin-top: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Table container */
+  .table-container {
+    width: 100%;
+  }
+  
+  /* Table styling */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Row separator */
+  .table-row {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3); /* 30% opacity */
+    height: 95px; /* Adjust row height for spacing */
+  }
+  
+  /* Category column */
+  .table-label {
+    font-weight: bold;
+    text-align: left;
+    margin: 15px 10px; /* Adds spacing inside the row */
+    width: 30%;
+  }
+  
+  /* Contract value columns */
+  .table-value {
+    text-align: left;
+    margin: 15px 10px; /* Adds spacing inside the row */
+    width: 35%;
+  }
+  
+  /* Aligns first column text to the left */
+  .table-heading {
+    font-weight: bold;
+    text-align: left;  /* 👈 Ensures text starts from the left */
+    margin: 10px 0;
+    width: 30%;  /* Gives some space to the first column */
+  }
+ 
+
+  .contract-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .contract-link:hover {
+    text-decoration: underline;
+  }
+
