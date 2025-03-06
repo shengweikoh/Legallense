@@ -4,11 +4,21 @@ import GoogleLogo from './Animation/Google.png';
 
 
 export default function GoogleCustomButton({ onClick }) {
+
+const wrapperStyle = {
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+    gap:'10px',
+    marginRight:'-100px',
+    paddingRight:'100px'
+
+}
   const buttonStyle = {
     display: 'inline-block',
     background: 'white',
     color: '#444',
-    width: '410px',
+    width: '160px',
     borderRadius: '10px',
     border: 'thin solid #888',
     whiteSpace: 'nowrap',
@@ -21,7 +31,6 @@ export default function GoogleCustomButton({ onClick }) {
 
   const textStyle = {
     fontSize: '14px',
-    fontWeight: 'bold',
     fontFamily: "Roboto', sans-serif",
     flexGrow: 1,
     textAlign: 'center',
@@ -29,16 +38,24 @@ export default function GoogleCustomButton({ onClick }) {
   };
 
   return (
+
+    <div style ={wrapperStyle}>
+
+    <span>Continue with</span>
     <button style={buttonStyle} onClick={onClick}>
 
 
-<img src={GoogleLogo} alt="Google logo" style={{
-          width: '24px', // Adjusted size
-          height: '24px',
-          marginLeft:'-5px',
-        }} />
+        <img src={GoogleLogo} alt="Google logo" style={{
+                width: '24px', // Adjusted size
+                height: '24px',
+                marginLeft:'-5px',
+                }} />
 
-      <span style={textStyle}>Sign in with Google</span>
+      <span style={textStyle}>Google</span>
     </button>
+
+    </div>
+
+
   );
 }

@@ -64,7 +64,7 @@ const Login = () => {
             </div>
             <button type="submit">Login</button>
 
-            <small className="text">Or</small>
+            <small className="text2">Or</small>
 
             <GoogleCustomButton></GoogleCustomButton>
 
