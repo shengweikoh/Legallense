@@ -15,7 +15,6 @@ const wrapperStyle = {
 
 }
   const buttonStyle = {
-    display: 'inline-block',
     background: 'white',
     color: '#444',
     width: '160px',
