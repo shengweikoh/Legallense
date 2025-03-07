@@ -58,8 +58,6 @@
   
   }
 
-
-
 .or{
   border-top:1px solid rgb(71, 70, 70,0.2);
 
@@ -229,4 +227,113 @@
       white-space: normal; /* Allow wrapping on very small screens */
     }
   }
+
+  /* Center login form on small screens */
+@media (max-width: 992px) {
+  .login-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Ensure the text in the form inputs is readable */
+.form-group input {
+  caret-color: black; /* Cursor color for better visibility */
+}
+
+/* Google login button styles */
+.googleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.googleButton:hover {
+  background-color: black;
+  color: white;
+}
+
+/* Divider Line */
+.divider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.divider-line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.divider-text {
+  padding: 0 10px;
+  font-size: 14px;
+  color: #444;
+}
+
+/* Popup modal styling */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.7); /* Red background with slight transparency */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 2px solid black;
+}
+
+.popup-content h2 {
+  color: black;
+  font-weight: bold;
+}
+
+.popup-content p {
+  color: black;
+  font-size: 16px;
+}
+
+.popup-content button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.popup-content button:hover {
+  background: #333;
+}
+
   
