@@ -31,6 +31,12 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="upload" element={<UploadContract />} />
+                <Route path="home" element={<Dashboard />} />
+                <Route path="analysis" element={<AnalysisPage />} />
+                <Route path="history" element={<History />} />
+                <Route path="compare" element={<ContractCompare />} />
+                <Route path="contractcompare" element={<ContractComparison />} />
 
         {/* Protected Routes for Authenticated Users */}
         <Route

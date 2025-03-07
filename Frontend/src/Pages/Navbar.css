@@ -71,5 +71,28 @@
     align-items: center; /* Aligns buttons vertically */
   }
 
+.info-container{
+
+    margin-right:40px;
+
+
+}
+
+.info-text{
+    padding:1.0vw;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600;
+}
+
+.handshake{
+    width:26px;
+    padding-right:10px;
+}
+
+.handcoin{
+    width:30px;
+    padding-right:10px;
+}
+
 
 
