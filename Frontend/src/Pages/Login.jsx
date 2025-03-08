@@ -28,7 +28,7 @@ const Login = () => {
                     const role = await getUserRole(user.email);
 
                     if (role === 'Users') {
-                        navigate('/user/login');  // Redirect user
+                        navigate('/home');  // Redirect user
                     } else {
                         setError('User role not found.');
                     }
