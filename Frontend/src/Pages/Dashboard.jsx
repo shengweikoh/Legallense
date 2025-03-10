@@ -72,8 +72,8 @@ export default function Dashboard() {
 
       </div>
 
-      <div className="mt-5">
-        <h2 className="h4 mb-4">Key Features</h2>
+      <div className="mt-5 feature-section">
+        <h2 className="h4 mb-4 key-feature">Key Features</h2>
 
         <div className="row mt-5">
           <div className="col-md-6 d-flex mb-3">
@@ -96,8 +96,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-
-        <div className="row">
+        <div className="row ">
           <div className="col-md-6 d-flex mt-5">
             <AlertTriangleIcon className="me-3" size={24} color="orange" />
             <div>

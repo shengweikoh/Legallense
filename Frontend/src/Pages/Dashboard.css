@@ -37,6 +37,14 @@
     /* Example: color: #333; */
   }
 
+
+.feature-section {
+  margin-left:5vw;
+}
+
+.key-feature {
+  padding-right:2.5vw;
+}
   
   /* If needed, override Bootstrap defaults or add additional styles */
   
