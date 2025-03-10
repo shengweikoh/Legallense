@@ -14,14 +14,13 @@ const Navbar = () => {
     const location = useLocation();
 
 
-
-
     const handleLoginClick = () => {
         navigate('/login');
       };
 
 
-      const isHome = location.pathname.startsWith("/home");
+      const isHome = location.pathname === "/" || location.pathname === "/login";
+    
 
     return (
         <nav className="navbar fixed-top">
@@ -31,7 +30,7 @@ const Navbar = () => {
                 <HomeIcon style={{ marginRight: "10px" }} /> Legal Lense.
                 </Link>
 
-               {!isHome && ( 
+               {isHome ? ( 
 
                         <div className = "button-container">
                         <Link to="/home">
@@ -44,15 +43,13 @@ const Navbar = () => {
                         </Link>
                
                 </div>
-               )} 
-
-               {isHome && (
+               )
+               :(
                     <div className="info-container">
                    <span className="info-text"><Handshake className = "handshake"></Handshake>Refer a Friend</span>
                     <span className="info-text"><HandCoins className = "handcoin"></HandCoins>Free Use: 8</span>
                     </div>
-               )
-               }
+               )}
 
 
 
