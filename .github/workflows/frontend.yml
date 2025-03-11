@@ -42,10 +42,24 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
+      - name: Debug Vercel Project Detection
+        run: |
+          echo "VERCEL_ORG_ID: $VERCEL_ORG_ID"
+          echo "VERCEL_PROJECT_ID: $VERCEL_PROJECT_ID"
+          echo "Fetching projects..."
+          vercel project ls --token "${{ secrets.VERCEL_TOKEN }}"
+
       # Step 7: Deploy to Vercel
       - name: Deploy to Vercel
         run: |
-          vercel pull --yes --environment=production --token "${{ secrets.VERCEL_TOKEN }}"
-          vercel build --prod --token "${{ secrets.VERCEL_TOKEN }}"
-          vercel deploy --prod --token "${{ secrets.VERCEL_TOKEN }}"
+          vercel --prod --token "${{ secrets.VERCEL_TOKEN }}" --scope shengweikohs-projects --confirm --yes --name legalens
+        working-directory: Frontend
+
+      # Step 8: Manually Link & Deploy to Vercel
+      - name: Manually Link & Deploy to Vercel
+        run: |
+          echo "Manually linking the Vercel project..."
+          vercel link --project legalens --scope shengweikohs-projects --token "${{ secrets.VERCEL_TOKEN }}" --yes
+          echo "Deploying project..."
+          vercel deploy --prod --scope shengweikohs-projects --token "${{ secrets.VERCEL_TOKEN }}" --yes
         working-directory: Frontend
