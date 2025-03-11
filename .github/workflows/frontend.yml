@@ -30,7 +30,7 @@ jobs:
 
       # Step 4: Install dependencies for the Vite React app
       - name: Install dependencies
-        run: npm ci
+        run: npm install
         working-directory: ./Frontend
 
       # Step 5: Build the Vite React app
