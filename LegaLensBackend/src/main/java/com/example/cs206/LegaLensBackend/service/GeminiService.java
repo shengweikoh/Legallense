@@ -28,7 +28,6 @@ public class GeminiService {
     public GeminiService() throws IOException {
         // Load the credentials file from the classpath
         File credentialsFile = new ClassPathResource(CREDENTIALS_FILE).getFile();
-        System.out.println("Credentials File Path: " + credentialsFile.getAbsolutePath());
 
         // Optionally set the GOOGLE_APPLICATION_CREDENTIALS system property
         System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", credentialsFile.getAbsolutePath());
@@ -43,10 +42,9 @@ public class GeminiService {
         } else {
             throw new IllegalStateException("Credentials are not an instance of ServiceAccountCredentials");
         }
-        System.out.println("Loaded projectId from credentials: " + this.projectId);
     }
 
-    public List<String> generateResponse(String prompt) throws IOException {
+    public String generateResponse(String prompt) throws IOException {
         // Initialize VertexAI (it will pick up the credentials from the system property)
         try (VertexAI vertexAi = new VertexAI(projectId, REGION)) {
             GenerativeModel model = new GenerativeModel.Builder()
@@ -58,8 +56,10 @@ public class GeminiService {
             ResponseStream<GenerateContentResponse> responseStream = model.generateContentStream(content);
 
             return responseStream.stream()
-                    .map(GenerateContentResponse::toString)
-                    .collect(Collectors.toList());
+                    .flatMap(response -> response.getCandidatesList().stream()) // Get all candidates
+                    .flatMap(candidate -> candidate.getContent().getPartsList().stream()) // Get all parts
+                    .map(part -> part.getText()) // Extract text
+                    .collect(Collectors.joining(" "));
         }
     }
 }
