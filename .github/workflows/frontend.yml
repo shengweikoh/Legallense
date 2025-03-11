@@ -31,12 +31,12 @@ jobs:
       # Step 4: Install dependencies for the Vite React app
       - name: Install dependencies
         run: npm ci
-        working-directory: ./frontend
+        working-directory: ./Frontend
 
       # Step 5: Build the Vite React app
       - name: Build the app
         run: npm run build
-        working-directory: ./frontend
+        working-directory: ./Frontend
 
       # Step 6: Install Vercel CLI
       - name: Install Vercel CLI
