@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "name": "legalens",
+    "builds": [
+      {
+        "src": "index.html",
+        "use": "@vercel/static"
+      }
+    ],
+    "framework": "vite"
+  }
