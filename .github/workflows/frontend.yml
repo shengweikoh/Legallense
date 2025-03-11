@@ -20,35 +20,32 @@ jobs:
           node-version: 18
           cache: 'npm'
 
-      # Step 3: Set up environment variables
+      # Step 3a: Set up environment variables in GitHub Actions environment
       - name: Set up environment variables
-        run: |
-          echo "FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}" >> $GITHUB_ENV
-          echo "VERCEL_ORG_ID=${{ secrets.VERCEL_ORG_ID }}" >> $GITHUB_ENV
-          echo "VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }}" >> $GITHUB_ENV
+        run: echo "FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}" >> $GITHUB_ENV
 
-      # Step 4: Decode and create .env file
+      # Step 3b: Decode and create .env file
       - name: Decode and Create .env File
         run: echo "${{ secrets.FIREBASE_ENV }}" | base64 -d > .env
 
-      # Step 5: Install dependencies
+      # Step 4: Install dependencies for the Vite React app
       - name: Install dependencies
         run: npm ci
         working-directory: ./Frontend
 
-      # Step 6: Build the Vite React app
+      # Step 5: Build the Vite React app
       - name: Build the app
         run: npm run build
         working-directory: ./Frontend
 
-      # Step 7: Install Vercel CLI
+      # Step 6: Install Vercel CLI
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      # Step 8: Deploy to Vercel with Explicit Org & Project ID
+      # Step 7: Deploy to Vercel
       - name: Deploy to Vercel
         run: |
-          vercel pull --yes --environment=production --token "${{ secrets.VERCEL_TOKEN }}" --org-id="${{ secrets.VERCEL_ORG_ID }}" --project-id="${{ secrets.VERCEL_PROJECT_ID }}"
-          vercel build --prod --token "${{ secrets.VERCEL_TOKEN }}" --org-id="${{ secrets.VERCEL_ORG_ID }}" --project-id="${{ secrets.VERCEL_PROJECT_ID }}"
-          vercel deploy --prod --token "${{ secrets.VERCEL_TOKEN }}" --org-id="${{ secrets.VERCEL_ORG_ID }}" --project-id="${{ secrets.VERCEL_PROJECT_ID }}"
+          vercel pull --yes --environment=production --token "${{ secrets.VERCEL_TOKEN }}"
+          vercel build --prod --token "${{ secrets.VERCEL_TOKEN }}"
+          vercel deploy --prod --token "${{ secrets.VERCEL_TOKEN }}"
         working-directory: Frontend
