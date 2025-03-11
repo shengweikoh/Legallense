@@ -1,0 +1,49 @@
+name: React Vite CI/CD with Vercel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      # Step 3a: Set up environment variables in GitHub Actions environment
+      - name: Set up environment variables
+        run: echo "FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}" >> $GITHUB_ENV
+
+      # Step 3b: Decode and create .env file
+      - name: Decode and Create .env File
+        run: echo "${{ secrets.FIREBASE_ENV }}" | base64 -d > .env
+
+      # Step 4: Install dependencies for the Vite React app
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./Frontend
+
+      # Step 5: Build the Vite React app
+      - name: Build the app
+        run: npm run build
+        working-directory: ./Frontend
+
+      # Step 6: Install Vercel CLI
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+  
+      # Step 7: Deploy to Vercel
+      - name: Deploy to Vercel
+        run: |
+          vercel --prod --token "${{ secrets.VERCEL_TOKEN }}" --scope shengweikohs-projects --confirm --yes --name legalens
+        working-directory: Frontend
