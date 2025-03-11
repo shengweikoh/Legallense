@@ -3,7 +3,7 @@ name: React Vite CI/CD with Vercel
 on:
   push:
     branches:
-      - main
+      - CI/CD-Pipeline
 
 jobs:
   deploy:
