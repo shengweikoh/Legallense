@@ -1,0 +1,320 @@
+
+.signup-page {
+    background-color:  #f4f4f2;
+    position: relative;
+    min-height: 100vh;
+  }
+
+.LegaLens2{
+  color:black !important;
+  font-size:100px !important;
+  font-family: 'Bebas Neue', sans-serif !important;
+  padding-right:60px;
+  margin-top:5vh;
+  
+}
+  
+  .content-wrapper-signup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  
+  }
+  
+  .signup-container {
+    max-width: 400px;
+    width: 100%;
+    margin-left: 32%;
+    padding: 30px 20px;
+    background-color:  #f4f4f2;/* Updated to dark background */
+    border-radius: 30px;
+    border-bottom: black;
+    position: relative;
+    opacity: 100;
+    transform: translateY(20px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    
+  }
+
+  .login-container.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  
+  .login-container h1 {
+    margin-bottom: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    color: #ffffff; /* Changed to white text */
+    white-space: nowrap;
+  }
+  
+  .login-container form {
+    display: flex;
+    flex-direction: column;
+
+  
+  }
+
+.or{
+  border-top:1px solid rgb(71, 70, 70,0.2);
+
+}
+
+.text2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 20px;
+  
+}
+
+.text2::before,
+.text2::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid rgba(71, 70, 70, 0.5);
+  margin: 0 10px;
+  /* to set the text OR in the middle of the lines.*/
+}
+
+  .form-group {
+    margin-bottom: 25px;
+    position: relative;
+  }
+  
+  .form-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-family: 'Poppins', sans-serif;
+    color: #cccccc; /* Light gray text */
+    font-size: 1rem;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #555555; /* Darker border */
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    background-color: #2a2a2a; /* Dark input background */
+    color: #ffffff; /* White text */
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .form-group input::placeholder {
+    color: #999999; /* Light gray placeholder text */
+  }
+  
+  .form-group input:focus {
+    border-color: #00fe9b; /* Bright color for focus */
+    box-shadow: 0 0 8px rgba(0, 254, 155, 0.5);
+    outline: none;
+  }
+  
+  .form-group .toggle-password {
+    font-size: 0.9rem;
+    color: #8debc7; /* Bright color for toggle */
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .form-group .toggle-password:hover {
+    text-decoration: underline;
+  }
+  
+  .auth-links {
+    text-align: right;
+    margin-bottom: 30px;
+  }
+
+.user-name{
+  color:black !important;
+
+}
+
+.password{
+  color:black !important;
+}
+
+
+.userinput{
+  background-color: white !important;
+  color:black !important;
+  height:40px;
+  width:100% !important;
+  border-color:rgb(184, 184, 184) !important;
+  
+  
+}
+
+
+.passwordinput{
+  background-color: white !important;
+  color:black !important;
+  height:40px;
+  width:100% !important;
+  border-color:rgb(184, 184, 184) !important;
+
+
+}
+
+  
+  .auth-links a {
+    color:black;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .auth-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .register-link {
+    margin-right: 130px;
+  }
+
+  
+  .forgot-password-link {
+    margin-left: 200px;
+
+  }
+  
+  button[type='submit'] {
+    padding: 10px;
+    background:  #106cfc;
+    color: #ffffff;
+    height:50px;
+    width:100%;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    margin-bottom:20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type='submit']:hover {
+    background:black;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Responsive styles */
+
+  /* Center login form on small screens */
+@media (max-width: 992px) {
+  .login-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Ensure the text in the form inputs is readable */
+.form-group input {
+  caret-color: black; /* Cursor color for better visibility */
+}
+
+/* Google login button styles */
+.googleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.googleButton:hover {
+  background-color: black;
+  color: white;
+}
+
+/* Divider Line */
+.divider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.divider-line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.divider-text {
+  padding: 0 10px;
+  font-size: 14px;
+  color: #444;
+}
+
+/* Popup modal styling */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.7); /* Red background with slight transparency */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 2px solid black;
+}
+
+.popup-content h2 {
+  color: black;
+  font-weight: bold;
+}
+
+.popup-content p {
+  color: black;
+  font-size: 16px;
+}
+
+.popup-content button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.popup-content button:hover {
+  background: #333;
+}
+
+  

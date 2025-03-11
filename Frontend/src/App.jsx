@@ -8,6 +8,9 @@ import './App.css';
 // Public Access Screens
 import Navbar from "./Pages/Navbar.jsx";
 import Login from './Pages/Login.jsx';  
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 import Home from "./Pages/Home"; 
 
 // User Access Screens
@@ -17,6 +20,8 @@ import AnalysisPage from './Pages/Analysis.jsx';
 import History from './Pages/History.jsx';
 import ContractCompare from './Pages/CompareContracts.jsx';
 import ContractComparison from './Pages/ContractComparison.jsx';
+import Signup from './Pages/Signup.jsx';
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -34,6 +39,7 @@ function App() {
         <Route path="/history" element={<History />} />
         <Route path="/compare" element={<ContractCompare />} />
         <Route path="/contractcompare" element={<ContractComparison />} />
+        <Route path = "signup" element= {<Signup/>}/>
 
         {/* Protected Routes for Authenticated Users */}
         <Route element={<ProtectedRoute />}>

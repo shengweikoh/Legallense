@@ -1,5 +1,5 @@
 import "./Home.css";
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef , useState} from 'react';
 import { motion } from "framer-motion";
 import TypingEffect from "./Animation/Typing";
 import chatbotGif from "./Animation/Chatbot.gif";
@@ -12,187 +12,116 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 const Home = () => {
-    
-    const descriptionRef = useRef(null);
+    const descriptionsRef = useRef([]);
+
+    const [hasAnimated, setHasAnimated] = useState(false);
+
+    const leftRef = useRef([]);
+    const rightRef = useRef([]);
+
+
+  
     useEffect(() => {
-        // Select all elements with the class 'description'
-        const descriptions = gsap.utils.toArray('.description');
-        
-        // Loop over each element and apply the animation
-        descriptions.forEach((el) => {
-          gsap.fromTo(
-            el,
-            {
-              // Initial state: no padding/margin and fully transparent
-              padding: "0px",
-              margin: "0px",
-              opacity: 30,
-            },
-            {
-              // Final state: desired padding/margin and fully visible
-              padding: "20px",  // adjust these values as needed
-              margin: "20px",
-              opacity: 1,
-              duration: 0.5,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: el,
-                start: "top bottom-=100", // when the top of the element reaches 90% of the viewport height
-                toggleActions: "play none none reverse",
-              },
-            }
-          );
-        });
-      }, []);
-
-
-    return (
-        <div className="home-container-fluid">
-            <div className="title">
-                        <motion.div
-                                initial={{ opacity: 0, y: -50 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 2 }}
-                            >
-                                Legal Lens.
-                            </motion.div>
-                        
-                        <TypingEffect/>
-
-    
-            </div>
-
-
-
-           <div className="description-container">
-
-                <div className="row g-10">
-                    <div className="col-md-1">
-                    <div className="p-2 smoltitle">01/</div>
-                    </div>
-                    <div className="col-md-5">
-                    <div className="bigtitle">What we do</div>
-                    </div>
-                    <div className="col-md-5">
-                    <div ref={descriptionRef} className="p-3 description">
-                            hi
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-                    <div className="description-container">
-                    <div className="row g-10 c-20">
-                        <div className="col-md-1">
-                        <div className="p-2 smoltitle">02/</div>
-                        </div>
-                        <div className="col-md-5">
-                        <div className="bigtitle">How we provide</div>
-                        </div>
-                        <div className="col-md-5">
-                        <div ref={descriptionRef} className="p-3 description">
-                            Description Description Description Description Description Description Description
-                            Description Description Description Description Description Description Description
-                            Description Description Description Description Description Description Description
-                            Description Description Description Description Description Description Description
-                            Description Description Description Description Description Description Description
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-
-                    <div className="description-container">
-                    <div className="row g-10">
-                        <div className="col-md-1">
-                        <div className="p-2 smoltitle">03/</div>
-                        </div>
-                        <div className="col-md-5">
-                        <div className="bigtitle">What we do</div>
-                        </div>
-                        <div className="col-md-5">
-                        <div className="p-3 description">
-                            Description Description Description Description Description Description Description
-                            Description Description Description Description Description Description Description
-                            Description Description Description Description Description Description Description
-                            Description Description Description Description Description Description Description
-                            Description Description Description Description Description Description Description
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-
-                        <div className="description-container">
-                        <div className="row g-10">
-                            <div className="col-md-1">
-                            <div className="p-2 smoltitle">04/</div>
-                            </div>
-                            <div className="col-md-5">
-                            <div className="bigtitle">What we do</div>
-                            </div>
-                            <div className="col-md-5">
-                            <div className="p-3 description">
-                                Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-
-
-         
-
-
+        const handleScroll = () => {
+          if (window.scrollY > 350 && !hasAnimated) {
 
             
-
-            <div className="row g-3 justify-content-center" style = {{paddingLeft:125}} >
-                    <div className="col-md-3" >
-                    <div className="card " style={{ width: "20rem", height: "300px" }}>
-                        <img src={chatbotGif} className="card-img-top" alt="Local GIF" style = {{height:300 ,width:80 ,marginLeft:90}} />
-                        <div className="card-body">
-                        <h5 className="card-title">Card Title</h5>
-                        <p className="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                        </div>
-                    </div>
-                    </div>
-
-                
-                    <div className="col-md-3">
-                    <div className="card" style={{ width: "20rem", height: "300px" }}>
-                    <img src={chatbotGif} className="card-img-top" alt="Local GIF" style = {{height:300 ,width:80 ,marginLeft:90}} />
-                        <div className="card-body">
-                        <h5 className="card-title">Card Title</h5>
-                        <p className="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                        </div>
-                    </div>
-                    </div>
-        
-                    <div className="col-md-3">
-                    <div className="card" style={{ width: "20rem", height: "300px" }}>
-                    <img src={chatbotGif} className="card-img-top" alt="Local GIF" style = {{height:300 ,width:80 ,marginLeft:90}} />
-                        <div className="card-body">
-                        <h5 className="card-title">Card Title</h5>
-                        <p className="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                        </div>
-                    </div>
-                    </div>
-
-                
-
-
-  </div>      
+            leftRef.current.forEach((el) => {
+                gsap.fromTo(
+                  el,
+                  { opacity: 0.25, x: 50 }, // Start off-screen (right)
+                  { opacity: 1, x: 0, duration: 2.0, ease: "power2.out" }
+                );
+              });
+      
+              // Animate elements in rightRef (move from left to center)
+              rightRef.current.forEach((el) => {
+                gsap.fromTo(
+                  el,
+                  { opacity: 0.25, x: -50 }, // Start off-screen (left)
+                  { opacity: 1, x: 0, duration: 2.0, ease: "power2.out" }
+                );
+              });
+    
+            setHasAnimated(true); // Mark animation as complete
+            window.removeEventListener("scroll", handleScroll); // Remove event listener
+          }
+        };
+    
+        if (!hasAnimated) {
+          window.addEventListener("scroll", handleScroll);
+        }
+    
+        return () => window.removeEventListener("scroll", handleScroll);
+      }, [hasAnimated]);
+      // Select all elements with the class 'description'
+    
+  
+    return (
+      <div className="home-container-fluid">
+        <div className="title">
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 2 }}
+          >
+            Legal Lens.
+          </motion.div>
+          <TypingEffect />
         </div>
+  
+        {/* Description Sections */}
+        {[ 
+          { number: "01", title: "What we do", text: "We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI." },
+          { number: "02", title: "How we provide", text: "Our AI simplifies complex legal terms." },
+          { number: "03", title: "Why choose us?", text: "We make legal help accessible and affordable." },
+          { number: "04", title: "Our Vision", text: "Bringing legal clarity to everyone." }
+        ].map((section, index) => (
+          <div className="description-container"key={index}>
+            <div className="row align-items-center g-4">
+              <div className="col-md-1 text-end">
+                <div className="p-2 smoltitle" ref={(el) => rightRef.current.push(el)} >{section.number}/</div>
+              </div>
+              <div className="col-md-3">
+                <div className="bigtitle" ref={(el) => rightRef.current.push(el)}>{section.title}</div>
+              </div>
+              
+              <div
+        
+                className=" col-md-8 description"
+                ref={(el) => leftRef.current.push(el)}
+              >
+                {section.text}
+              </div>
+            </div>
+          </div>
+        ))}
+  
+        {/* Cards Section */}
+        <div className="row g-3 justify-content-center" style={{ paddingLeft: 125 }}>
+          {[1, 2, 3].map((_, index) => (
+            <div className="col-md-3" key={index}>
+              <div className="card" style={{ width: "20rem", height: "300px" }}>
+                <img
+                  src={chatbotGif}
+                  className="card-img-top"
+                  alt="Chatbot GIF"
+                  style={{ height: 300, width: 80, marginLeft: 90 }}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">Card Title</h5>
+                  <p className="card-text">
+                    Some quick example text to build on the card title and make up the bulk of the
+                    card's content.
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     );
-};
+  };
 
 
 
