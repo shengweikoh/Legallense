@@ -1,17 +1,21 @@
 {
-  "version": 2,
-  "public": true,
-  "framework": "vite",
-  "builds": [
-    {
-      "src": "dist/index.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/dist/index.html"
-    }
-  ]
-}
+    "version": 2,
+    "public": true,
+    "framework": "vite",
+    "builds": [
+      {
+        "src": "dist/index.html",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/assets/(.*)",
+        "dest": "/dist/assets/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/dist/index.html"
+      }
+    ]
+  }
