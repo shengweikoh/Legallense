@@ -1,11 +1,17 @@
 {
     "version": 2,
-    "name": "legalens",
+    "public": true,
+    "framework": "vite",
     "builds": [
       {
-        "src": "index.html",
+        "src": "dist/index.html",
         "use": "@vercel/static"
       }
     ],
-    "framework": "vite"
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/dist/index.html"
+      }
+    ]
   }
