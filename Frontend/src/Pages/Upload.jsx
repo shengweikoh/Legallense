@@ -3,11 +3,29 @@ import "./Upload.css";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import AlertDialog from '../components/AlertDialog';
 
 
 export default function UploadContract() {
   const [file, setFile] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+
+  const handleOpen = () => {
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const handleRedirect = () => {
+    handleClose();
+    navigate('/analysis');
+  }
+
 
   const handleFileChange = (event) => {
     if (event.target.files) {
@@ -114,9 +132,26 @@ export default function UploadContract() {
   
 </div>
 
+
+<AlertDialog
+      open={open}
+      handleOpen={handleOpen}
+      handleClose={handleClose}
+      dialogButtonText="Continue to analysis"
+      dialogTitle="Important notice : Not legal advice"
+      dialogContent="This application is not a substitute for professional legal counsel. By continuing, you acknowledge
+    that any information provided is purely for reference and should not be taken as legal advice."
+      handleAction={handleRedirect}
+      actionButtonText="Yes, I acknowledge"
+  />
+
+
+
+
+{/* 
 <Link to="/analysis" className="btn btn-primary text-white text-decoration-none Analyze2">
   Analysis
-</Link>
+</Link> */}
 
 
 
