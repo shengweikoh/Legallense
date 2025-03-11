@@ -48,4 +48,4 @@ jobs:
           vercel pull --yes --token "${{ secrets.VERCEL_TOKEN }}"
           vercel build --prod --token "${{ secrets.VERCEL_TOKEN }}"
           vercel deploy --prod --token "${{ secrets.VERCEL_TOKEN }}"
-        working-directory: ./frontend
+        working-directory: Frontend
