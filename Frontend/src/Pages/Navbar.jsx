@@ -52,7 +52,7 @@ const Navbar = () => {
             <div className="container-fluid">
         
             <Link className="navbar-brand" to="/">
-                <HomeIcon style={{ marginRight: "10px" }} /> Legal Lense.
+                <HomeIcon style={{ marginRight: "10px" }} /> LegaLens.
                 </Link>
 
                {isHome ? ( 
