@@ -42,9 +42,13 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
+      - name: Debug Vercel Project Detection
+        run: vercel project ls --token "${{ secrets.VERCEL_TOKEN }}"
+
       # Step 7: Deploy to Vercel
       - name: Deploy to Vercel
         run: |
+          vercel pull --yes --environment=production --token "${{ secrets.VERCEL_TOKEN }}"
           vercel build --prod --token "${{ secrets.VERCEL_TOKEN }}"
           vercel deploy --prod --token "${{ secrets.VERCEL_TOKEN }}"
         working-directory: Frontend
