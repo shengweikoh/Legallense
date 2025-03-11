@@ -57,9 +57,9 @@ jobs:
 
       # Step 8: Manually Link & Deploy to Vercel
       - name: Manually Link & Deploy to Vercel
-      run: |
-        echo "Manually linking the Vercel project..."
-        vercel link --project legalens --scope shengweikohs-projects --token "${{ secrets.VERCEL_TOKEN }}" --yes
-        echo "Deploying project..."
-        vercel deploy --prod --scope shengweikohs-projects --token "${{ secrets.VERCEL_TOKEN }}" --yes
-      working-directory: Frontend
+        run: |
+          echo "Manually linking the Vercel project..."
+          vercel link --project legalens --scope shengweikohs-projects --token "${{ secrets.VERCEL_TOKEN }}" --yes
+          echo "Deploying project..."
+          vercel deploy --prod --scope shengweikohs-projects --token "${{ secrets.VERCEL_TOKEN }}" --yes
+        working-directory: Frontend
