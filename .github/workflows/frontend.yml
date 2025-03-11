@@ -41,11 +41,9 @@ jobs:
       # Step 6: Install Vercel CLI
       - name: Install Vercel CLI
         run: npm install -g vercel
-
+  
       # Step 7: Deploy to Vercel
       - name: Deploy to Vercel
         run: |
-          vercel pull --yes --environment=production --token "${{ secrets.VERCEL_TOKEN }}"
-          vercel build --prod --token "${{ secrets.VERCEL_TOKEN }}"
-          vercel deploy --prod --token "${{ secrets.VERCEL_TOKEN }}"
+          vercel --prod --token "${{ secrets.VERCEL_TOKEN }}" --scope shengweikohs-projects --confirm --yes --name legalens
         working-directory: Frontend
