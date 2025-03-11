@@ -45,7 +45,7 @@ jobs:
       # Step 7: Deploy to Vercel
       - name: Deploy to Vercel
         run: |
-            vercel pull --yes --environment=production --token "${{ secrets.VERCEL_TOKEN }}" --project-name your-vercel-project-name
-            vercel build --prod --token "${{ secrets.VERCEL_TOKEN }}" --project-name your-vercel-project-name
-            vercel deploy --prod --token "${{ secrets.VERCEL_TOKEN }}" --project-name your-vercel-project-name
+          vercel pull --yes --environment=production --token "${{ secrets.VERCEL_TOKEN }}"
+          vercel build --prod --token "${{ secrets.VERCEL_TOKEN }}"
+          vercel deploy --prod --token "${{ secrets.VERCEL_TOKEN }}"
         working-directory: Frontend
