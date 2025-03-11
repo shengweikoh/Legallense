@@ -2,12 +2,6 @@
     "version": 2,
     "public": true,
     "framework": "vite",
-    "builds": [
-      {
-        "src": "dist/index.html",
-        "use": "@vercel/static"
-      }
-    ],
     "routes": [
       {
         "src": "/assets/(.*)",
