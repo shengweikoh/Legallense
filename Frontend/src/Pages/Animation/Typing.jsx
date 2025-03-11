@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import  "./typing.css";
+import  "./Typing.css";
 
 const TypingEffect = () => {
   const sentence = "The AI Powered Contract Reviewer You Need.";
