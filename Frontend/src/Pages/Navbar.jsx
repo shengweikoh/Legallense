@@ -2,7 +2,7 @@ import { Link , useLocation } from "react-router-dom";
 import "./Navbar.css";
 import Logo from "./Animation/LegalLense.png"
 import { useNavigate } from 'react-router-dom';
-import {  HandCoins, Handshake,GavelIcon, HistoryIcon, UploadIcon, HomeIcon, Home ,CircleUserRound} from "lucide-react";
+import {  AppWindow,HandCoins, Handshake,GavelIcon, HistoryIcon, UploadIcon, HomeIcon, Home ,CircleUserRound} from "lucide-react";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import FBInstanceAuth from "../firebase/firebase_auth"; 
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
@@ -58,7 +58,8 @@ const Navbar = () => {
                {isHome ? ( 
                 <div className="button-container">
                         <Link to="/home">
-                            <button className="upload">Find out more</button>
+                            <button className="upload">
+                                <AppWindow/> Dashboard</button>
                         </Link>
 
                         {user ? (
