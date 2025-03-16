@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173") // or use "*" to allow all origins
 @RequestMapping("/api/gemini")
 public class GeminiController {
 
