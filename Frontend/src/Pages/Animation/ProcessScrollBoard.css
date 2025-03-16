@@ -1,0 +1,112 @@
+process-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    overflow: hidden;
+
+
+  }
+
+  body {
+    overflow-x: hidden; /* Prevents extra horizontal scroll */
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Container with Steps */
+  .process-container {
+    display: flex;
+    width: 400vw; /* 4 steps, each 100vw */
+    transition: transform 1s ease-out;
+    transform: translateX(0vw); /* Start at Step 1 */
+    overflow: hidden;
+  }
+  
+  /* Each Step */
+  .step-box {
+    min-width: 100vw; /* Each step takes full viewport width */
+    height:500px;/* Ensure height is consistent */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #6b73ff, #000dff);
+    color: white;
+    font-size: 1.5rem;
+    padding: 40px;
+    border-radius: 20px;
+    position: relative;
+    margin:10px;
+    overflow: hidden;
+
+  }
+  
+  /* Step Number */
+  .step-number {
+    font-size: 3rem;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  /* Step Title */
+  .step-title {
+    font-size: 2rem;
+    margin: 20px 0;
+  }
+  
+  /* Step Description */
+  .step-description {
+    font-size: 1.2rem;
+    max-width: 500px;
+    text-align: center;
+    line-height: 1.6;
+  }
+  
+  /* Left & Right Arrows */
+  .arrow {
+
+  }
+  
+  .arrow:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  
+  .left-arrow {
+    left: 20px;
+  }
+  
+  .right-arrow {
+    right: 20px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .step-box {
+      height: 70vh;
+      padding: 20px;
+      font-size: 1.2rem;
+    }
+  
+    .step-number {
+      font-size: 2rem;
+    }
+  
+    .step-title {
+      font-size: 1.5rem;
+    }
+  
+    .step-description {
+      font-size: 1rem;
+    }
+  
+    .arrow {
+      font-size: 1.5rem;
+      padding: 10px;
+    }
+  }
