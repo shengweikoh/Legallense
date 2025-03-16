@@ -6,6 +6,7 @@ import chatbotGif from "./Animation/Chatbot.gif";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import ProcessScrollBoard from "./Animation/ProcessScrollBoard";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -96,10 +97,12 @@ const Home = () => {
             </div>
           </div>
         ))}
+
+        <ProcessScrollBoard/>
   
         {/* Cards Section */}
-        <div className="row g-3 justify-content-center" style={{ paddingLeft: 125 }}>
-          {[1, 2, 3].map((_, index) => (
+        <div className="row g-3 justify-content-center carddescription" style={{ paddingLeft: 125 }}>
+          {[1, 2, 3,4].map((_, index) => (
             <div className="col-md-3" key={index}>
               <div className="card" style={{ width: "20rem", height: "300px" }}>
                 <img

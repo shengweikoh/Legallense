@@ -3,7 +3,7 @@
     font-family: 'Bebas Neue', sans-serif;
     width:100%;
     font-size:100px;
-    height:1200px;
+    height: 2000px;
     padding:350px;
     color:rgb(43, 42, 42);
     transition: font-size 1s ease; 
@@ -25,9 +25,23 @@
 
     width:100%;
     border:bold;
-    border-bottom:1px solid rgb(71, 70, 70,0.2) ;
-
+    position: relative;
 }
+
+.description-container::after {
+    content: "";
+    display: block; /* Makes it visible */
+    width: 90%; /* Border width only 80% of the container */
+    height: 1.5px; /* Border thickness */
+    background: rgba(71, 70, 70, 0.3); /* Border color */
+    
+    position: absolute;
+    left: 50%;  /* Move it to center */
+    bottom: 0;
+    transform: translateX(-50%);
+}
+
+
 
 .smoltitle{
     font-size:14px;
@@ -51,6 +65,10 @@
     padding-left:200px;
 
     
+}
+
+.carddescription {
+    margin-top:300px;
 }
 
 
