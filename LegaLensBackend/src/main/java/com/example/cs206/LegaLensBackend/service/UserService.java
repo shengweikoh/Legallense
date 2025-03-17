@@ -23,7 +23,8 @@ public class UserService {
         DocumentSnapshot snapshot = firestore.collection("Users").document(userId).get().get();
         if (snapshot.exists()) {
             User user = snapshot.toObject(User.class);
-            System.out.println("Fetched user: " + user);
+            // System.out.println("Raw data: " + snapshot.getData());
+            // System.out.println("Fetched user: " + user);
             return Optional.ofNullable(user);
         } else {
             return Optional.empty();

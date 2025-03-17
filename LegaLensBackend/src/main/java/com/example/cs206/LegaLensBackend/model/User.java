@@ -8,7 +8,7 @@ public class User {
     private String email;
     private String name;
     private Date dateOfBirth;
-    private Integer freeUses;
+    private Integer freeUse;
     private Long phoneNumber;
 
     public User() {
@@ -16,12 +16,12 @@ public class User {
     }
 
     public User(String userId, String email, String name, Date dateOfBirth, 
-                Integer freeUses, Long phoneNumber) {
+                Integer freeUse, Long phoneNumber) {
         this.userId = userId;
         this.email = email;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.freeUses = freeUses;
+        this.freeUse = freeUse;
         this.phoneNumber = phoneNumber;
     }
 
@@ -54,11 +54,11 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Integer getFreeUses() {
-        return freeUses;
+    public Integer getFreeUse() {
+        return freeUse;
     }
-    public void setFreeUses(Integer freeUses) {
-        this.freeUses = freeUses;
+    public void setFreeUse(Integer freeUse) {
+        this.freeUse = freeUse;
     }
 
     public Long getPhoneNumber() {
