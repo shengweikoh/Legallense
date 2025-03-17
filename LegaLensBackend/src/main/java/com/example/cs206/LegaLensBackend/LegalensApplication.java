@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GeminiApplication {
+public class LegalensApplication {
     public static void main(String[] args) {
-        SpringApplication.run(GeminiApplication.class, args);
+        SpringApplication.run(LegalensApplication.class, args);
     }
 }
