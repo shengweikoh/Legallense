@@ -47,8 +47,8 @@ export default function UploadContract() {
 
   return (
 
-    <div className="container-fluid min-vh-100 custom-bg">
-  <div className="row justify-content-center align-items-center" style={{ height: "100%" }}>
+  <div className="container-fluid min-vh-100 custom-bg">
+  <div className="row justify-content-center align-items-center " style={{ height: "100%" }}>
     <div className="col-12 col-md-6">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -133,18 +133,17 @@ export default function UploadContract() {
 </div>
 
 
-<AlertDialog
-      open={open}
-      handleOpen={handleOpen}
-      handleClose={handleClose}
-      dialogButtonText="Continue to analysis"
-      dialogTitle="Important notice : Not legal advice"
-      dialogContent="This application is not a substitute for professional legal counsel. By continuing, you acknowledge
-    that any information provided is purely for reference and should not be taken as legal advice."
-      handleAction={handleRedirect}
-      actionButtonText="Yes, I acknowledge"
+  <AlertDialog
+    open={open}
+    handleOpen={handleOpen}
+    handleClose={handleClose}
+    dialogButtonText="Continue to analysis"
+    dialogTitle="Important notice : Not legal advice"
+    dialogContent="This application is not a substitute for professional legal counsel. By continuing, you acknowledge
+      that any information provided is purely for reference and should not be taken as legal advice."
+    handleAction={handleRedirect}
+    actionButtonText="Yes, I acknowledge"
   />
-
 
 
 
