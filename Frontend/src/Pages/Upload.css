@@ -1,13 +1,15 @@
 .custom-bg{
+    min-height:120vh;
     background-color:  #f4f4f2;
     padding-top:120px;
 
-
+   
 }
 
 .card-header{
     background-color:white;
 }
+
 
 .btn.btn-primary.Analyze {
     background-color:#0D6EFD; /* Use your desired color */
@@ -20,6 +22,7 @@
   }
 .contractdetails{
     width:60%;
+    
 }
 
 .Analyze2{

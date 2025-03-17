@@ -81,7 +81,23 @@ const Navbar = () => {
                     <div className="info-container">
                    <span className="info-text"><Handshake className = "handshake"></Handshake>Refer a Friend</span>
                     <span className="info-text"><HandCoins className = "handcoin"></HandCoins>Free Use: 8</span>
+                    {user ? (
+                            <button className="logout" onClick={handleLogout}>
+                                <CircleUserRound /> Logout
+                            </button>
+                        ) : (
+                            /* ✅ If no user, show Login button */
+                            <Link to="/login">
+                                <button className="login">
+                                    <CircleUserRound /> Login
+                                </button>
+                            </Link>
+                        )}
                     </div>
+
+
+
+                    
                )}
 
 

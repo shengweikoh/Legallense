@@ -71,7 +71,7 @@ const Home = () => {
           <TypingEffect />
         </div>
   
-        {/* Description Sections */}
+      
         {[ 
           { number: "01", title: "What we do", text: "We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI.We provide legal assistance through AI." },
           { number: "02", title: "How we provide", text: "Our AI simplifies complex legal terms." },
@@ -86,9 +86,8 @@ const Home = () => {
               <div className="col-md-3">
                 <div className="bigtitle" ref={(el) => rightRef.current.push(el)}>{section.title}</div>
               </div>
-              
               <div
-        
+      
                 className=" col-md-8 description"
                 ref={(el) => leftRef.current.push(el)}
               >

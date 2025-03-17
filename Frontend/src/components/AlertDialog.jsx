@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import PropTypes from "prop-types";
+import "./AlertDialog.css";
 
 const theme = createTheme({
     palette: {
@@ -29,7 +30,7 @@ function AlertDialog({open, handleOpen, handleClose, dialogButtonText, dialogTit
     return (
         <ThemeProvider theme = {theme}>
             <Box>
-                <Button variant="contained" onClick={handleOpen} sx = {{ textTransform: 'capitalize'}}>
+                <Button variant="contained" onClick={handleOpen} sx = {{ textTransform: 'capitalize'}}  className="custom-button" >
                     {dialogButtonText}
                 </Button>
 
