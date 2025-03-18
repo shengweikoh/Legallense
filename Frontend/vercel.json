@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "public": true,
+    "framework": "vite",
+    "routes": [
+      {
+        "src": "/assets/(.*)",
+        "dest": "/dist/assets/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/dist/index.html"
+      }
+    ]
+  }

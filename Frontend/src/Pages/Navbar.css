@@ -51,7 +51,6 @@
 }
 
 .login:hover {
-
     background-color: rgb(28, 27, 27);
     color:rgb(196, 196, 196); /* Changes background color on hover */
     border-color:rgb(22, 22, 22);
@@ -72,10 +71,6 @@
   }
 
 .info-container{
-
-    margin-right:40px;
-
-
 }
 
 .info-text{
@@ -92,6 +87,24 @@
 .handcoin{
     width:30px;
     padding-right:10px;
+}
+
+.logout{
+    font-size:14.5px;
+    color:rgb(58, 58, 58);
+    background-color:  #f4f4f2;
+    width:100px;
+    HEIGHT:60px;
+    border-radius:10px;
+    margin-right:20px;
+}
+
+.logout:hover {
+
+    background-color: rgb(28, 27, 27);
+    color:rgb(196, 196, 196); /* Changes background color on hover */
+    border-color:rgb(22, 22, 22);
+    transition: background-color 0.3s ease;
 }
 
 
