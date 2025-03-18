@@ -1,0 +1,12 @@
+.custom-button {
+    background-color: #007bff !important; /* Forces MUI to accept the color */
+    color: white !important;
+    padding: 10px 20px !important;
+    font-size: 16px !important;
+    border-radius: 5px !important;
+    margin-bottom: 100px !important;
+}
+
+.custom-button:hover {
+    background-color: #0056b3 !important; /* Ensures hover works */
+}
