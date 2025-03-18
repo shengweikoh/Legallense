@@ -162,32 +162,35 @@ public class ContractService {
         log.info("Contract with ID: " + contractId + " updated successfully.");
     }
 
-    public String compareContracts(String userId, String contractId1, String contractId2) throws ExecutionException, InterruptedException {
-        log.info("Comparing contracts with IDs: " + contractId1 + " and " + contractId2);
+    public String compareContracts(String userId, String contractId1, String contractId2) {
+        try {
+            log.info("Comparing contracts with IDs: " + contractId1 + " and " + contractId2 + " for user ID: " + userId);
 
-        // Retrieve the first contract from Firestore
-        DocumentReference docRef1 = firestore.collection("Contracts").document(contractId1);
-        Contract contract1 = docRef1.get().get().toObject(Contract.class);
+            // Retrieve the first contract using UserContractService
+            Contract contract1 = userContractService.getUserContractById(userId, contractId1);
+            if (contract1 == null) {
+                throw new IllegalArgumentException("Contract not found for ID: " + contractId1);
+            }
 
-        if (contract1 == null) {
-            throw new IllegalArgumentException("Contract not found for ID: " + contractId1);
+            // Retrieve the second contract using UserContractService
+            Contract contract2 = userContractService.getUserContractById(userId, contractId2);
+            if (contract2 == null) {
+                throw new IllegalArgumentException("Contract not found for ID: " + contractId2);
+            }
+
+            // Combine the summaries of both contracts
+            String comparisonResult = "Comparison of Contracts:\n\n" +
+                    "Contract 1 Name: " + contract1.getContractName() + "\n" +
+                    "Contract 1 Summary:\n" + contract1.getSummary() + "\n\n" +
+                    "Contract 2 Name: " + contract2.getContractName() + "\n" +
+                    "Contract 2 Summary:\n" + contract2.getSummary();
+
+            log.info("Comparison completed for contracts with IDs: " + contractId1 + " and " + contractId2);
+
+            return comparisonResult;
+        } catch (Exception e) {
+            log.severe("Error comparing contracts: " + e.getMessage());
+            throw new RuntimeException(e); // Wrap checked exceptions in a RuntimeException
         }
-
-        // Retrieve the second contract from Firestore
-        DocumentReference docRef2 = firestore.collection("Contracts").document(contractId2);
-        Contract contract2 = docRef2.get().get().toObject(Contract.class);
-
-        if (contract2 == null) {
-            throw new IllegalArgumentException("Contract not found for ID: " + contractId2);
-        }
-
-        // Combine the summaries of both contracts
-        String comparisonResult = "Comparison of Contracts:\n\n" +
-                "Contract 1 Summary:\n" + contract1.getSummary() + "\n\n" +
-                "Contract 2 Summary:\n" + contract2.getSummary();
-
-        log.info("Comparison completed for contracts with IDs: " + contractId1 + " and " + contractId2);
-
-        return comparisonResult;
     }
 }
