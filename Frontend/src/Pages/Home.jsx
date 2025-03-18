@@ -70,6 +70,9 @@ const Home = () => {
           </motion.div>
           <TypingEffect />
         </div>
+
+
+        <ProcessScrollBoard/>
   
       
         {[ 
@@ -97,7 +100,7 @@ const Home = () => {
           </div>
         ))}
 
-        <ProcessScrollBoard/>
+        
   
         {/* Cards Section */}
         <div className="row g-3 justify-content-center carddescription" style={{ paddingLeft: 125 }}>

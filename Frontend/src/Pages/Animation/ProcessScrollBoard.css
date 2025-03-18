@@ -1,13 +1,14 @@
 process-wrapper {
     position: relative;
-    width: 100%;
+    width: 90%;
+    max-width: 1000px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80vh;
+    height: 100vh;
     overflow: hidden;
 
-
+  
   }
 
   body {
@@ -19,33 +20,38 @@ process-wrapper {
   /* Container with Steps */
   .process-container {
     display: flex;
-    width: 400vw; /* 4 steps, each 100vw */
-    transition: transform 1s ease-out;
+    width: 210vw; /* 4 steps, each 100vw */
+    transition: transform 0.7s ease-out;
     transform: translateX(0vw); /* Start at Step 1 */
     overflow: hidden;
   }
   
   /* Each Step */
   .step-box {
-    min-width: 100vw; /* Each step takes full viewport width */
+
+
+    min-width: 50vw; /* Each step takes full viewport width */
     height:500px;/* Ensure height is consistent */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(45deg, #6b73ff, #000dff);
-    color: white;
+    background: linear-gradient(45deg, #454545, #353535);
+    color: #f4f4f2; 
     font-size: 1.5rem;
     padding: 40px;
-    border-radius: 20px;
+    border-radius: 40px;
     position: relative;
-    margin:10px;
+    margin-right:25px !important;
+    margin:30px;
     overflow: hidden;
+    box-shadow: 0px 10px 20px rgba(31, 31, 31, 0.4);
 
   }
   
   /* Step Number */
   .step-number {
+    background-color: #f4f4f2;
     font-size: 3rem;
     font-weight: bold;
     background: rgba(255, 255, 255, 0.2);
@@ -84,7 +90,6 @@ process-wrapper {
   .right-arrow {
     right: 20px;
   }
-  
   /* Responsive */
   @media (max-width: 768px) {
     .step-box {
@@ -95,6 +100,7 @@ process-wrapper {
   
     .step-number {
       font-size: 2rem;
+      
     }
   
     .step-title {
@@ -110,3 +116,24 @@ process-wrapper {
       padding: 10px;
     }
   }
+
+.step-gif{
+  width:180px;
+  height:180px;
+  border-radius:10px
+
+}
+
+.step-number {
+  display: flex;
+  align-items: center; /* Centers vertically */
+  justify-content: center; /* Centers horizontally */
+  height: 50px;
+  width: 30px;
+  font-size: 30px;
+  margin-bottom: 30px;
+  background-color: rgba(255, 255, 255, 0.2); /* Optional: Background for visibility */
+  border-radius: 10px; /* Optional: Rounded corners */
+}
+
+
