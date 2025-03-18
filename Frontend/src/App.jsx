@@ -33,16 +33,16 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/upload" element={<UploadContract />} />
-        <Route path="/home" element={<Dashboard />} />
-        <Route path="/analysis" element={<AnalysisPage />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/compare" element={<ContractCompare />} />
-        <Route path="/contractcompare" element={<ContractComparison />} />
         <Route path = "signup" element= {<Signup/>}/>
 
         {/* Protected Routes for Authenticated Users */}
         <Route element={<ProtectedRoute />}>
+          <Route path="/upload" element={<UploadContract />} />
+          <Route path="/home" element={<Dashboard />} />
+          <Route path="/analysis" element={<AnalysisPage />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/compare" element={<ContractCompare />} />
+          <Route path="/contractcompare" element={<ContractComparison />} />
         {/* Place protected routes here */}
         </Route>
       </Routes>
