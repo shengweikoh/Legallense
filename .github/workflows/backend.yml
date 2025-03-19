@@ -25,8 +25,8 @@ jobs:
       # 3. Decode and Create serviceAccountKey.json and vertex-api-key.json
       - name: Decode and Create serviceAccountKey.json and vertex-api-key.json
         run: |
-          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | base64 -d > backend/src/main/resources/serviceAccountKey.json
-          echo "${{ secrets.VERTEX_API_KEY }}" | base64 -d > backend/src/main/resources/vertex-api-key.json
+          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | base64 -d > LegaLensBackend/src/main/resources/serviceAccountKey.json
+          echo "${{ secrets.VERTEX_API_KEY }}" | base64 -d > LegaLensBackend/src/main/resources/vertex-api-key.json
 
       # 4. Build the Spring Boot project with Maven (in subdirectory if needed)
       - name: Build with Maven
