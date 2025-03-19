@@ -1,3 +1,4 @@
+# Local Development
 ### Health Check
 GET http://localhost:8080/health
 
@@ -21,7 +22,7 @@ Content-Type: application/json
 
 
 
-
+# Production Environment
 ### Health Check
 GET https://legalens.onrender.com/health
 
