@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.io.IOException;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
@@ -39,25 +40,20 @@ public class GeminiContractService {
     private UserContractService userContractService;
 
     // The constructor now accepts an environment variable for production override.
-    public GeminiContractService(@Value("${VERTEX_API_KEY:}") String vertexApiKeyPath) throws IOException {
-        File credentialsFile;
+    public GeminiContractService(@Value("${VERTEX_API_KEY:}") String vertexApiKeyJson) throws IOException {
+        InputStream credentialsStream;
 
-        // If the environment variable is set (non-empty), use it
-        if (vertexApiKeyPath != null && !vertexApiKeyPath.isEmpty()) {
-            credentialsFile = new File(vertexApiKeyPath);
+        if (vertexApiKeyJson != null && !vertexApiKeyJson.isEmpty()) {
+            credentialsStream = new ByteArrayInputStream(vertexApiKeyJson.getBytes(StandardCharsets.UTF_8));
         } else {
-            // Otherwise, load from the classpath for local development
-            credentialsFile = new ClassPathResource(DEFAULT_CREDENTIALS_FILE).getFile();
+            // Fallback for local development: load from the classpath
+            File credentialsFile = new ClassPathResource(DEFAULT_CREDENTIALS_FILE).getFile();
+            credentialsStream = new FileInputStream(credentialsFile);
         }
 
-        // Optionally set the GOOGLE_APPLICATION_CREDENTIALS system property
-        System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", credentialsFile.getAbsolutePath());
-
-        // Load GoogleCredentials from the JSON file
-        GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(credentialsFile))
+        GoogleCredentials credentials = GoogleCredentials.fromStream(credentialsStream)
                 .createScoped(List.of("https://www.googleapis.com/auth/cloud-platform"));
 
-        // Ensure the credentials are a ServiceAccountCredentials instance to extract the project ID
         if (credentials instanceof ServiceAccountCredentials) {
             this.projectId = ((ServiceAccountCredentials) credentials).getProjectId();
         } else {

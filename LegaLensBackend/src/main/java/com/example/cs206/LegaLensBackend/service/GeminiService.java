@@ -11,41 +11,36 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class GeminiService {
 
-    // The project ID will be loaded from the credentials file
     private final String projectId;
     private static final String REGION = "us-central1";
-    // Default file location in resources for local development
     private static final String DEFAULT_CREDENTIALS_FILE = "vertex-api-key.json";
 
-    // The constructor now accepts an environment variable for production override.
-    public GeminiService(@Value("${VERTEX_API_KEY:}") String vertexApiKeyPath) throws IOException {
-        File credentialsFile;
+    public GeminiService(@Value("${VERTEX_API_KEY:}") String vertexApiKeyJson) throws IOException {
+        InputStream credentialsStream;
 
-        // If the environment variable is set (non-empty), use it
-        if (vertexApiKeyPath != null && !vertexApiKeyPath.isEmpty()) {
-            credentialsFile = new File(vertexApiKeyPath);
+        if (vertexApiKeyJson != null && !vertexApiKeyJson.isEmpty()) {
+            credentialsStream = new ByteArrayInputStream(vertexApiKeyJson.getBytes(StandardCharsets.UTF_8));
         } else {
-            // Otherwise, load from the classpath for local development
-            credentialsFile = new ClassPathResource(DEFAULT_CREDENTIALS_FILE).getFile();
+            // Fallback for local development: load from the classpath
+            File credentialsFile = new ClassPathResource(DEFAULT_CREDENTIALS_FILE).getFile();
+            credentialsStream = new FileInputStream(credentialsFile);
         }
 
-        // Optionally set the GOOGLE_APPLICATION_CREDENTIALS system property
-        System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", credentialsFile.getAbsolutePath());
-
-        // Load GoogleCredentials from the JSON file
-        GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(credentialsFile))
+        GoogleCredentials credentials = GoogleCredentials.fromStream(credentialsStream)
                 .createScoped(List.of("https://www.googleapis.com/auth/cloud-platform"));
 
-        // Ensure the credentials are a ServiceAccountCredentials instance to extract the project ID
         if (credentials instanceof ServiceAccountCredentials) {
             this.projectId = ((ServiceAccountCredentials) credentials).getProjectId();
         } else {
@@ -54,7 +49,6 @@ public class GeminiService {
     }
 
     public String generateResponse(String prompt) throws IOException {
-        // Initialize VertexAI (it will pick up the credentials from the system property)
         try (VertexAI vertexAi = new VertexAI(projectId, REGION)) {
             GenerativeModel model = new GenerativeModel.Builder()
                     .setModelName("gemini-1.5-flash-001")
@@ -65,9 +59,9 @@ public class GeminiService {
             ResponseStream<GenerateContentResponse> responseStream = model.generateContentStream(content);
 
             return responseStream.stream()
-                    .flatMap(response -> response.getCandidatesList().stream()) // Get all candidates
-                    .flatMap(candidate -> candidate.getContent().getPartsList().stream()) // Get all parts
-                    .map(part -> part.getText()) // Extract text
+                    .flatMap(response -> response.getCandidatesList().stream())
+                    .flatMap(candidate -> candidate.getContent().getPartsList().stream())
+                    .map(part -> part.getText())
                     .collect(Collectors.joining(" "));
         }
     }
