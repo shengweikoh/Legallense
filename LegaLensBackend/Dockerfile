@@ -30,4 +30,4 @@ RUN ./mvnw clean install -DskipTests
 EXPOSE 8080
 
 # Start the Spring Boot application
-CMD ["java", "-jar", "/app/LegaLensBackend.jar"]
+CMD ["java", "-jar", "target/LegaLensBackend-0.0.1-SNAPSHOT.jar"]
