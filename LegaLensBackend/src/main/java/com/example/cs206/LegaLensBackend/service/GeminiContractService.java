@@ -1,50 +1,42 @@
 package com.example.cs206.LegaLensBackend.service;
 
 import com.example.cs206.LegaLensBackend.model.Contract;
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.WriteResult;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.google.cloud.firestore.Firestore;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 
 @Service
-public class ContractService {
+public class GeminiContractService {
 
-    private static final Logger log = Logger.getLogger(ContractService.class.getName());
-
-    @Autowired
-    private Firestore firestore;
+    private static final Logger log = Logger.getLogger(GeminiContractService.class.getName());
 
     @Autowired
     private UserContractService userContractService;
 
     private final String geminiApiUrl = "https://api.gemini.com/v1/contract";
 
-    public void setContractToPremium(String userId, String contractId) {
-        try {
-            log.info("Setting contract with ID: " + contractId + " to premium.");
+    private String callGeminiApi(String endpoint, JsonObject payload) throws IOException {
+        URL url = new URL(geminiApiUrl + endpoint);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setDoOutput(true);
 
-            // Retrieve the contract using UserContractService
-            Contract contract = userContractService.getUserContractById(userId, contractId);
+        try (OutputStream os = connection.getOutputStream()) {
+            os.write(payload.toString().getBytes("utf-8"));
+        }
 
-            // Update the premiumPaid field
-            contract.setPremiumPaid(true);
-
-            // Save the updated contract to Firestore
-            updateContractInFirestore(userId, contractId, contract);
-            log.info("Contract with ID: " + contractId + " has been set to premium.");
-        } catch (Exception e) {
-            log.severe("Error setting contract to premium: " + e.getMessage());
-            throw new RuntimeException(e); // Wrap checked exceptions in a RuntimeException
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            return new String(connection.getInputStream().readAllBytes(), "utf-8");
+        } else {
+            throw new IOException("Failed to call Gemini API: " + responseCode);
         }
     }
 
@@ -64,7 +56,7 @@ public class ContractService {
 
             // Update the summary field in Firestore
             contract.setSummary(summary);
-            updateContractInFirestore(userId, contractId, contract);
+            userContractService.updateContractInFirestore(userId, contractId, contract);
 
             return summary;
         } catch (Exception e) {
@@ -94,7 +86,7 @@ public class ContractService {
 
             // Update the flag field in Firestore
             contract.setFlag(highlights);
-            updateContractInFirestore(userId, contractId, contract);
+            userContractService.updateContractInFirestore(userId, contractId, contract);
 
             return highlights;
         } catch (Exception e) {
@@ -124,42 +116,13 @@ public class ContractService {
 
             // Update the suggest field in Firestore
             contract.setSuggest(suggestions);
-            updateContractInFirestore(userId, contractId, contract);
+            userContractService.updateContractInFirestore(userId, contractId, contract);
 
             return suggestions;
         } catch (Exception e) {
             log.severe("Error suggesting contract: " + e.getMessage());
             throw new RuntimeException(e); // Wrap checked exceptions in a RuntimeException
         }
-    }
-
-    private String callGeminiApi(String endpoint, JsonObject payload) throws IOException {
-        URL url = new URL(geminiApiUrl + endpoint);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.setDoOutput(true);
-
-        try (OutputStream os = connection.getOutputStream()) {
-            os.write(payload.toString().getBytes("utf-8"));
-        }
-
-        int responseCode = connection.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            return new String(connection.getInputStream().readAllBytes(), "utf-8");
-        } else {
-            throw new IOException("Failed to call Gemini API: " + responseCode);
-        }
-    }
-
-    private void updateContractInFirestore(String userId, String contractId, Contract contract) throws ExecutionException, InterruptedException {
-        DocumentReference docRef = firestore.collection("Users")
-                                             .document(userId)
-                                             .collection("Contracts")
-                                             .document(contractId);
-        ApiFuture<WriteResult> future = docRef.set(contract);
-        future.get(); // Wait for the operation to complete
-        log.info("Contract with ID: " + contractId + " updated successfully.");
     }
 
     public String compareContracts(String userId, String contractId1, String contractId2) {

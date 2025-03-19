@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,6 +49,16 @@ public class UserContractController {
             return ResponseEntity.ok("Contract uploaded successfully with ID: " + contractId);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error uploading contract: " + e.getMessage());
+        }
+    }
+
+    @PutMapping("/{userId}/contracts/{contractId}/set-premium")
+    public ResponseEntity<String> setContractToPremium(@PathVariable String userId, @PathVariable String contractId) {
+        try {
+            userContractService.setContractToPremium(userId, contractId);
+            return ResponseEntity.ok("Contract set to premium successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error setting contract to premium: " + e.getMessage());
         }
     }
 }

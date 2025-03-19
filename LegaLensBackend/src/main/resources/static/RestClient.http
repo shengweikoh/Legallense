@@ -13,3 +13,9 @@ Content-Type: application/json
 {
     "prompt": "Generate a short story in 3 sentences."
 }
+
+###
+GET http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/9KhqtEFP6Cgj68reifI2
+
+###
+PUT http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/9KhqtEFP6Cgj68reifI2/set-premium
