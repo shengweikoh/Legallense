@@ -1,0 +1,15 @@
+###
+POST http://localhost:8080/api/gemini/chat
+Content-Type: application/json
+
+{
+    "prompt": "Generate 3 short riddles."
+}
+
+###
+POST http://localhost:8080/api/gemini/chat
+Content-Type: application/json
+
+{
+    "prompt": "Generate a short story in 3 sentences."
+}
