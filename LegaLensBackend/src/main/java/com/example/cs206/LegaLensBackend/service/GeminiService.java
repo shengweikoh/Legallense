@@ -7,6 +7,7 @@ import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.generativeai.ContentMaker;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
 import com.google.cloud.vertexai.generativeai.ResponseStream;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +23,20 @@ public class GeminiService {
     // The project ID will be loaded from the credentials file
     private final String projectId;
     private static final String REGION = "us-central1";
-    private static final String CREDENTIALS_FILE = "vertex-api-key.json"; // Place this in src/main/resources
+    // Default file location in resources for local development
+    private static final String DEFAULT_CREDENTIALS_FILE = "vertex-api-key.json";
 
-    // Constructor loads the credentials and extracts the project ID
-    public GeminiService() throws IOException {
-        // Load the credentials file from the classpath
-        File credentialsFile = new ClassPathResource(CREDENTIALS_FILE).getFile();
+    // The constructor now accepts an environment variable for production override.
+    public GeminiService(@Value("${VERTEX_API_KEY:}") String vertexApiKeyPath) throws IOException {
+        File credentialsFile;
+
+        // If the environment variable is set (non-empty), use it
+        if (vertexApiKeyPath != null && !vertexApiKeyPath.isEmpty()) {
+            credentialsFile = new File(vertexApiKeyPath);
+        } else {
+            // Otherwise, load from the classpath for local development
+            credentialsFile = new ClassPathResource(DEFAULT_CREDENTIALS_FILE).getFile();
+        }
 
         // Optionally set the GOOGLE_APPLICATION_CREDENTIALS system property
         System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", credentialsFile.getAbsolutePath());
