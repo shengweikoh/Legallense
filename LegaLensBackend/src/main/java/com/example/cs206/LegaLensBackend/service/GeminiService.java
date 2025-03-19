@@ -17,6 +17,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,18 +26,27 @@ import java.util.stream.Collectors;
 public class GeminiService {
 
     private final String projectId;
-    private static final String REGION = "us-central1";
+    private static final String REGION = "asia-southeast1";
     private static final String DEFAULT_CREDENTIALS_FILE = "vertex-api-key.json";
 
     public GeminiService(@Value("${VERTEX_API_KEY:}") String vertexApiKeyJson) throws IOException {
         InputStream credentialsStream;
+        String credentialsJson;
 
         if (vertexApiKeyJson != null && !vertexApiKeyJson.isEmpty()) {
-            credentialsStream = new ByteArrayInputStream(vertexApiKeyJson.getBytes(StandardCharsets.UTF_8));
+            // Use the vertex API key from the environment variable.
+            credentialsJson = vertexApiKeyJson;
+            credentialsStream = new ByteArrayInputStream(credentialsJson.getBytes(StandardCharsets.UTF_8));
+            // Write the JSON content to a temporary file.
+            Path tempFile = Files.createTempFile("vertex-api-key", ".json");
+            Files.write(tempFile, credentialsJson.getBytes(StandardCharsets.UTF_8));
+            // Set the system property for Application Default Credentials.
+            System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", tempFile.toAbsolutePath().toString());
         } else {
-            // Fallback for local development: load from the classpath
+            // Fallback for local development: load from the classpath.
             File credentialsFile = new ClassPathResource(DEFAULT_CREDENTIALS_FILE).getFile();
             credentialsStream = new FileInputStream(credentialsFile);
+            System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", credentialsFile.getAbsolutePath());
         }
 
         GoogleCredentials credentials = GoogleCredentials.fromStream(credentialsStream)
@@ -49,7 +60,9 @@ public class GeminiService {
     }
 
     public String generateResponse(String prompt) throws IOException {
+        // This call should now succeed because GOOGLE_APPLICATION_CREDENTIALS is set.
         GoogleCredentials.getApplicationDefault();
+        
         try (VertexAI vertexAi = new VertexAI(projectId, REGION)) {
             GenerativeModel model = new GenerativeModel.Builder()
                     .setModelName("gemini-1.5-flash-001")

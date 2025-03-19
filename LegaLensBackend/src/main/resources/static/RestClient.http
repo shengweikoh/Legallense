@@ -18,3 +18,24 @@ PUT http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/9Khqt
 ### Summarize Contract
 POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/9KhqtEFP6Cgj68reifI2/summarize
 Content-Type: application/json
+
+
+
+
+### Health Check
+GET https://legalens.onrender.com/health
+
+### Get contract
+GET https://legalens.onrender.com/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/9KhqtEFP6Cgj68reifI2
+
+### Test if Gemini Works
+POST https://legalens.onrender.com/api/gemini/chat
+Content-Type: application/json
+
+{
+    "prompt": "Generate 3 short riddles."
+}
+
+### Summarize Contract
+POST https://legalens.onrender.com/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/9KhqtEFP6Cgj68reifI2/summarize
+Content-Type: application/json
