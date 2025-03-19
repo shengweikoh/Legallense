@@ -9,6 +9,9 @@
 // import java.util.Map;
 
 // @RestController
+// @RequestMapping("/api/gemini")
+// public class GeminiController {
+// @RestController
 // @CrossOrigin(origins = "http://localhost:5173") // or use "*" to allow all origins
 // @RequestMapping("/api/gemini")
 // public class GeminiController {
