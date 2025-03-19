@@ -10,26 +10,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
-import java.io.FileInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 @Configuration
 public class FirebaseConfig {
 
-    // Inject environment variable; defaults to empty string if not set.
+    // Inject the JSON content from the environment variable.
     @Value("${FIREBASE_SERVICE_ACCOUNT_KEY:}")
-    private String firebaseCredentialsPath;
+    private String firebaseCredentialsJson;
 
     @PostConstruct
     public void initFirebase() throws IOException {
         InputStream serviceAccount;
 
-        // If the environment variable is set, load from the provided file path.
-        if (firebaseCredentialsPath != null && !firebaseCredentialsPath.isEmpty()) {
-            serviceAccount = new FileInputStream(firebaseCredentialsPath);
+        if (firebaseCredentialsJson != null && !firebaseCredentialsJson.isEmpty()) {
+            // Convert the JSON string to an InputStream using ByteArrayInputStream
+            serviceAccount = new ByteArrayInputStream(firebaseCredentialsJson.getBytes(StandardCharsets.UTF_8));
         } else {
-            // Otherwise, load from the resources folder for local development.
+            // Fallback: load from the classpath for local development
             serviceAccount = getClass().getClassLoader().getResourceAsStream("serviceAccountKey.json");
             if (serviceAccount == null) {
                 throw new IOException("Firebase serviceAccountKey.json not found in resources.");
