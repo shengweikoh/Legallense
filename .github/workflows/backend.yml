@@ -21,18 +21,12 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # 3. Decode and Create serviceAccountKey.json and vertex-api-key.json
-      - name: Decode and Create serviceAccountKey.json and vertex-api-key.json
-        run: |
-          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | base64 -d > LegaLensBackend/src/main/resources/serviceAccountKey.json
-          echo "${{ secrets.VERTEX_API_KEY }}" | base64 -d > LegaLensBackend/src/main/resources/vertex-api-key.json
-
-      # 4. Build the Spring Boot project with Maven (in subdirectory if needed)
+      # 3. Build the Spring Boot project with Maven (in subdirectory if needed)
       - name: Build with Maven
         working-directory: ./LegaLensBackend
         run: mvn clean install
 
-      # 5. Deploy to Render
+      # 4. Deploy to Render
       - name: Deploy to Render
         run: |
           curl -X POST https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }} \

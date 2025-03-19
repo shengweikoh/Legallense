@@ -1,3 +1,6 @@
+### Health Check
+GET http://localhost:8080/health
+
 ### Test if Gemini Works
 POST http://localhost:8080/api/gemini/chat
 Content-Type: application/json
