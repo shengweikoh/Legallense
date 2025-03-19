@@ -4,11 +4,11 @@ FROM maven:3.9.8-eclipse-temurin-17 AS build
 # Set working directory
 WORKDIR /app
 
-# Accept build-time arguments for your keys
+# Accept build-time arguments for your keys (provided securely during build)
 ARG FIREBASE_SERVICE_ACCOUNT_KEY
 ARG VERTEX_API_KEY
 
-# Copy the project files
+# Copy your project files
 COPY . /app
 
 # Decode and write JSON files into src/main/resources BEFORE the Maven build
@@ -23,18 +23,11 @@ RUN if [ -n "$FIREBASE_SERVICE_ACCOUNT_KEY" ]; then \
         echo "VERTEX_API_KEY not provided"; \
     fi
 
-# Build the application and package it into a JAR
+# Now that the JSON files are in place, run the Maven build
 RUN ./mvnw clean install -DskipTests
-
-# Use a runtime image (for example, a JRE image) for running the application
-FROM eclipse-temurin:17-jre-alpine
-WORKDIR /app
-
-# Copy the built JAR from the build stage
-COPY --from=build /app/target/LegaLensBackend-0.0.1-SNAPSHOT.jar /app/LegaLensBackend.jar
 
 # Expose the application port
 EXPOSE 8080
 
-# Run the Spring Boot application
+# Start the Spring Boot application
 CMD ["java", "-jar", "/app/LegaLensBackend.jar"]
