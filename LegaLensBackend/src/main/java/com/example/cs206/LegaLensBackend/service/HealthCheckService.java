@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class HealthCheckService {
 
     public String getHealthStatus() {
-        return "Service is up and running!";
+        return "LegaLens backend is up and running!";
     }
 }
