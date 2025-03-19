@@ -10,15 +10,12 @@ import com.google.cloud.vertexai.generativeai.ResponseStream;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,29 +23,22 @@ import java.util.stream.Collectors;
 public class GeminiService {
 
     private final String projectId;
-    private static final String REGION = "asia-southeast1";
+    private static final String REGION = "asia-southeast1"; // Example: Singapore region.
     private static final String DEFAULT_CREDENTIALS_FILE = "vertex-api-key.json";
 
     public GeminiService(@Value("${VERTEX_API_KEY:}") String vertexApiKeyJson) throws IOException {
         InputStream credentialsStream;
-        String credentialsJson;
 
         if (vertexApiKeyJson != null && !vertexApiKeyJson.isEmpty()) {
-            // Use the vertex API key from the environment variable.
-            credentialsJson = vertexApiKeyJson;
-            credentialsStream = new ByteArrayInputStream(credentialsJson.getBytes(StandardCharsets.UTF_8));
-            // Write the JSON content to a temporary file.
-            Path tempFile = Files.createTempFile("vertex-api-key", ".json");
-            Files.write(tempFile, credentialsJson.getBytes(StandardCharsets.UTF_8));
-            // Set the system property for Application Default Credentials.
-            System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", tempFile.toAbsolutePath().toString());
+            // Use the provided JSON from the environment variable.
+            credentialsStream = new ByteArrayInputStream(vertexApiKeyJson.getBytes(StandardCharsets.UTF_8));
         } else {
             // Fallback for local development: load from the classpath.
             File credentialsFile = new ClassPathResource(DEFAULT_CREDENTIALS_FILE).getFile();
             credentialsStream = new FileInputStream(credentialsFile);
-            System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", credentialsFile.getAbsolutePath());
         }
 
+        // Load credentials from the stream.
         GoogleCredentials credentials = GoogleCredentials.fromStream(credentialsStream)
                 .createScoped(List.of("https://www.googleapis.com/auth/cloud-platform"));
 
@@ -60,9 +50,11 @@ public class GeminiService {
     }
 
     public String generateResponse(String prompt) throws IOException {
-        // This call should now succeed because GOOGLE_APPLICATION_CREDENTIALS is set.
-        GoogleCredentials.getApplicationDefault();
-        
+        // At this point, ADC should be available because our initializer set GOOGLE_APPLICATION_CREDENTIALS.
+        // If needed, you can verify it:
+        GoogleCredentials defaultCreds = GoogleCredentials.getApplicationDefault();
+        System.out.println("Default credentials loaded: " + defaultCreds);
+
         try (VertexAI vertexAi = new VertexAI(projectId, REGION)) {
             GenerativeModel model = new GenerativeModel.Builder()
                     .setModelName("gemini-1.5-flash-001")

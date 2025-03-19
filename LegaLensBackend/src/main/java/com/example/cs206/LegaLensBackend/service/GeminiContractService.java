@@ -44,24 +44,17 @@ public class GeminiContractService {
     // The constructor now accepts an environment variable for production override.
     public GeminiContractService(@Value("${VERTEX_API_KEY:}") String vertexApiKeyJson) throws IOException {
         InputStream credentialsStream;
-        String credentialsJson;
 
         if (vertexApiKeyJson != null && !vertexApiKeyJson.isEmpty()) {
-            // Use the vertex API key from the environment variable.
-            credentialsJson = vertexApiKeyJson;
-            credentialsStream = new ByteArrayInputStream(credentialsJson.getBytes(StandardCharsets.UTF_8));
-            // Write the JSON content to a temporary file.
-            Path tempFile = Files.createTempFile("vertex-api-key", ".json");
-            Files.write(tempFile, credentialsJson.getBytes(StandardCharsets.UTF_8));
-            // Set the system property for Application Default Credentials.
-            System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", tempFile.toAbsolutePath().toString());
+            // Use the provided JSON from the environment variable.
+            credentialsStream = new ByteArrayInputStream(vertexApiKeyJson.getBytes(StandardCharsets.UTF_8));
         } else {
             // Fallback for local development: load from the classpath.
             File credentialsFile = new ClassPathResource(DEFAULT_CREDENTIALS_FILE).getFile();
             credentialsStream = new FileInputStream(credentialsFile);
-            System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", credentialsFile.getAbsolutePath());
         }
 
+        // Load credentials from the stream.
         GoogleCredentials credentials = GoogleCredentials.fromStream(credentialsStream)
                 .createScoped(List.of("https://www.googleapis.com/auth/cloud-platform"));
 
