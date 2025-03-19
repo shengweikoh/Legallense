@@ -2,9 +2,8 @@ name: Java Spring Boot CI/CD Pipeline with Render
 
 on:
   push:
-    # Only run this workflow when pushing to the "CI/CD-Pipeline" branch
     branches: 
-      - 'CI/CD-Pipeline'
+      - main
 
 jobs:
   build:
