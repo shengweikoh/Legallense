@@ -2,15 +2,16 @@ name: Java Spring Boot CI/CD Pipeline with Render
 
 on:
   push:
-    # Only run this workflow when pushing to the "CI/CD Pipeline" branch
+    # Only run this workflow when pushing to the "CI/CD-Pipeline" branch
     branches: 
       - 'CI/CD-Pipeline'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      # 1. Check out the repo
+      # 1. Check out the repository
       - name: Check out repository
         uses: actions/checkout@v3
 
@@ -21,11 +22,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # 3: Decode and Create serviceAccountKey.json and vertex-api-key.json
+      # 3. Decode and Create serviceAccountKey.json and vertex-api-key.json
       - name: Decode and Create serviceAccountKey.json and vertex-api-key.json
-      run: |
-        echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | base64 -d > backend/src/main/resources/serviceAccountKey.json
-        echo "${{ secrets.VERTEX_API_KEY }}" | base64 -d > backend/src/main/resources/vertex-api-key.json
+        run: |
+          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | base64 -d > backend/src/main/resources/serviceAccountKey.json
+          echo "${{ secrets.VERTEX_API_KEY }}" | base64 -d > backend/src/main/resources/vertex-api-key.json
 
       # 4. Build the Spring Boot project with Maven (in subdirectory if needed)
       - name: Build with Maven
