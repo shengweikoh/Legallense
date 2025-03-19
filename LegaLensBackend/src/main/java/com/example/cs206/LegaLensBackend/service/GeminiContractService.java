@@ -4,39 +4,90 @@ import com.example.cs206.LegaLensBackend.model.Contract;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.auth.oauth2.ServiceAccountCredentials;
+import com.google.cloud.vertexai.VertexAI;
+import com.google.cloud.vertexai.api.GenerateContentResponse;
+import com.google.cloud.vertexai.generativeai.ContentMaker;
+import com.google.cloud.vertexai.generativeai.GenerativeModel;
+import com.google.cloud.vertexai.generativeai.ResponseStream;
+import org.springframework.core.io.ClassPathResource;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.logging.Logger;
 
 @Service
 public class GeminiContractService {
+    // The project ID will be loaded from the credentials file
+    private final String projectId;
+    private static final String REGION = "us-central1";
+    private static final String CREDENTIALS_FILE = "vertex-api-key.json"; // Place this in src/main/resources
 
     private static final Logger log = Logger.getLogger(GeminiContractService.class.getName());
 
     @Autowired
     private UserContractService userContractService;
 
-    private final String geminiApiUrl = "https://api.gemini.com/v1/contract";
+    // Constructor loads the credentials and extracts the project ID
+    public GeminiContractService() throws IOException {
+        // Load the credentials file from the classpath
+        File credentialsFile = new ClassPathResource(CREDENTIALS_FILE).getFile();
+
+        // Optionally set the GOOGLE_APPLICATION_CREDENTIALS system property
+        System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", credentialsFile.getAbsolutePath());
+
+        // Load GoogleCredentials from the JSON file
+        GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(credentialsFile))
+                .createScoped(List.of("https://www.googleapis.com/auth/cloud-platform"));
+
+        // Ensure the credentials are a ServiceAccountCredentials instance to extract the project ID
+        if (credentials instanceof ServiceAccountCredentials) {
+            this.projectId = ((ServiceAccountCredentials) credentials).getProjectId();
+        } else {
+            throw new IllegalStateException("Credentials are not an instance of ServiceAccountCredentials");
+        }
+    }
 
     private String callGeminiApi(String endpoint, JsonObject payload) throws IOException {
-        URL url = new URL(geminiApiUrl + endpoint);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.setDoOutput(true);
+        // Initialize VertexAI (it will pick up the credentials from the system property)
+        try (VertexAI vertexAi = new VertexAI(projectId, REGION)) {
+            GenerativeModel model = new GenerativeModel.Builder()
+                    .setModelName("gemini-1.5-flash-001")
+                    .setVertexAi(vertexAi)
+                    .build();
 
-        try (OutputStream os = connection.getOutputStream()) {
-            os.write(payload.toString().getBytes("utf-8"));
-        }
+            
+            // Load the prompt from the JSON file located in resources/gemini-prompts/summary.json
+            InputStream promptStream = getClass().getResourceAsStream("/gemini-prompts" + endpoint);
+            if (promptStream == null) {
+                throw new RuntimeException("Prompt file not found at /gemini-prompts" + endpoint);
+            }
+            InputStreamReader reader = new InputStreamReader(promptStream, StandardCharsets.UTF_8);
+            JsonElement promptElement = JsonParser.parseReader(reader);
 
-        int responseCode = connection.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            return new String(connection.getInputStream().readAllBytes(), "utf-8");
-        } else {
-            throw new IOException("Failed to call Gemini API: " + responseCode);
+            // Add the prompt JSON to the payload (the key "prompt" can be adjusted as needed)
+            payload.add("prompt", promptElement.getAsJsonObject());
+
+            // Convert the JsonObject payload to a string representation
+            String payloadString = payload.toString();
+
+            var content = ContentMaker.fromMultiModalData(payloadString);
+            ResponseStream<GenerateContentResponse> responseStream = model.generateContentStream(content);
+
+            return responseStream.stream()
+                    .flatMap(response -> response.getCandidatesList().stream()) // Get all candidates
+                    .flatMap(candidate -> candidate.getContent().getPartsList().stream()) // Get all parts
+                    .map(part -> part.getText()) // Extract text
+                    .collect(Collectors.joining(" "));
         }
     }
 
@@ -49,10 +100,12 @@ public class GeminiContractService {
 
             // Prepare the payload for the Gemini API
             JsonObject payload = new JsonObject();
+
+            // Now add the contract text to the payload
             payload.addProperty("contract", contract.getFullText());
 
             // Call the Gemini API
-            String summary = callGeminiApi("/summarize", payload);
+            String summary = callGeminiApi("/summary.json", payload);
 
             // Update the summary field in Firestore
             contract.setSummary(summary);
@@ -82,7 +135,7 @@ public class GeminiContractService {
             payload.addProperty("contract", contract.getFullText());
 
             // Call the Gemini API
-            String highlights = callGeminiApi("/highlight", payload);
+            String highlights = callGeminiApi("/highlight.json", payload);
 
             // Update the flag field in Firestore
             contract.setFlag(highlights);
@@ -112,7 +165,7 @@ public class GeminiContractService {
             payload.addProperty("contract", contract.getFullText());
 
             // Call the Gemini API
-            String suggestions = callGeminiApi("/suggest", payload);
+            String suggestions = callGeminiApi("/suggest.json", payload);
 
             // Update the suggest field in Firestore
             contract.setSuggest(suggestions);

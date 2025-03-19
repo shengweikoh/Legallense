@@ -1,6 +1,7 @@
 package com.example.cs206.LegaLensBackend.controller;
 
 import com.example.cs206.LegaLensBackend.service.GeminiContractService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,11 +9,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/users/{userId}/contracts")
 public class GeminiContractController {
-
     @Autowired
     private GeminiContractService geminiContractService;
 
-    @PutMapping("/{contractId}/summarize")
+    public GeminiContractController(GeminiContractService geminiContractService) {
+        this.geminiContractService = geminiContractService;
+    }
+
+    @PostMapping("/{contractId}/summarize")
     public ResponseEntity<String> summarizeContract(@PathVariable String userId, @PathVariable String contractId) {
         try {
             String summary = geminiContractService.summarizeContract(userId, contractId);
@@ -23,7 +27,7 @@ public class GeminiContractController {
         }
     }
 
-    @PutMapping("/{contractId}/highlight")
+    @PostMapping("/{contractId}/highlight")
     public ResponseEntity<String> highlightContract(@PathVariable String userId, @PathVariable String contractId) {
         try {
             String highlights = geminiContractService.highlightContract(userId, contractId);
@@ -33,7 +37,7 @@ public class GeminiContractController {
         }
     }
 
-    @PutMapping("/{contractId}/suggest")
+    @PostMapping("/{contractId}/suggest")
     public ResponseEntity<String> suggestContract(@PathVariable String userId, @PathVariable String contractId) {
         try {
             String suggestions = geminiContractService.suggestContract(userId, contractId);
