@@ -14,12 +14,13 @@ jobs:
         uses: actions/checkout@v3
 
       # Step 2: Set up Node.js environment
+      - name: Change to Frontend directory
+        run: cd Frontend
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'npm'
-        working-directory: ./Frontend
 
       # Step 3a: Set up environment variables in GitHub Actions environment
       - name: Set up environment variables
