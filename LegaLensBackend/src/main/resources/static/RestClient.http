@@ -1,4 +1,4 @@
-###
+### Test if Gemini Works
 POST http://localhost:8080/api/gemini/chat
 Content-Type: application/json
 
@@ -6,10 +6,12 @@ Content-Type: application/json
     "prompt": "Generate 3 short riddles."
 }
 
-###
-POST http://localhost:8080/api/gemini/chat
-Content-Type: application/json
+### Get contract
+GET http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/9KhqtEFP6Cgj68reifI2
 
-{
-    "prompt": "Generate a short story in 3 sentences."
-}
+### Upgrade contract to premium
+PUT http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/9KhqtEFP6Cgj68reifI2/set-premium
+
+### Summarize Contract
+POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/9KhqtEFP6Cgj68reifI2/summarize
+Content-Type: application/json
