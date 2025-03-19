@@ -9,8 +9,7 @@ mkdir -p LegaLensBackend/src/main/resources
 # Decode and write FIREBASE_SERVICE_ACCOUNT_KEY if set
 if [ -n "$FIREBASE_SERVICE_ACCOUNT_KEY" ]; then
     echo "Decoding FIREBASE_SERVICE_ACCOUNT_KEY..."
-    echo "$FIREBASE_SERVICE_ACCOUNT_KEY" | base64 -d > LegaLensBackend/src/main/resources/serviceAccountKey.json
-    echo "serviceAccountKey.json created at: $(pwd)/LegaLensBackend/src/main/resources/serviceAccountKey.json"
+    echo "$FIREBASE_SERVICE_ACCOUNT_KEY" | base64 -d > src/main/resources/serviceAccountKey.json
 else
     echo "FIREBASE_SERVICE_ACCOUNT_KEY is not set"
 fi
@@ -18,14 +17,10 @@ fi
 # Decode and write VERTEX_API_KEY if set
 if [ -n "$VERTEX_API_KEY" ]; then
     echo "Decoding VERTEX_API_KEY..."
-    echo "$VERTEX_API_KEY" | base64 -d > LegaLensBackend/src/main/resources/vertex-api-key.json
-    echo "vertex-api-key.json created at: $(pwd)/LegaLensBackend/src/main/resources/vertex-api-key.json"
+    echo "$VERTEX_API_KEY" | base64 -d > src/main/resources/vertex-api-key.json
 else
     echo "VERTEX_API_KEY is not set"
 fi
 
-# Set the GOOGLE_APPLICATION_CREDENTIALS environment variable to point to the Firebase credentials file
-export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/LegaLensBackend/src/main/resources/serviceAccountKey.json
-
 echo "Starting the Spring Boot application..."
-exec java -jar LegaLensBackend/target/LegaLensBackend-0.0.1-SNAPSHOT.jar
+exec java -jar app/target/LegaLensBackend-0.0.1-SNAPSHOT.jar
