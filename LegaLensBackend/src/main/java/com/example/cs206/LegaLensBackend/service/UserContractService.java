@@ -1,5 +1,6 @@
 package com.example.cs206.LegaLensBackend.service;
 
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,5 +100,34 @@ public class UserContractService {
         tempFile.delete();
 
         return generatedId;
+    }
+
+    public void setContractToPremium(String userId, String contractId) {
+        try {
+            log.info("Setting contract with ID: " + contractId + " to premium.");
+
+            // Retrieve the contract using UserContractService
+            Contract contract = getUserContractById(userId, contractId);
+
+            // Update the premiumPaid field
+            contract.setPremiumPaid(true);
+
+            // Save the updated contract to Firestore
+            updateContractInFirestore(userId, contractId, contract);
+            log.info("Contract with ID: " + contractId + " has been set to premium.");
+        } catch (Exception e) {
+            log.severe("Error setting contract to premium: " + e.getMessage());
+            throw new RuntimeException(e); // Wrap checked exceptions in a RuntimeException
+        }
+    }
+
+    public void updateContractInFirestore(String userId, String contractId, Contract contract) throws ExecutionException, InterruptedException {
+        DocumentReference docRef = firestore.collection("Users")
+                                             .document(userId)
+                                             .collection("Contracts")
+                                             .document(contractId);
+        ApiFuture<WriteResult> future = docRef.set(contract);
+        future.get(); // Wait for the operation to complete
+        log.info("Contract with ID: " + contractId + " updated successfully.");
     }
 }
