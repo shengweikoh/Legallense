@@ -3,6 +3,7 @@ package com.example.cs206.LegaLensBackend.service;
 import com.example.cs206.LegaLensBackend.model.Contract;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.auth.oauth2.ServiceAccountCredentials;
@@ -30,17 +31,24 @@ public class GeminiContractService {
     // The project ID will be loaded from the credentials file
     private final String projectId;
     private static final String REGION = "us-central1";
-    private static final String CREDENTIALS_FILE = "vertex-api-key.json"; // Place this in src/main/resources
+    private static final String DEFAULT_CREDENTIALS_FILE = "vertex-api-key.json"; // Place this in src/main/resources
 
     private static final Logger log = Logger.getLogger(GeminiContractService.class.getName());
 
     @Autowired
     private UserContractService userContractService;
 
-    // Constructor loads the credentials and extracts the project ID
-    public GeminiContractService() throws IOException {
-        // Load the credentials file from the classpath
-        File credentialsFile = new ClassPathResource(CREDENTIALS_FILE).getFile();
+    // The constructor now accepts an environment variable for production override.
+    public GeminiContractService(@Value("${VERTEX_API_KEY:}") String vertexApiKeyPath) throws IOException {
+        File credentialsFile;
+
+        // If the environment variable is set (non-empty), use it
+        if (vertexApiKeyPath != null && !vertexApiKeyPath.isEmpty()) {
+            credentialsFile = new File(vertexApiKeyPath);
+        } else {
+            // Otherwise, load from the classpath for local development
+            credentialsFile = new ClassPathResource(DEFAULT_CREDENTIALS_FILE).getFile();
+        }
 
         // Optionally set the GOOGLE_APPLICATION_CREDENTIALS system property
         System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", credentialsFile.getAbsolutePath());
