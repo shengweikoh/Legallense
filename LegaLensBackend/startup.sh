@@ -3,9 +3,6 @@ set -e
 
 echo "Running startup script..."
 
-# Create the target directory if it doesn't exist
-mkdir -p LegaLensBackend/src/main/resources
-
 # Decode and write FIREBASE_SERVICE_ACCOUNT_KEY if set
 if [ -n "$FIREBASE_SERVICE_ACCOUNT_KEY" ]; then
     echo "Decoding FIREBASE_SERVICE_ACCOUNT_KEY..."
@@ -23,4 +20,4 @@ else
 fi
 
 echo "Starting the Spring Boot application..."
-exec java -jar app/target/LegaLensBackend-0.0.1-SNAPSHOT.jar
+exec java -jar target/LegaLensBackend-0.0.1-SNAPSHOT.jar
