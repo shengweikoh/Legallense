@@ -39,4 +39,4 @@ Content-Type: application/json
 
 ### Summarize Contract
 POST https://legalens.onrender.com/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/9KhqtEFP6Cgj68reifI2/summarize
-Content-Type: application/json
+Content-Type: application/json 
