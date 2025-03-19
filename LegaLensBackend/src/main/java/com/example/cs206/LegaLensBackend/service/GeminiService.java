@@ -49,6 +49,7 @@ public class GeminiService {
     }
 
     public String generateResponse(String prompt) throws IOException {
+        GoogleCredentials.getApplicationDefault();
         try (VertexAI vertexAi = new VertexAI(projectId, REGION)) {
             GenerativeModel model = new GenerativeModel.Builder()
                     .setModelName("gemini-1.5-flash-001")
