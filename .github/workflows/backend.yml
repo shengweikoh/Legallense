@@ -4,7 +4,7 @@ on:
   push:
     # Only run this workflow when pushing to the "CI/CD Pipeline" branch
     branches: 
-      - 'CI/CD Pipeline'
+      - 'CI/CD-Pipeline'
 
 jobs:
   build:
