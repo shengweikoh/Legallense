@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.cs206.LegaLensBackend.service.UserContractService;
 import com.example.cs206.LegaLensBackend.model.Contract;
+import com.example.cs206.LegaLensBackend.dto.ContractDetailsDTO;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -59,6 +61,16 @@ public class UserContractController {
             return ResponseEntity.ok("Contract set to premium successfully.");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error setting contract to premium: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/{userId}/contracts")
+    public ResponseEntity<Object> getAllContractsForUser(@PathVariable String userId) {
+        try {
+            List<ContractDetailsDTO> contracts = userContractService.getAllContractsForUser(userId);
+            return ResponseEntity.ok(contracts);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error fetching contracts: " + e.getMessage());
         }
     }
 }

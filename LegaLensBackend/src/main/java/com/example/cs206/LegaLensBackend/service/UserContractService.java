@@ -15,9 +15,16 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
+import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 
 import java.io.File;
 import java.io.IOException;
+
+import com.example.cs206.LegaLensBackend.dto.ContractDetailsDTO;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserContractService {
@@ -90,6 +97,7 @@ public class UserContractService {
         contract.setSummary(""); // Placeholder for summary
         contract.setFlag(""); // Placeholder for flag
         contract.setSuggest(""); // Placeholder for suggestions
+        contract.setDateUploaded(); // Set the current date as a String
 
         // Save the contract to Firestore
         ApiFuture<WriteResult> future = docRef.set(contract);
@@ -129,5 +137,44 @@ public class UserContractService {
         ApiFuture<WriteResult> future = docRef.set(contract);
         future.get(); // Wait for the operation to complete
         log.info("Contract with ID: " + contractId + " updated successfully.");
+    }
+
+    public ContractDetailsDTO getContractDetails(String userId, String contractId) throws Exception {
+        Contract contract = getUserContractById(userId, contractId);
+        return new ContractDetailsDTO(
+            contract.getContractName(),
+            contract.getDocumentId(),
+            contract.getDateUploaded(),
+            contract.isPremiumPaid()
+        );
+    }
+
+    public List<ContractDetailsDTO> getAllContractsForUser(String userId) throws Exception {
+        log.info("Fetching all contracts for user ID: " + userId);
+
+        // Navigate to the user's contracts collection
+        CollectionReference contractsCollection = firestore.collection("Users")
+                                                           .document(userId)
+                                                           .collection("Contracts");
+
+        // Fetch all documents in the contracts collection
+        ApiFuture<QuerySnapshot> querySnapshot = contractsCollection.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.get().getDocuments();
+
+        // Map each document to a ContractDetailsDTO
+        List<ContractDetailsDTO> contractDetailsList = new ArrayList<>();
+        for (QueryDocumentSnapshot document : documents) {
+            Contract contract = document.toObject(Contract.class);
+            ContractDetailsDTO contractDetailsDTO = new ContractDetailsDTO(
+                contract.getContractName(),
+                contract.getDocumentId(),
+                contract.getDateUploaded(),
+                contract.isPremiumPaid()
+            );
+            contractDetailsList.add(contractDetailsDTO);
+        }
+
+        log.info("Fetched " + contractDetailsList.size() + " contracts for user ID: " + userId);
+        return contractDetailsList;
     }
 }
