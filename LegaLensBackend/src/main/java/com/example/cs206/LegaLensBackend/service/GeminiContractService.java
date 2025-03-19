@@ -19,6 +19,8 @@ import com.google.gson.JsonParser;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.io.IOException;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -31,7 +33,7 @@ import java.util.logging.Logger;
 public class GeminiContractService {
     // The project ID will be loaded from the credentials file
     private final String projectId;
-    private static final String REGION = "us-central1";
+    private static final String REGION = "asia-southeast1";
     private static final String DEFAULT_CREDENTIALS_FILE = "vertex-api-key.json"; // Place this in src/main/resources
 
     private static final Logger log = Logger.getLogger(GeminiContractService.class.getName());
@@ -42,13 +44,22 @@ public class GeminiContractService {
     // The constructor now accepts an environment variable for production override.
     public GeminiContractService(@Value("${VERTEX_API_KEY:}") String vertexApiKeyJson) throws IOException {
         InputStream credentialsStream;
+        String credentialsJson;
 
         if (vertexApiKeyJson != null && !vertexApiKeyJson.isEmpty()) {
-            credentialsStream = new ByteArrayInputStream(vertexApiKeyJson.getBytes(StandardCharsets.UTF_8));
+            // Use the vertex API key from the environment variable.
+            credentialsJson = vertexApiKeyJson;
+            credentialsStream = new ByteArrayInputStream(credentialsJson.getBytes(StandardCharsets.UTF_8));
+            // Write the JSON content to a temporary file.
+            Path tempFile = Files.createTempFile("vertex-api-key", ".json");
+            Files.write(tempFile, credentialsJson.getBytes(StandardCharsets.UTF_8));
+            // Set the system property for Application Default Credentials.
+            System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", tempFile.toAbsolutePath().toString());
         } else {
-            // Fallback for local development: load from the classpath
+            // Fallback for local development: load from the classpath.
             File credentialsFile = new ClassPathResource(DEFAULT_CREDENTIALS_FILE).getFile();
             credentialsStream = new FileInputStream(credentialsFile);
+            System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", credentialsFile.getAbsolutePath());
         }
 
         GoogleCredentials credentials = GoogleCredentials.fromStream(credentialsStream)
