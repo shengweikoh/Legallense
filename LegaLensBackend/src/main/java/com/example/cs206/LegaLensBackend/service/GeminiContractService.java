@@ -62,6 +62,7 @@ public class GeminiContractService {
     }
 
     private String callGeminiApi(String endpoint, JsonObject payload) throws IOException {
+        GoogleCredentials.getApplicationDefault();
         // Initialize VertexAI (it will pick up the credentials from the system property)
         try (VertexAI vertexAi = new VertexAI(projectId, REGION)) {
             GenerativeModel model = new GenerativeModel.Builder()
