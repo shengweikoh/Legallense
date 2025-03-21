@@ -1,0 +1,220 @@
+General prompting template
+
+Prompt Order:
+1. Examples -> Demonstrates the expected format, style or structure of the output.
+2. Context -> Additional information that provides the background details the AI needs to generate a relevant response.
+3. Role -> Persona that helps frame the response in a certain way.
+4. Instruction -> Tells the AI exactly what task it should perform.
+5. Output Format -> Ensures response follows a particular structure.
+
+Example Prompt Template:
+
+1. Examples:
+    • Example 1: “The employee agrees to a probationary period of 6 months, during which either party may terminate the contract with two weeks’ notice.”
+    • Example 2: “The employer agrees to provide health insurance coverage for the employee, including dental and vision, starting from the first day of employment.”
+
+2. Context:
+You are summarizing the key clauses of an employment contract for a client. The contract contains various provisions that detail the terms and conditions of the employment relationship, including benefits, obligations, and termination rights.
+
+3. Role:
+You are a lawyer with expertise in employment law, summarizing the key clauses of the contract to your client in clear, easy-to-understand language.
+
+4. Instruction:
+Summarize the main clauses of the employment contract, highlighting important details such as:
+    • Employment start date.
+    • Job responsibilities and duties.
+    • Compensation and benefits.
+    • Probationary period and termination clauses.
+    • Confidentiality and non-compete clauses.
+Provide concise explanations of each clause and emphasize any terms that the client should be aware of or may need to negotiate.
+
+5. Output Format:
+    • Clause 1: [Clause Title]
+    • Summary: [Brief summary of the clause]
+    • Important Details: [Any critical terms or conditions the client should be aware of]
+
+
+//Full example prompt//
+Employment Contract:
+⸻
+
+Employment Agreement
+This Employment Agreement dated this 15th day of March 2025 is made between:
+
+Employer
+ABC Events Management
+(hereinafter referred to as “the employer”)
+Address of employer:
+123 Event Street, Suite 456,
+Singapore, 123456
+
+Employee
+John Doe
+(hereinafter referred to as “the employee”)
+Address of employee:
+789 Promotion Lane,
+Singapore, 654321
+
+1. Commencement of Employment
+
+This employment contract will begin on 1st April 2025 and continue until terminated as set out in clause 14 (below).
+
+2. Place of Work
+
+Various event venues in Singapore.
+
+3. Job Description
+
+3.1. Job Title: Events Promoter
+3.2. Duties:
+	•	Promote events to potential attendees via social media, flyers, and in-person interactions.
+	•	Assist with event registration and set-up.
+	•	Help distribute promotional materials at events.
+	•	Engage with attendees to ensure a positive experience.
+	•	Collect feedback after the event for marketing purposes.
+
+4. Remuneration
+
+4.1 The employee’s basic salary shall be paid in cash/by cheque or through GIRO on the 15th of each month:
+$100 per day.
+
+4.2 The employee shall be entitled to the following allowances/payment in kind (if any):
+	•	4.2.1 A weekly fixed transport allowance at a rate of $10 per day.
+	•	4.2.2 A weekly fixed meal allowance at a rate of $5 per day.
+	•	4.2.3 A weekly fixed laundry allowance of $2.
+	•	4.2.4 A weekly fixed site allowance of $5.
+
+4.3 The total value of the above remuneration shall be $100 + $10 + $5 + $2 + $5 = $122 per day.
+(The total of clauses 4.1 to 4.2.4)
+
+4.4 The employee shall also be paid overtime (OT) for work beyond 8 hours in a day or 44 hours in a week. The total amount of OT paid every month will be made on the 15th of each month.
+
+4.5 The employer shall review the employee’s remuneration/salary upon confirmation in the appointment and subsequently once a year.
+
+5. Working Days / Hours of Work / Overtime
+
+5.1 Working days will be 4 days a week.
+5.2 The normal working hours will be as follows:
+(i) First shift: 8:00 AM — 4:00 PM
+(ii) Second shift: 4:00 PM — 12:00 AM
+5.2.3 Rest day: Sunday
+5.4 Overtime will only be worked if authorised or agreed upon between the parties from time to time.
+
+6. Meal Intervals
+
+6.1 The employee shall have a meal (lunch) break of 1 hour.
+Meal time will be taken from:
+Lunch: 12:00 PM to 1:00 PM daily.
+
+6.2 The employee engaged in shift work shall have a meal break of 1 hour for every 8 continuous hours of work from time to time.
+
+7. Sunday or Rest Day Work
+
+7.1 Any work on Sundays/rest days will be by agreement between the parties from time to time.
+7.2 If the employee works on a Sunday/rest day at the request of the employer, he/she will be paid 1 day’s basic salary for working up to half the normal daily working hours or 2 day’s basic salary for working for more than half the normal daily working hours.
+7.3 If the employee works beyond his/her normal daily working hours on his rest day, he shall be paid 1½ times his hourly basic rate of pay.
+7.4 If the employee works on a Sunday/rest day at his/her own request, he/she will be paid ½ day’s basic salary for work up to half the normal daily working hours or 1 day’s basic salary for working for more than half the normal daily working hours.
+
+8. Public Holidays
+
+8.1 The employee will be entitled to all official public holidays on full pay.
+8.2 If the employee works on a public holiday, he/she shall be paid an additional one day’s basic pay and travel allowance (if any) for that day.
+
+9. Annual Leave
+
+9.1 The employee, who has served for at least 3 months, is entitled to 7 days of paid leave for every 12 months of continuous service.
+For each completed year of service, the number of days of annual leave will increase by 1 day until a maximum of 14 days.
+
+9.2 Where the employee’s period of employment is more than 3 months but less than 12 continuous months of service, the annual leave entitlement will be in proportion to the number of completed months of service in that year.
+
+10. Sick Leave
+
+10.1 The employee will be entitled to paid sick leave not exceeding:
+	•	14 days in each year if no hospitalization is necessary; or
+	•	60 days (including the 14 days in 10.1) in each year if hospitalization is necessary.
+
+10.2 During the first three months of employment the employee will not be entitled to paid sick leave and any sick leave taken during the period will be considered as unpaid leave.
+10.3 The employee is to notify the employer as soon as possible in case of his/her absence from work through illness after certification of his/her sick leave by company’s doctor or a Government doctor.
+
+11. Maternity Leave (to include if applicable)
+
+This clause is not applicable to the employee as they are male.
+
+12. Childcare Leave
+
+12.1 The employee (working parent) with any child below seven years of age will be entitled to 6 days paid childcare leave per year, to a maximum of 42 days, provided he/she has worked for the employer for at least 3 months.
+
+12.2 The employee is entitled to be paid by the employer at the gross rate of pay for every day of such leave taken by the employee.
+
+12.3 Any childcare leave unconsumed at the end of the calendar year will be forfeited and no payment in lieu will be paid to the employee.
+
+13. Deductions from Remuneration
+
+13.1 The employer may not deduct any monies from the employee’s wage other than those allowed under the Employment Act or ordered by the Court.
+
+14. Termination of Employment
+
+14.1 Either party can terminate this agreement with 1 week written notice or by paying salary in lieu of notice for the relevant period.
+
+15. Uniform
+
+15.1 2 sets of uniforms will be supplied to the employee by the employer and will remain the property of the employer.
+
+16. Workmen’s Insurance
+
+16.1 Where personal injury is sustained by the employee in the course of his employment, the employer will be liable to pay compensation where applicable under the Work Injury Compensation Act (Cap. 354).
+
+16.2 The employer will insure and maintain insurance under one or more approved policies with an insurer against any liability that he would incur to any workmen employed by him where applicable under the Work Injury Compensation Act (Cap. 354).
+
+17. Other Conditions of Employment or Benefits
+
+17.1 The employee will receive event bonuses based on performance, such as ticket sales and event attendance.
+17.2 The employee is eligible for performance-based incentives after 6 months of continuous service.
+
+18. General
+
+18.1 Any changes to this agreement will only be valid if they are in writing and have been agreed and signed by both parties.
+
+⸻
+
+THIS AGREEMENT SIGNED AT Singapore ON THIS 15th DAY OF March 2025
+
+(Signature) (Signature)
+
+⸻
+
+Name of Employer: John Smith
+Name of Employee: John Doe
+
+Witness By:
+Signature: _________________________
+Name: Sarah Tan
+Designation: HR Manager
+
+Enclosed: Company Policy Guidelines, Event Procedures
+
+⸻
+
+1. Examples:
+    • Example 1: “The employee agrees to a probationary period of 6 months, during which either party may terminate the contract with two weeks’ notice.”
+    • Example 2: “The employer agrees to provide health insurance coverage for the employee, including dental and vision, starting from the first day of employment.”
+
+2. Context:
+You are summarizing the key clauses of an employment contract for a client. The contract contains various provisions that detail the terms and conditions of the employment relationship, including benefits, obligations, and termination rights.
+
+3. Role:
+You are a lawyer with expertise in employment law, summarizing the key clauses of the contract to your client in clear, easy-to-understand language.
+
+4. Instruction:
+Summarize the main clauses of the employment contract, highlighting important details such as:
+    • Employment start date.
+    • Job responsibilities and duties.
+    • Compensation and benefits.
+    • Probationary period and termination clauses.
+    • Confidentiality and non-compete clauses.
+Provide concise explanations of each clause and emphasize any terms that the client should be aware of or may need to negotiate.
+
+5. Output Format:
+    • Clause 1: [Clause Title]
+    • Summary: [Brief summary of the clause]
+    • Important Details: [Any critical terms or conditions the client should be aware of]

@@ -1,5 +1,6 @@
 package com.example.cs206.LegaLensBackend.service;
 
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,16 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
+import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 
 import java.io.File;
 import java.io.IOException;
+
+import com.example.cs206.LegaLensBackend.dto.ContractDetailsDTO;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserContractService {
@@ -89,6 +97,7 @@ public class UserContractService {
         contract.setSummary(""); // Placeholder for summary
         contract.setFlag(""); // Placeholder for flag
         contract.setSuggest(""); // Placeholder for suggestions
+        contract.setDateUploaded(); // Set the current date as a String
 
         // Save the contract to Firestore
         ApiFuture<WriteResult> future = docRef.set(contract);
@@ -99,5 +108,73 @@ public class UserContractService {
         tempFile.delete();
 
         return generatedId;
+    }
+
+    public void setContractToPremium(String userId, String contractId) {
+        try {
+            log.info("Setting contract with ID: " + contractId + " to premium.");
+
+            // Retrieve the contract using UserContractService
+            Contract contract = getUserContractById(userId, contractId);
+
+            // Update the premiumPaid field
+            contract.setPremiumPaid(true);
+
+            // Save the updated contract to Firestore
+            updateContractInFirestore(userId, contractId, contract);
+            log.info("Contract with ID: " + contractId + " has been set to premium.");
+        } catch (Exception e) {
+            log.severe("Error setting contract to premium: " + e.getMessage());
+            throw new RuntimeException(e); // Wrap checked exceptions in a RuntimeException
+        }
+    }
+
+    public void updateContractInFirestore(String userId, String contractId, Contract contract) throws ExecutionException, InterruptedException {
+        DocumentReference docRef = firestore.collection("Users")
+                                             .document(userId)
+                                             .collection("Contracts")
+                                             .document(contractId);
+        ApiFuture<WriteResult> future = docRef.set(contract);
+        future.get(); // Wait for the operation to complete
+        log.info("Contract with ID: " + contractId + " updated successfully.");
+    }
+
+    public ContractDetailsDTO getContractDetails(String userId, String contractId) throws Exception {
+        Contract contract = getUserContractById(userId, contractId);
+        return new ContractDetailsDTO(
+            contract.getContractName(),
+            contract.getDocumentId(),
+            contract.getDateUploaded(),
+            contract.isPremiumPaid()
+        );
+    }
+
+    public List<ContractDetailsDTO> getAllContractsForUser(String userId) throws Exception {
+        log.info("Fetching all contracts for user ID: " + userId);
+
+        // Navigate to the user's contracts collection
+        CollectionReference contractsCollection = firestore.collection("Users")
+                                                           .document(userId)
+                                                           .collection("Contracts");
+
+        // Fetch all documents in the contracts collection
+        ApiFuture<QuerySnapshot> querySnapshot = contractsCollection.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.get().getDocuments();
+
+        // Map each document to a ContractDetailsDTO
+        List<ContractDetailsDTO> contractDetailsList = new ArrayList<>();
+        for (QueryDocumentSnapshot document : documents) {
+            Contract contract = document.toObject(Contract.class);
+            ContractDetailsDTO contractDetailsDTO = new ContractDetailsDTO(
+                contract.getContractName(),
+                contract.getDocumentId(),
+                contract.getDateUploaded(),
+                contract.isPremiumPaid()
+            );
+            contractDetailsList.add(contractDetailsDTO);
+        }
+
+        log.info("Fetched " + contractDetailsList.size() + " contracts for user ID: " + userId);
+        return contractDetailsList;
     }
 }

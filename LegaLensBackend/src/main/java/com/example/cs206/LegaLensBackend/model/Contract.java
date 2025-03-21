@@ -8,6 +8,7 @@ public class Contract {
     private String summary;
     private String flag;
     private String suggest;
+    private String dateUploaded; // Change to String for compatibility
 
     // Getters and Setters
     public String getContractName() {
@@ -58,13 +59,19 @@ public class Contract {
         this.summary = summary;
     }
 
-
-
     public String getSuggest() {
         return suggest;
     }
 
     public void setSuggest(String suggest) {
         this.suggest = suggest;
+    }
+
+    public String getDateUploaded() {
+        return dateUploaded;
+    }
+
+    public void setDateUploaded() {
+        this.dateUploaded = java.time.LocalDate.now().toString(); // Store as ISO-8601 string
     }
 }

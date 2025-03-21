@@ -15,77 +15,57 @@ const steps = [
 
 const ProcessScrollBoard = () => {
   const containerRef = useRef(null);
-  const [currentStep, setCurrentStep] = useState(0); // Track current step
+  const wrapperRef = useRef(null);
+  const [currentStep, setCurrentStep] = useState(0);
+  
+  // Mouse move event for scrolling
+  const handleMouseMove = (e) => {
+    if (!wrapperRef.current) return;
 
+    const { left, width } = wrapperRef.current.getBoundingClientRect();
+    const mouseX = e.clientX - left;
+    const moveThreshold = width * 0.3; // Mouse zones
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentStep((prevStep) => (prevStep === steps.length - 1 ? 0 : prevStep + 1));
-    },4000); // Auto-scroll every 3 seconds
+    if (mouseX < moveThreshold && currentStep > 0) {
+      setCurrentStep((prev) => prev - 1); // Move left
+    } else if (mouseX > width - moveThreshold && currentStep < steps.length - 1) {
+      setCurrentStep((prev) => prev + 1); // Move right
+    }
+  };
 
-    return () => clearInterval(interval); // Cleanup interval on unmount
-  }, []);
-
-
+  // Animate step change with GSAP
   useEffect(() => {
     gsap.to(containerRef.current, {
-      x: -currentStep * 40 + "vw", // Move by viewport width
-      duration: 1.0,
+      x: -currentStep * 38 + "vw", // Moves 50vw per step (Matches current CSS)
+      duration: 0.7,
       ease: "power2.out",
     });
   }, [currentStep]);
 
-  const nextStep = () => {
-    if (currentStep < steps.length - 1) setCurrentStep(currentStep + 1);
-  };
-
-  const prevStep = () => {
-    if (currentStep > 0) setCurrentStep(currentStep - 1);
-  };
-
   return (
-    <div className="process-wrapper">
+    <div
+      className="process-wrapper"
+      ref={wrapperRef}
+      onMouseMove={handleMouseMove}
+    >
+      <h2 className="process-title">OUR PROCESS</h2>
 
-
-      OUR PROCESS 
-     
-
-     <button className="arrow left-arrow" onClick={prevStep}>
-        <FaArrowLeft />
-      </button>
       <div className="process-container" ref={containerRef}>
-    
         {steps.map((step) => (
-
           <motion.div
             key={step.id}
             className="step-box"
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: step * 0.2 }}
+            transition={{ duration: 0.5, delay: step.id * 0.2 }}
           >
             <div className="step-number">{step.id}</div>
-            <img 
-            src= {Identifygif}
-            alt="Step Animation" 
-            className="step-gif"
-          />
-            
+            <img src={Identifygif} alt="Step Animation" className="step-gif" />
             <h2 className="step-title">{step.title}</h2>
             <p className="step-description">{step.description}</p>
           </motion.div>
-
         ))}
-
-        
-    
       </div>
-
-      <button className="arrow right-arrow" onClick={nextStep}>
-        <FaArrowRight />
-      </button>
-
-      
     </div>
   );
 };
