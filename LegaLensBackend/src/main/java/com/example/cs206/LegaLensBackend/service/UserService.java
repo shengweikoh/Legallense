@@ -6,15 +6,12 @@ import com.google.cloud.firestore.Firestore;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 @Service
 public class UserService {
 
     private final Firestore firestore;
 
-    @Autowired
     public UserService(Firestore firestore) {
         this.firestore = firestore;
     }

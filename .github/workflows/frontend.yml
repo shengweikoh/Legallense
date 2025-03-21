@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+          cache-dependency-path: Frontend/package-lock.json
 
       # Step 3a: Set up environment variables in GitHub Actions environment
       - name: Set up environment variables
