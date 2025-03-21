@@ -1,23 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FileTextIcon, ChevronRightIcon } from "lucide-react";
 import "./History.css";
 import { motion } from "framer-motion";
+import geminiApi from "../services/geminiApi";
+import { useAuth } from "../contexts/AuthContext";
+import { Typography } from "@mui/material";
+import { getAuth } from "firebase/auth";
+
 
 export default function History() {
-  const contracts = [
-    { id: 1, name: "Coffee Shop Part-Time Contract", date: "2023-06-15" },
-    { id: 2, name: "Retail Store Weekend Job Agreement", date: "2023-05-22" },
-    { id: 3, name: "Event Staff Contract", date: "2023-04-10" },
-    { id: 1, name: "Coffee Shop Part-Time Contract", date: "2023-06-15" },
-    { id: 2, name: "Retail Store Weekend Job Agreement", date: "2023-05-22" },
-    { id: 3, name: "Event Staff Contract", date: "2023-04-10" },
+  const { user } = useAuth();
 
-  ];
+  // const auth = getAuth();
+
+  const [contracts, setContracts] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!user) return;
+
+    const fetchContracts = async (userId) => {
+      const response = geminiApi.fetchHistoryContracts(userId);
+      if (response.success) {
+        setContracts(response.data);
+      } else {
+        setError(response.message);
+      }
+      setLoading(false);
+    };
+    
+    fetchContracts(user.uid);
+  }, [user])
+
+  if (loading) {
+    return <Typography>Loading clients...</Typography>;
+  }
+
+  if (error) {
+    return <Typography color="error">{error}</Typography>;
+  }
+
+
+  // const contracts = [
+  //   { documentId: 1, title: "Coffee Shop Part-Time Contract",  },
+  //   { contractId: 2, title: "Retail Store Weekend Job Agreement", date: "2023-05-22" },
+  //   { contractId: 3, title: "Event Staff Contract", date: "2023-04-10" },
+  //   { contractId: 1, title: "Coffee Shop Part-Time Contract", date: "2023-06-15" },
+  //   { contractId: 2, title: "Retail Store Weekend Job Agreement", date: "2023-05-22" },
+  //   { contractId: 3, title: "Event Staff Contract", date: "2023-04-10" },
+
+  // ];
 
   return (
-
-
     <div className="history-container">
         <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -28,17 +64,17 @@ export default function History() {
       <div className="row g-3">
         {contracts.map((contract) => (
 
-        <motion.div
+        <motion.div key = {contract.documentId}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 2, y: 0 }}
         transition={{ duration: 0.8}}
         >
           
-          <div key={contract.id} className="col-md-6 col-lg-10 mx-auto historyspace">
+          <div className="col-md-6 col-lg-10 mx-auto historyspace">
             <div className="card shadow-sm border-1 mt-1 historymaincard">
               <div className="card-body historycard">
                 <h5 className="card-title d-flex justify-content-between align-items-center p-0 ">
-                  {contract.name}
+                  {contract.contractName}
                 </h5>
                 <h6 className="card-subtitle text-muted mb-2 text-start">
                   Analyzed on {contract.date}
@@ -46,9 +82,9 @@ export default function History() {
                 <div className="d-flex justify-content-between align-items-center mt-2">
                   <div className="d-flex align-items-center text-muted">
                     <FileTextIcon className="me-2 text-primary" size={20} />
-                    <span>Contract #{contract.id}</span>
+                    <span>Contract #{contract.documentId}</span>
                   </div>
-                  <Link to={`/summary?id=${contract.id}`} className="btn btn-outline-primary d-flex align-items-center">
+                  <Link to={`/summary/${contract.documentId}`} className="btn btn-outline-primary d-flex align-items-center">
                     View Summary <ChevronRightIcon className="ms-1" size={16} />
                   </Link>
                 </div>

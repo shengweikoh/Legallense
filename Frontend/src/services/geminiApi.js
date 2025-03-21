@@ -1,25 +1,51 @@
+import axios from "axios";
+
+const BASE_URL = "http://localhost:8080/api/users";
+
+const axiosInstance = axios.create({
+    baseURL: BASE_URL,
+    headers: {
+        "Content-Type": "application/json",
+    },
+});
+
 const geminiApi = {
 
-    sendPrompt: async (prompt) => {
+    fetchHistoryContracts: async (userId) => {
         try {
-            const response = await fetch("http://localhost:8080/api/gemini/chat", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify( {prompt} )
-            });
-    
-            if (!response.ok) {
-                throw new Error("Network error detected");
+            const response = await axiosInstance.get(
+                `/${userId}/contracts`
+            );
+            return {
+                success:true,
+                data: response.data
             }
-    
-            const answer = await response.text();
-            return answer
         } catch (error) {
-            console.error("Error sending prompt: " + error);
+            return {
+                success:false,
+                message: 
+                    error.response?.data || "An error occured while fetching the contracts"
+            }
         }
-    } 
+    },
+
+    summariseContract: async (userId, contractId) => {
+        try {
+            const response = await axiosInstance.post(
+                `/${userId}/contracts/${contractId}`
+            );
+            return {
+                success: true,
+                data: response.data,
+            };
+        } catch (error) {
+            return {
+                success: false,
+                message:
+                    error.response?.data || "An error occured while fetching the summary"
+            };
+        }
+    },
 }
 
 export default geminiApi;
