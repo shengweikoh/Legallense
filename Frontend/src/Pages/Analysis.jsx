@@ -10,7 +10,7 @@ export default function AnalysisPage() {
     <div className="container-fluid m-5 analysiscontainer">
       <div className="row ">
         {/* Left Section: Contract Details */}
-        <div className="col-md-6">
+        <div className="col-lg-6 col-md-6 col-sm-6 d-flex flex-column">
           <div className="card contractdetails2 mb-4">
             <div className="card-header">
               <h5 className="card-title">Contract Details</h5>
@@ -42,7 +42,7 @@ export default function AnalysisPage() {
         </div>
 
         {/* Right Section: Tabs */}
-        <div className="col-md-6">
+        <div className="col-lg-6 col-md-6 col-sm-6 d-flex flex-column">
           <div className="card  result">
             <div className="card-header">
               <ul className="nav nav-tabs card-header-tabs" id="analysisTabs" role="tablist">
