@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "./Analysis.css";
+import { ContractDetails } from '../components/ContractDetails';
+import { Summary } from '../components/Summary';
 
 
 export default function AnalysisPage() {
@@ -23,19 +25,11 @@ export default function AnalysisPage() {
                   width:"100%",  
                   border: "1px solid #ddd",
                   padding: "10px",
+                  whiteSpace: "pre-line"
                 }}
               >
                 {/* Replace with your contract details */}
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam
-                lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam
-                viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent
-                et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt
-                congue enim, ut porta lorem lacinia consectetur. Lorem ipsum dolor sit
-                amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet
-                ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante
-                hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas
-                mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem
-                lacinia consectetur.
+                <ContractDetails />
               </div>
             </div>
           </div>
@@ -107,8 +101,11 @@ export default function AnalysisPage() {
                   id="summary"
                   role="tabpanel"
                   aria-labelledby="summary-tab"
+                  style = {{
+                    whiteSpace:"pre-line",
+                  }}
                 >
-                  <p>Summary content goes here...</p>
+                    <Summary />
                 </div>
                 <div
                   className="tab-pane fade"

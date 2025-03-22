@@ -21,6 +21,7 @@ import History from './Pages/History.jsx';
 import ContractCompare from './Pages/CompareContracts.jsx';
 import ContractComparison from './Pages/ContractComparison.jsx';
 import Signup from './Pages/Signup.jsx';
+import { AuthProvider } from './contexts/AuthContext.jsx';
 
 
 function App() {
@@ -28,24 +29,26 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/upload" element={<UploadContract />} />
-        <Route path="/home" element={<Dashboard />} />
-        <Route path="/analysis" element={<AnalysisPage />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/compare" element={<ContractCompare />} />
-        <Route path="/contractcompare" element={<ContractComparison />} />
-        <Route path = "signup" element= {<Signup/>}/>
+      <AuthProvider>
+        <Navbar />
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/upload" element={<UploadContract />} />
+            <Route path="/home" element={<Dashboard />} />
+            <Route path="/analysis/:contractId" element={<AnalysisPage />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/compare" element={<ContractCompare />} />
+            <Route path="/contractcompare" element={<ContractComparison />} />
+            <Route path = "signup" element= {<Signup/>}/>
 
-        {/* Protected Routes for Authenticated Users */}
-        <Route element={<ProtectedRoute />}>
-        {/* Place protected routes here */}
-        </Route>
-      </Routes>
+            {/* Protected Routes for Authenticated Users */}
+            <Route element={<ProtectedRoute />}>
+            {/* Place protected routes here */}
+            </Route>
+        </Routes>
+      </AuthProvider>
     </Router>
   );
 }
