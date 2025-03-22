@@ -17,13 +17,13 @@ import com.example.cs206.LegaLensBackend.dto.ContractDetailsDTO;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/users/{userId}/contracts")
 public class UserContractController {
 
     @Autowired
     private UserContractService userContractService;
 
-    @GetMapping("/{userId}/contracts/{contractId}")
+    @GetMapping("/{contractId}")
     public ResponseEntity<Object> getUserContractById(@PathVariable String userId, @PathVariable String contractId) {
         try {
             Contract contract = userContractService.getUserContractById(userId, contractId);
@@ -35,7 +35,7 @@ public class UserContractController {
         }
     }
 
-    @PostMapping("/{userId}/contracts/upload")
+    @PostMapping("/upload")
     public ResponseEntity<String> uploadContract(@PathVariable String userId,
                                                   @RequestParam("file") MultipartFile file,
                                                   @RequestParam("contractName") String contractName) {
@@ -54,7 +54,7 @@ public class UserContractController {
         }
     }
 
-    @PutMapping("/{userId}/contracts/{contractId}/set-premium")
+    @PutMapping("/{contractId}/set-premium")
     public ResponseEntity<String> setContractToPremium(@PathVariable String userId, @PathVariable String contractId) {
         try {
             userContractService.setContractToPremium(userId, contractId);
@@ -64,13 +64,55 @@ public class UserContractController {
         }
     }
 
-    @GetMapping("/{userId}/contracts")
+    @GetMapping("")
     public ResponseEntity<Object> getAllContractsForUser(@PathVariable String userId) {
         try {
             List<ContractDetailsDTO> contracts = userContractService.getAllContractsForUser(userId);
             return ResponseEntity.ok(contracts);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error fetching contracts: " + e.getMessage());
+        }
+    }
+    // here
+
+    @PostMapping("/{contractId}/summarize")
+    public ResponseEntity<String> summarizeContract(@PathVariable String userId, @PathVariable String contractId) {
+        try {
+            String summary = userContractService.getUserContractSummary(userId, contractId);
+            return ResponseEntity.ok(summary);
+        } catch (Exception e) {
+
+            return ResponseEntity.status(500).body("Error summarizing contract: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/{contractId}/highlight")
+    public ResponseEntity<String> highlightContract(@PathVariable String userId, @PathVariable String contractId) {
+        try {
+            String highlights = userContractService.getUserContractHighlight(userId, contractId);
+            return ResponseEntity.ok(highlights);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error highlighting contract: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/{contractId}/suggest")
+    public ResponseEntity<String> suggestContract(@PathVariable String userId, @PathVariable String contractId) {
+        try {
+            String suggestions = userContractService.getUserContractSuggest(userId, contractId);
+            return ResponseEntity.ok(suggestions);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error suggesting contract: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/compare")
+    public ResponseEntity<String> compareContracts(@PathVariable String userId, @RequestParam String contractId1, @RequestParam String contractId2) {
+        try {
+            String comparison = userContractService.getUserContractCompare(userId, contractId1, contractId2);
+            return ResponseEntity.ok(comparison);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error comparing contracts: " + e.getMessage());
         }
     }
 }
