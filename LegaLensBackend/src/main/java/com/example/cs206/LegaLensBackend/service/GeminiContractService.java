@@ -2,7 +2,6 @@ package com.example.cs206.LegaLensBackend.service;
 
 import com.example.cs206.LegaLensBackend.model.Contract;
 import com.google.gson.JsonObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -19,8 +18,6 @@ import com.google.gson.JsonParser;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.io.IOException;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -37,9 +34,6 @@ public class GeminiContractService {
     private static final String DEFAULT_CREDENTIALS_FILE = "vertex-api-key.json"; // Place this in src/main/resources
 
     private static final Logger log = Logger.getLogger(GeminiContractService.class.getName());
-
-    @Autowired
-    private UserContractService userContractService;
 
     // The constructor now accepts an environment variable for production override.
     public GeminiContractService(@Value("${VERTEX_API_KEY:}") String vertexApiKeyJson) throws IOException {
@@ -100,12 +94,9 @@ public class GeminiContractService {
         }
     }
 
-    public String summarizeContract(String userId, String contractId) {
+    public String summarizeContract(Contract contract, String userId, String contractId) {
         try {
             log.info("Summarizing contract with ID: " + contractId + " for user ID: " + userId);
-
-            // Retrieve the contract using UserContractService
-            Contract contract = userContractService.getUserContractById(userId, contractId);
 
             // Prepare the payload for the Gemini API
             JsonObject payload = new JsonObject();
@@ -116,10 +107,6 @@ public class GeminiContractService {
             // Call the Gemini API
             String summary = callGeminiApi("/summary.json", payload);
 
-            // Update the summary field in Firestore
-            contract.setSummary(summary);
-            userContractService.updateContractInFirestore(userId, contractId, contract);
-
             return summary;
         } catch (Exception e) {
             log.severe("Error summarizing contract: " + e.getMessage());
@@ -127,12 +114,9 @@ public class GeminiContractService {
         }
     }
 
-    public String highlightContract(String userId, String contractId) {
+    public String highlightContract(Contract contract, String userId, String contractId) {
         try {
             log.info("Highlighting contract with ID: " + contractId + " for user ID: " + userId);
-
-            // Retrieve the contract using UserContractService
-            Contract contract = userContractService.getUserContractById(userId, contractId);
 
             // Check if the contract is marked as premium
             if (!contract.isPremiumPaid()) {
@@ -146,10 +130,6 @@ public class GeminiContractService {
             // Call the Gemini API
             String highlights = callGeminiApi("/highlight.json", payload);
 
-            // Update the flag field in Firestore
-            contract.setFlag(highlights);
-            userContractService.updateContractInFirestore(userId, contractId, contract);
-
             return highlights;
         } catch (Exception e) {
             log.severe("Error highlighting contract: " + e.getMessage());
@@ -157,12 +137,9 @@ public class GeminiContractService {
         }
     }
 
-    public String suggestContract(String userId, String contractId) {
+    public String suggestContract(Contract contract, String userId, String contractId) {
         try {
             log.info("Suggesting changes for contract with ID: " + contractId + " for user ID: " + userId);
-
-            // Retrieve the contract using UserContractService
-            Contract contract = userContractService.getUserContractById(userId, contractId);
 
             // Check if the contract is marked as premium
             if (!contract.isPremiumPaid()) {
@@ -174,43 +151,23 @@ public class GeminiContractService {
             payload.addProperty("contract", contract.getFullText());
 
             // Call the Gemini API
-            String suggestions = callGeminiApi("/suggest.json", payload);
+            String suggest = callGeminiApi("/suggest.json", payload);
 
-            // Update the suggest field in Firestore
-            contract.setSuggest(suggestions);
-            userContractService.updateContractInFirestore(userId, contractId, contract);
-
-            return suggestions;
+            return suggest;
         } catch (Exception e) {
             log.severe("Error suggesting contract: " + e.getMessage());
             throw new RuntimeException(e); // Wrap checked exceptions in a RuntimeException
         }
     }
 
-    public String compareContracts(String userId, String contractId1, String contractId2) {
+    public String compareContracts(Contract contract1, Contract contract2) {
         try {
-            log.info("Comparing contracts with IDs: " + contractId1 + " and " + contractId2 + " for user ID: " + userId);
-
-            // Retrieve the first contract using UserContractService
-            Contract contract1 = userContractService.getUserContractById(userId, contractId1);
-            if (contract1 == null) {
-                throw new IllegalArgumentException("Contract not found for ID: " + contractId1);
-            }
-
-            // Retrieve the second contract using UserContractService
-            Contract contract2 = userContractService.getUserContractById(userId, contractId2);
-            if (contract2 == null) {
-                throw new IllegalArgumentException("Contract not found for ID: " + contractId2);
-            }
-
             // Combine the summaries of both contracts
             String comparisonResult = "Comparison of Contracts:\n\n" +
                     "Contract 1 Name: " + contract1.getContractName() + "\n" +
                     "Contract 1 Summary:\n" + contract1.getSummary() + "\n\n" +
                     "Contract 2 Name: " + contract2.getContractName() + "\n" +
                     "Contract 2 Summary:\n" + contract2.getSummary();
-
-            log.info("Comparison completed for contracts with IDs: " + contractId1 + " and " + contractId2);
 
             return comparisonResult;
         } catch (Exception e) {
