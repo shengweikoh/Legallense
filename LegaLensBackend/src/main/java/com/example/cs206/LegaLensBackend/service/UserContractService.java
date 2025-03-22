@@ -34,6 +34,9 @@ public class UserContractService {
     @Autowired
     private Firestore firestore;
 
+    @Autowired
+    GeminiContractService geminiContractService;
+
     public Contract getUserContractById(String userId, String contractId) throws Exception {
         log.info("Fetching contract with ID: " + contractId + " for user ID: " + userId);
 
@@ -176,5 +179,79 @@ public class UserContractService {
 
         log.info("Fetched " + contractDetailsList.size() + " contracts for user ID: " + userId);
         return contractDetailsList;
+    }
+
+    public String getUserContractSummary(String userId, String contractId) throws Exception {
+        Contract contract = getUserContractById(userId, contractId);
+        String summary = contract.getSummary();
+        if (summary == null) {
+            try {
+                summary = geminiContractService.summarizeContract(contract, userId, contractId);
+            } catch (RuntimeException ex) {
+                log.severe("Error summarizing contract: " + ex.getMessage());
+                throw ex;
+            }
+            // Update the summary field in Firestore
+            contract.setSummary(summary);
+            updateContractInFirestore(userId, contractId, contract);
+        }
+        return summary;
+    }
+
+    public String getUserContractHighlight(String userId, String contractId) throws Exception {
+        Contract contract = getUserContractById(userId, contractId);
+        String highlight = contract.getFlag();
+        if (highlight == null) {
+            try {
+                highlight = geminiContractService.summarizeContract(contract, userId, contractId);
+            } catch (RuntimeException ex) {
+                log.severe("Error generating contract highlight: " + ex.getMessage());
+                throw ex;
+            }
+            // Update the flag field in Firestore
+            contract.setFlag(highlight);
+            updateContractInFirestore(userId, contractId, contract);
+        }
+        return highlight;
+    }
+
+    public String getUserContractSuggest(String userId, String contractId) throws Exception {
+        Contract contract = getUserContractById(userId, contractId);
+        String suggest = contract.getSuggest();
+        if (suggest == null) {
+            try {
+                suggest = geminiContractService.summarizeContract(contract, userId, contractId);
+            } catch (RuntimeException ex) {
+                log.severe("Error generating contract suggestion: " + ex.getMessage());
+                throw ex;
+            }
+            // Update the suggest field in Firestore
+            contract.setSuggest(suggest);
+            updateContractInFirestore(userId, contractId, contract);
+        }
+        return suggest;
+    }
+
+    public String getUserContractCompare(String userId, String contractId1, String contractId2) throws Exception {
+        log.info("Comparing contracts with IDs: " + contractId1 + " and " + contractId2 + " for user ID: " + userId);
+        // Retrieve the first contract
+        Contract contract1 = getUserContractById(userId, contractId1);
+        if (contract1 == null) {
+            throw new IllegalArgumentException("Contract not found for ID: " + contractId1);
+        }
+
+        // Retrieve the second contract
+        Contract contract2 = getUserContractById(userId, contractId2);
+        if (contract2 == null) {
+            throw new IllegalArgumentException("Contract not found for ID: " + contractId2);
+        }
+        
+        try {
+            String comparisonResult = geminiContractService.compareContracts(contract1, contract2);
+            return comparisonResult;
+        } catch (RuntimeException ex) {
+            log.severe("Error comparing contracts: " + ex.getMessage());
+            throw ex;
+        }
     }
 }
