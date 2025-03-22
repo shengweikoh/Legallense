@@ -8,3 +8,4 @@
 /serviceAccountKey.json
 LegaLensBackend/src/main/resources/vertex-api-key.json
 LegaLensBackend/src/main/resources/serviceAccountKey.json
+.gitignore
