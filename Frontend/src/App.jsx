@@ -37,7 +37,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/upload" element={<UploadContract />} />
             <Route path="/home" element={<Dashboard />} />
-            <Route path="/analysis" element={<AnalysisPage />} />
+            <Route path="/analysis/:contractId" element={<AnalysisPage />} />
             <Route path="/history" element={<History />} />
             <Route path="/compare" element={<ContractCompare />} />
             <Route path="/contractcompare" element={<ContractComparison />} />

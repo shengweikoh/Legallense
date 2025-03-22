@@ -5,20 +5,21 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 
-export const Summary = () => {
+export const ContractDetails = () => {
     const { contractId } = useParams();
     const { user } = useAuth();
 
-    const [summary, setSummary] = useState(null);
+    const [details, setDetails] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         if (!user) return;
-        const fetchSummary = async (userId, contractId) => {
-            const response = await geminiApi.summariseContract(userId, contractId);
+
+        const fetchContractDetails = async (userId, contractId) => {
+            const response = await geminiApi.fetchContractDetails(userId, contractId);
             if (response.success) {
-                setSummary(response.data);
+                setDetails(response.data.fullText);
             } else {
                 setError(response.message);
             }
@@ -26,7 +27,7 @@ export const Summary = () => {
           
         }
 
-        fetchSummary(user.uid, contractId);
+        fetchContractDetails(user.uid, contractId);
 
     },[user, contractId]) // Error!
 
@@ -40,9 +41,10 @@ export const Summary = () => {
     }
 
     return (
-        <>
-            {summary}
-        </>
+       <>
+        {details}
+       </>
+
     )
 
 
