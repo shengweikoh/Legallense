@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FileTextIcon, ChevronRightIcon } from "lucide-react";
 import "./History.css";
@@ -6,13 +6,10 @@ import { motion } from "framer-motion";
 import geminiApi from "../services/geminiApi";
 import { useAuth } from "../contexts/AuthContext";
 import { Typography } from "@mui/material";
-import { getAuth } from "firebase/auth";
 
 
 export default function History() {
   const { user } = useAuth();
-
-  // const auth = getAuth();
 
   const [contracts, setContracts] = useState([]);
   const [error, setError] = useState(null);
@@ -22,7 +19,7 @@ export default function History() {
     if (!user) return;
 
     const fetchContracts = async (userId) => {
-      const response = geminiApi.fetchHistoryContracts(userId);
+      const response = await geminiApi.fetchHistoryContracts(userId);
       if (response.success) {
         setContracts(response.data);
       } else {
@@ -32,10 +29,10 @@ export default function History() {
     };
     
     fetchContracts(user.uid);
-  }, [user])
+  })
 
   if (loading) {
-    return <Typography>Loading clients...</Typography>;
+    return <Typography>Loading contracts...</Typography>;
   }
 
   if (error) {
@@ -63,7 +60,6 @@ export default function History() {
       <h1 className="mb-4 fw-bold historytitle">Contract History</h1>
       <div className="row g-3">
         {contracts.map((contract) => (
-
         <motion.div key = {contract.documentId}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 2, y: 0 }}
@@ -77,15 +73,15 @@ export default function History() {
                   {contract.contractName}
                 </h5>
                 <h6 className="card-subtitle text-muted mb-2 text-start">
-                  Analyzed on {contract.date}
+                  Analyzed on {contract.dateUploaded}
                 </h6>
                 <div className="d-flex justify-content-between align-items-center mt-2">
                   <div className="d-flex align-items-center text-muted">
                     <FileTextIcon className="me-2 text-primary" size={20} />
                     <span>Contract #{contract.documentId}</span>
                   </div>
-                  <Link to={`/summary/${contract.documentId}`} className="btn btn-outline-primary d-flex align-items-center">
-                    View Summary <ChevronRightIcon className="ms-1" size={16} />
+                  <Link to={`/analysis/${contract.documentId}`} className="btn btn-outline-primary d-flex align-items-center">
+                    View Analysis <ChevronRightIcon className="ms-1" size={16} />
                   </Link>
                 </div>
               </div>
