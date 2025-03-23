@@ -1,0 +1,30 @@
+.featured-card {
+  background: white;
+  border: none;
+}
+
+.featured-card ul li {
+  color: white;
+}
+
+.featured-card .btn {
+  background-color: #007bff;
+  border: none;
+}
+
+.card {
+  border-radius: 1rem;
+}
+.month{
+    color:black;
+}
+
+.price1{
+    font-family: 'Bebas Neue', sans-serif;
+    width:100%;
+    font-size:80px;
+    height: 100px;
+    color:rgb(43, 42, 42);
+    transition: font-size 1s ease;
+ 
+}
