@@ -184,7 +184,7 @@ public class UserContractService {
     public String getUserContractSummary(String userId, String contractId) throws Exception {
         Contract contract = getUserContractById(userId, contractId);
         String summary = contract.getSummary();
-        if (summary == null) {
+        if (summary == null || summary == "") {
             try {
                 summary = geminiContractService.summarizeContract(contract, userId, contractId);
             } catch (RuntimeException ex) {
@@ -201,9 +201,9 @@ public class UserContractService {
     public String getUserContractHighlight(String userId, String contractId) throws Exception {
         Contract contract = getUserContractById(userId, contractId);
         String highlight = contract.getFlag();
-        if (highlight == null) {
+        if (highlight == null || highlight == "") {
             try {
-                highlight = geminiContractService.summarizeContract(contract, userId, contractId);
+                highlight = geminiContractService.highlightContract(contract, userId, contractId);
             } catch (RuntimeException ex) {
                 log.severe("Error generating contract highlight: " + ex.getMessage());
                 throw ex;
@@ -218,9 +218,9 @@ public class UserContractService {
     public String getUserContractSuggest(String userId, String contractId) throws Exception {
         Contract contract = getUserContractById(userId, contractId);
         String suggest = contract.getSuggest();
-        if (suggest == null) {
+        if (suggest == null || suggest == "") {
             try {
-                suggest = geminiContractService.summarizeContract(contract, userId, contractId);
+                suggest = geminiContractService.suggestContract(contract, userId, contractId);
             } catch (RuntimeException ex) {
                 log.severe("Error generating contract suggestion: " + ex.getMessage());
                 throw ex;

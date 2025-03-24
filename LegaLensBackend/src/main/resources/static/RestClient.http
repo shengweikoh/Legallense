@@ -20,6 +20,23 @@ PUT http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp
 POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp9FPfdivuNFxlD4Q/summarize
 Content-Type: application/json
 
+### Highlight Contract
+POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp9FPfdivuNFxlD4Q/highlight
+Content-Type: application/json
+
+### Suggest Contract
+POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp9FPfdivuNFxlD4Q/suggest
+Content-Type: application/json
+
+### Compare Contract
+POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/compare
+Content-Type: application/json
+
+{
+    "contractId1": "og3cp9FPfdivuNFxlD4Q",
+    "contractId2": ""
+}
+
 
 
 # Production Environment
