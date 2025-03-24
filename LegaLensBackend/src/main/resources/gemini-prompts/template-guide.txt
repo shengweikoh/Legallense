@@ -194,6 +194,7 @@ Designation: HR Manager
 Enclosed: Company Policy Guidelines, Event Procedures
 
 ⸻
+(Summary Prompt)
 
 1. Examples:
     • Example 1: “The employee agrees to a probationary period of 6 months, during which either party may terminate the contract with two weeks’ notice.”
