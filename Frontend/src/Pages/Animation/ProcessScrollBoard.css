@@ -7,6 +7,7 @@ process-wrapper {
     justify-content: center;
     height: 100vh;
     overflow: hidden;
+  
 
   
   }
@@ -20,24 +21,46 @@ process-wrapper {
   /* Container with Steps */
   .process-container {
     display: flex;
-    width: 210vw; /* 4 steps, each 100vw */
-    transition: transform 0.7s ease-out;
-    transform: translateX(0vw); /* Start at Step 1 */
+    width: 400vw; /* 4 steps, each 100vw */
+    transition: transform 0.9s ease-out;
+    transform: translateX(20vw); /* Start at Step 1 */
     overflow: hidden;
+    padding:40px;
+  }
+
+
+  .step-card {
+    width: 1000px;
+    min-height: 50vh;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    margin: 1rem;
+    backdrop-filter: blur(5px);
+  }
+  
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+    z-index: 1;
+  }
+  
+  .card-body {
+    z-index: 2;
   }
   
   /* Each Step */
   .step-box {
 
-
-    min-width: 50vw; /* Each step takes full viewport width */
-    height:500px;/* Ensure height is consistent */
+    position: relative;
+    min-width: 40vw; /* Each step takes full viewport width */
+    height:400px;/* Ensure height is consistent */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(45deg, #454545, #353535);
-    color: #f4f4f2; 
+    background: rgb(50, 50, 50);
     font-size: 1.5rem;
     padding: 40px;
     border-radius: 40px;
@@ -45,30 +68,35 @@ process-wrapper {
     margin-right:25px !important;
     margin:30px;
     overflow: hidden;
-    box-shadow: 0px 10px 20px rgba(31, 31, 31, 0.4);
+    border: solid;
+   
 
   }
   
   /* Step Number */
   .step-number {
-    background-color: #f4f4f2;
-    font-size: 3rem;
+    color: #383838;
     font-weight: bold;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px 20px;
-    border-radius: 50%;
-    overflow: hidden;
+    background-color: rgba(243, 243, 243, 0.6) !important;
+    padding: 30px 50px;
+    margin-top:60px;
+    border-radius: 50px !important;
+    margin-left:43% !important;
   }
   
   /* Step Title */
   .step-title {
-    font-size: 2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: #f4f4f2;
     margin: 20px 0;
   }
   
   /* Step Description */
   .step-description {
-    font-size: 1.2rem;
+    
+    color: #f4f4f2;
+    font-size: 1.4rem;
     max-width: 500px;
     text-align: center;
     line-height: 1.6;
@@ -135,5 +163,44 @@ process-wrapper {
   background-color: rgba(255, 255, 255, 0.2); /* Optional: Background for visibility */
   border-radius: 10px; /* Optional: Rounded corners */
 }
+
+.process-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size:80px;
+  margin-top:160px;
+
+}
+
+
+.step-background {
+  position: absolute;
+  inset: 0; /* top: 0; right: 0; bottom: 0; left: 0; */
+  z-index: 1;
+}
+
+.step-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5) contrast(0.9);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 2, 0, 0.3); /* dims background */
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.step-foreground {
+  position: absolute;
+  z-index: 2;
+  padding: 2rem;
+}
+
 
 
