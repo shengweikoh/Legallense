@@ -8,10 +8,10 @@ import { Suggest } from "../components/Suggest";
 export default function AnalysisPage() {
   return (
     <div className="page">
-      <div className="container-fluid m-5 analysiscontainer">
-        <div className="row g-5">
+      <div className="container-fluid m-4 analysiscontainer">
+        <div className="row g-4">
           {/* Left Section: Contract Details */}
-          <div className="col-lg-6 col-md-6 col-sm-6 d-flex flex-column">
+          <div className="col-lg-6 d-flex flex-column">
             <div className="card contractdetails2 mb-4">
               <div className="card-header">
                 <h5 className="card-title">Contract Details</h5>
@@ -21,9 +21,10 @@ export default function AnalysisPage() {
                   className="overflow-auto"
                   style={{
                     maxHeight: "65vh",
+                    minHeight: "65vh",
                     width: "100%",
-                    border: "1px solid #ddd",
-                    padding: "10px",
+                    border: "2px solid #ddd",
+                    padding: "0px",
                     whiteSpace: "pre-line",
                   }}
                 >
@@ -35,8 +36,8 @@ export default function AnalysisPage() {
           </div>
 
           {/* Right Section: Tabs */}
-          <div className="col-lg-6 col-md-6 col-sm-6 d-flex flex-column">
-            <div className="card  result">
+          <div className="col-lg-6  d-flex flex-column resultcontainer">
+            <div className="card result">
               <div className="card-header">
                 <ul
                   className="nav nav-tabs card-header-tabs"
@@ -107,6 +108,7 @@ export default function AnalysisPage() {
                     style={{
                       whiteSpace: "pre-line",
                       maxHeight: "65vh",
+                      maxWidth:"25vw",
                       overflowY: "auto",
                     }}
                   >
@@ -120,6 +122,7 @@ export default function AnalysisPage() {
                     style={{
                       whiteSpace: "pre-line",
                       maxHeight: "65vh",
+                      maxWidth:"25vw",
                       overflowY: "auto",
                     }}
                   >
@@ -133,6 +136,7 @@ export default function AnalysisPage() {
                     style={{
                       whiteSpace: "pre-line",
                       maxHeight: "65vh",
+                      maxWidth:"25vw",
                       overflowY: "auto",
                     }}
                   >

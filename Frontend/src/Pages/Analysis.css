@@ -6,7 +6,7 @@
 }
 
 .page-content{
-    margin-top:90px;
+    margin-top:20px;
 }
 
 .analysiscontainer {
@@ -15,27 +15,22 @@
     align-items: center;  /* Centers vertically (if needed) */
     text-align: center;
       /* Centers text inside */
-    padding-top:9vh;
+    padding-top: 12vh;
+    padding-bottom: 2vh;
+    width:100vw;
 }
 
 .contractdetails2{
-
+  
 
   
 }
-.card.result{
 
-  width:800px;
-    
-}
 
-@media (max-width: 1280px) {
-    .analysiscontainer .row {
-      flex-direction: column;
-    }
-    .contractdetails2, .result {
-      width: 100%;
-    }
-  }
+
+
+
+
+
 
 

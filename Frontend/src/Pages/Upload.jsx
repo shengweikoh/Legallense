@@ -138,6 +138,11 @@ export default function UploadContract() {
       </div>
 
       {uploadStatus && (
+        <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 2, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="row m-5">
           <div className="col-12">
             <div className="d-flex justify-content-center">
@@ -164,7 +169,8 @@ export default function UploadContract() {
             </div>
           </div>
         </div>
-        
+
+        </motion.div>
       )}
 
       {uploadStatus && (
