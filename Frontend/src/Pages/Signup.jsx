@@ -1,16 +1,101 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
+import { doc, setDoc } from "firebase/firestore";
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { FirestoreDB } from '../firebase/firebase_config';  // Firestore instance
 import FBInstanceAuth from "../firebase/firebase_auth";  // Firebase auth helper
 import NavBar from './Navbar.jsx';
 import GoogleCustomButton from "./GoogleButton.jsx";
 import './Signup.css';
+import { Typography } from '@mui/material';
 
 
 const Signup = () => {
+
+    const navigate = useNavigate();
+    const auth = getAuth();
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false);
+    
+    useEffect(() => {
+        // Listen for authentication state changes
+        // Only user accounts created through signup
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            setLoading(true);
+            if (user) {
+                try {
+                    setLoading(true);
+                    navigate('/home');
+                } catch (e) {
+                    setError('Error redirecting after sign up.');
+                } finally {
+                    setLoading(false);
+                }
+            } else {
+                setLoading(false);
+            }
+        });
+        // Clean up the listener on component unmount
+        return () => unsubscribe();
+    }, [auth, navigate]);
+
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        referral: ""
+      });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { name, email, password, confirmPassword, referral } = formData;
+
+
+        if (password != confirmPassword) {
+            setError("Passwords do not match.");
+            return;
+        }
+
+        try {
+            const userSignup = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userSignup.user;
+            
+            const userDocRef = doc(FirestoreDB, 'Users', user.uid);
+            await setDoc(userDocRef, {
+                userId: user.uid,
+                name: name,
+                email: user.email,
+                referral: referral,
+                freeUse: 0,
+            });
+    
+            console.log('User document created/updated in Firestore:', user.uid);    
+            setLoading(false);
+        } catch (error) {
+            console.error('Error creating user:', error.message);
+            setError(`Sign-up failed: ${error.message}`);
+        } finally {
+            setLoading(false);
+        }
+
+    }
+    
+    if (!loading && error) {
+        <Typography> {error} </Typography>
+    }
+
+
     return (
         <div className="signup-page">
              <NavBar />
@@ -27,54 +112,69 @@ const Signup = () => {
                         <div className="row">
                             <div className="col-12">
                                 <div className="signup-container">
-                                    <form>
+                                    <form onSubmit={handleSubmit}>
                                         <div className="form-group">
-                                            <label className="user-name">Full Name</label>
+                                            <label className="user-name">Name</label>
                                             <input
+                                                name="name"
                                                 className="form-control text-left userinput"
                                                 type="text"
                                                 placeholder="Enter your full name"
                                                 required
+                                                value={formData.name}
+                                                onChange={handleChange}
                                             />
                                         </div>
                                     
                                         <div className="form-group">
                                             <label className="email">Email</label>
                                             <input
+                                                name="email"
                                                 className="form-control text-left userinput"
                                                 type="email"
                                                 placeholder="Enter your email"
                                                 required
+                                                value={formData.email}
+                                                onChange={handleChange}
                                             />
                                         </div>
 
                                         <div className="form-group">
                                             <label className="password">Password</label>
                                             <input
+                                                name="password"
                                                 className="form-control text-left passwordinput"
                                                 type="password"
                                                 placeholder="Create a password"
                                                 required
+                                                value={formData.password}
+                                                onChange={handleChange}
                                             />
                                         </div>
 
                                         <div className="form-group">
                                             <label className="password">Confirm Password</label>
                                             <input
+                                                name="confirmPassword"
                                                 className="form-control text-left passwordinput"
                                                 type="password"
                                                 placeholder="Confirm your password"
                                                 required
+                                                value={formData.confirmPassword}
+                                                onChange={handleChange}
                                             />
                                         </div>
 
+
                                         <div className="form-group">
-                                            <label className="text">Referral key</label>
+                                            <label className="referral">Referral code</label>
                                             <input
-                                                className="form-control text-left passwordinput"
+                                                name="referral"
+                                                className="form-control text-left userinput"
                                                 type="text"
-                                                placeholder="Referral code"
-                                                required
+                                                placeholder="Enter referral code if any"
+                                                value={formData.referral}
+                                                onChange={handleChange}
                                             />
                                         </div>
 
