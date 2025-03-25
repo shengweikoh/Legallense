@@ -29,7 +29,7 @@ export default function History() {
     };
     
     fetchContracts(user.uid);
-  })
+  }, [user])
 
   if (loading) {
     return <Typography>Loading contracts...</Typography>;
