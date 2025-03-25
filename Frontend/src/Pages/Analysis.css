@@ -1,12 +1,17 @@
 .page{
     background-color: #f4f4f2; 
     width:100vw;
-    height:1100cdpx;
+    height:1100px;
 
 }
 
 .page-content{
     margin-top:20px;
+}
+
+.details{
+  font-size:30px;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .analysiscontainer {
@@ -21,6 +26,13 @@
   
 
   
+}
+
+.nav-item{
+
+  font-size:23px;
+  font-family: 'Bebas Neue', sans-serif;
+
 }
 
 

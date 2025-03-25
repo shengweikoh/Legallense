@@ -14,7 +14,7 @@ export default function AnalysisPage() {
           <div className="col-lg-6 d-flex flex-column">
             <div className="card contractdetails2 mb-4">
               <div className="card-header">
-                <h5 className="card-title">Contract Details</h5>
+                <h5 className="card-title details">Contract Details</h5>
               </div>
               <div className="card-body">
                 <div
@@ -40,7 +40,7 @@ export default function AnalysisPage() {
             <div className="card result">
               <div className="card-header">
                 <ul
-                  className="nav nav-tabs card-header-tabs"
+                  className="nav nav-tabs card-header-tabs d-flex justify-content-center gap-4"
                   id="analysisTabs"
                   role="tablist"
                 >
@@ -53,6 +53,7 @@ export default function AnalysisPage() {
                       role="tab"
                       aria-controls="summary"
                       aria-selected="true"
+
                     >
                       Summary
                     </a>
