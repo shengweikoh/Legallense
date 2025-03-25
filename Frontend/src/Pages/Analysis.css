@@ -19,13 +19,14 @@
 }
 
 .contractdetails2{
-    width:98vh;
-    margin-right:10vh;
 
+  width:800px;
+  
 }
 .card.result{
-    width:43vw;
-    margin-right:100px;
+
+  width:800px;
+    
 }
 
 @media (max-width: 1280px) {
