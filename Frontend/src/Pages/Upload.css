@@ -13,8 +13,10 @@
 
 .btn.btn-primary.Analyze {
     background-color:#0D6EFD; /* Use your desired color */
+    height:100  px;
     background-image: none !important;
-    width:150px;
+    width:120px;
+    margin-top:10px;
   }
 
   .btn.btn-primary.Analyze:hover {
@@ -35,4 +37,6 @@
 .Analyze2:hover {
     background-color: #0A58CA !important; /* Darker on hover */
   }
+
+
 
