@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useAuth } from '../contexts/AuthContext';
 import geminiApi from '../services/geminiApi';
 import { useEffect, useState } from 'react';

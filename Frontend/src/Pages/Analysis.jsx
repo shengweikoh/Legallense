@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from "react-router-dom";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "./Analysis.css";
 import { ContractDetails } from '../components/ContractDetails';
 import { Summary } from '../components/Summary';
+import { Highlight } from '../components/Highlight';
+import { Suggest } from '../components/Suggest';
 
 
 export default function AnalysisPage() {
@@ -112,16 +112,22 @@ export default function AnalysisPage() {
                   id="review"
                   role="tabpanel"
                   aria-labelledby="review-tab"
+                  style = {{
+                    whiteSpace:"pre-line",
+                  }}
                 >
-                  <p>Review content goes here...</p>
+                   <Highlight />
                 </div>
                 <div
                   className="tab-pane fade"
                   id="suggest"
                   role="tabpanel"
                   aria-labelledby="suggest-tab"
+                  style = {{
+                    whiteSpace:"pre-line",
+                  }}
                 >
-                  <p>Suggest content goes here...</p>
+                  <Suggest />
                 </div>
                 <div
                   className="tab-pane fade"
