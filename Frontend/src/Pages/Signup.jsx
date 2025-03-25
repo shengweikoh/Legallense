@@ -77,7 +77,7 @@ const Signup = () => {
                 name: name,
                 email: user.email,
                 referral: referral,
-                freeUse: 0,
+                freeUpgrade: 1,
             });
     
             console.log('User document created/updated in Firestore:', user.uid);    
