@@ -6,6 +6,8 @@ import {  AppWindow,HandCoins, Handshake,GavelIcon, HistoryIcon, UploadIcon, Hom
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import FBInstanceAuth from "../firebase/firebase_auth"; 
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { FirestoreDB } from '../firebase/firebase_config';
 
 import { useEffect, useState } from "react";
 
@@ -15,6 +17,7 @@ const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const[user,setUser] = useState(null);
+    const [freeUse, setFreeUse] = useState(null);
     const auth = getAuth();
 
 
@@ -25,11 +28,19 @@ const Navbar = () => {
       const isHome = location.pathname === "/" || location.pathname === "/login";
 
       useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 setUser(user);
+                const userDocRef = doc(FirestoreDB, "Users", user.uid);
+                const docSnap = await getDoc(userDocRef);
+                if (docSnap.exists) {
+                    setFreeUse(docSnap.data().freeUse);
+                } else {
+                    setFreeUse("N/A");
+                }
             } else {
                 setUser(null);
+                setFreeUse(null);
             }
         });
         return () => unsubscribe();
@@ -80,7 +91,7 @@ const Navbar = () => {
                :(
                     <div className="info-container">
                    <span className="info-text"><Handshake className = "handshake"></Handshake>Refer a Friend</span>
-                    <span className="info-text"><HandCoins className = "handcoin"></HandCoins>Free Use: 8</span>
+                    <span className="info-text"><HandCoins className = "handcoin"></HandCoins>Free Use: {freeUse != null ? freeUse : "Loading..." } </span>
                     {user ? (
                             <button className="logout" onClick={handleLogout}>
                                 <CircleUserRound /> Logout
