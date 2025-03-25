@@ -107,8 +107,8 @@ export default function AnalysisPage() {
                     aria-labelledby="summary-tab"
                     style={{
                       whiteSpace: "pre-line",
-                      maxHeight: "65vh",
-                      maxWidth:"25vw",
+                      maxHeight: "64vh",
+                      maxWidth:"60vw",
                       overflowY: "auto",
                     }}
                   >
@@ -121,8 +121,8 @@ export default function AnalysisPage() {
                     aria-labelledby="review-tab"
                     style={{
                       whiteSpace: "pre-line",
-                      maxHeight: "65vh",
-                      maxWidth:"25vw",
+                      maxHeight: "64vh",
+                      maxWidth:"60vw",
                       overflowY: "auto",
                     }}
                   >
@@ -135,8 +135,8 @@ export default function AnalysisPage() {
                     aria-labelledby="suggest-tab"
                     style={{
                       whiteSpace: "pre-line",
-                      maxHeight: "65vh",
-                      maxWidth:"25vw",
+                      maxHeight: "64vh",
+                      maxWidth:"60vw",
                       overflowY: "auto",
                     }}
                   >
@@ -147,8 +147,14 @@ export default function AnalysisPage() {
                     id="compare"
                     role="tabpanel"
                     aria-labelledby="compare-tab"
+                    style={{
+                      whiteSpace: "pre-line",
+                      maxHeight: "64vh",
+                      maxWidth:"60vw",
+                      overflowY: "auto",
+                    }}
                   >
-                    <p>Compare content goes here...</p>
+                    <p>Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...</p>
                   </div>
                 </div>
               </div>
