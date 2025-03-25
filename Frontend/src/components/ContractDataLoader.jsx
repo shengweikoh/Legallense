@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-
 export const ContractDataLoader = ({ request, children, loadingMessage = "Loading..." , errorColor = "red"}) => {
   const { contractId } = useParams();
   const { user } = useAuth();
