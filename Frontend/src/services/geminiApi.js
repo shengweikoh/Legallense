@@ -11,6 +11,24 @@ const axiosInstance = axios.create({
 
 const geminiApi = {
 
+    compareContracts: async (userId, contractId1, contractId2) => {
+        try {
+          const response = await axiosInstance.get(
+            `/users/${userId}/contracts/compare`,
+            { params: { contractId1, contractId2 } }
+          );
+          return {
+            success: true,
+            data: response.data
+          };
+        } catch (error) {
+          return {
+            success: false,
+            message: error.response?.data || "An error occurred during comparison"
+          };
+        }
+      },
+
     uploadContract: async(userId, contractFile, contractName) => {
         try {
             const formData = new FormData();
