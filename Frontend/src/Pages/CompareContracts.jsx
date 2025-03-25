@@ -1,21 +1,52 @@
-import React , {useState} from 'react';
+import React , {useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "./CompareContracts.css";
-
 import { motion } from "framer-motion";
-
+import geminiApi from "../services/geminiApi";
+import { useAuth } from "../contexts/AuthContext";
+import { Typography } from "@mui/material";
 
 export default function ContractCompare() {
-  const contracts = [
-    { id: 1, name: "Human Resources Executive (H group) 👑", date: "11-05-2025" },
-    { id: 2, name: "Employment Engagement Intern 👑", date: "12-09-2024" },
-    { id: 3, name: "Talent Acquisition Intern", date: "09-09-2024" },
-    { id: 4, name: "Strategy & Experience Intern 👑", date: "04-09-2024" }
-  ];
+  // const contracts = [
+  //   { id: 1, name: "Human Resources Executive (H group) 👑", date: "11-05-2025" },
+  //   { id: 2, name: "Employment Engagement Intern 👑", date: "12-09-2024" },
+  //   { id: 3, name: "Talent Acquisition Intern", date: "09-09-2024" },
+  //   { id: 4, name: "Strategy & Experience Intern 👑", date: "04-09-2024" }
+  // ];
+
+
+  const { user } = useAuth();
+  const [contracts, setContracts] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const [selectedLeft, setSelectedLeft] = useState(null);
   const [selectedRight, setSelectedRight] = useState(null);
+
+  useEffect(() => {
+    if (!user) return;
+
+    const fetchContracts = async (userId) => {
+      const response = await geminiApi.fetchHistoryContracts(userId);
+      if (response.success) {
+        setContracts(response.data);
+      } else {
+        setError(response.message);
+      }
+      setLoading(false);
+    };
+    
+    fetchContracts(user.uid);
+  }, [user])
+
+  if (loading) {
+    return <Typography>Loading contracts...</Typography>;
+  }
+
+  if (error) {
+    return <Typography color="error">{error}</Typography>;
+  }
 
   const handleSelect = (id, side) => {
     if (side === "left") {
@@ -56,23 +87,23 @@ export default function ContractCompare() {
             <p className="text-center">Select the first contract for comparison</p>
             {contracts.map((contract) => (
               <div
-                key={contract.id}
-                className={`card mb-4 shadow-sm mx-auto ${selectedLeft === contract.id ? "border border-primary" : ""}`}
+                key={contract.documentId}
+                className={`card mb-4 shadow-sm mx-auto ${selectedLeft === contract.documentId ? "border border-primary" : ""}`}
                 style={{
-                  opacity: selectedLeft && selectedLeft !== contract.id ? 0.5 : 1,
+                  opacity: selectedLeft && selectedLeft !== contract.documentId ? 0.5 : 1,
                   cursor: "pointer",
                   padding: "20px",
                 }}
-                onClick={() => handleSelect(contract.id, "left")}
+                onClick={() => handleSelect(contract.documentId, "left")}
               >
                 <div className="card-body">
-                  <h5 className="card-title">{contract.name}</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">Analyzed on {contract.date}</h6>
+                  <h5 className="card-title">{contract.contractName}</h5>
+                  <h6 className="card-subtitle mb-2 text-muted">Analyzed on {contract.dateUploaded}</h6>
                   <button
-                    className={`btn w-100 ${selectedLeft === contract.id ? "btn-primary" : "btn-outline-dark"}`}
-                    disabled={selectedLeft === contract.id}
+                    className={`btn w-100 ${selectedLeft === contract.documentId ? "btn-primary" : "btn-outline-dark"}`}
+                    disabled={selectedLeft === contract.documentId}
                   >
-                    {selectedLeft === contract.id ? "Selected" : "Compare"}
+                    {selectedLeft === contract.documentId ? "Selected" : "Compare"}
                   </button>
                 </div>
               </div>
@@ -85,23 +116,23 @@ export default function ContractCompare() {
             <p className="text-center">Select the second contract for comparison</p>
             {contracts.map((contract) => (
               <div
-                key={contract.id}
-                className={`card mb-4 shadow-sm mx-auto ${selectedRight === contract.id ? "border-primary" : ""}`}
+                key={contract.documentId}
+                className={`card mb-4 shadow-sm mx-auto ${selectedRight === contract.documentId ? "border-primary" : ""}`}
                 style={{
-                  opacity: selectedRight && selectedRight !== contract.id ? 0.5 : 1,
+                  opacity: selectedRight && selectedRight !== contract.documentId ? 0.5 : 1,
                   cursor: "pointer",
                   padding: "20px",
                 }}
-                onClick={() => handleSelect(contract.id, "right")}
+                onClick={() => handleSelect(contract.documentId, "right")}
               >
                 <div className="card-body">
-                  <h5 className="card-title">{contract.name}</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">Analyzed on {contract.date}</h6>
+                  <h5 className="card-title">{contract.contractName}</h5>
+                  <h6 className="card-subtitle mb-2 text-muted">Analyzed on {contract.dateUploaded}</h6>
                   <button
-                    className={`btn w-100 ${selectedRight === contract.id ? "btn-primary" : "btn-outline-dark"}`}
-                    disabled={selectedRight === contract.id}
+                    className={`btn w-100 ${selectedRight === contract.documentId ? "btn-primary" : "btn-outline-dark"}`}
+                    disabled={selectedRight === contract.documentId}
                   >
-                    {selectedRight === contract.id ? "Selected" : "Compare"}
+                    {selectedRight === contract.documentId ? "Selected" : "Compare"}
                   </button>
                 </div>
               </div>

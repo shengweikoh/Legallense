@@ -29,14 +29,17 @@ POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3c
 Content-Type: application/json
 
 ### Compare Contract
-POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/compare
+GET http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/compare
 Content-Type: application/json
 
 {
     "contractId1": "og3cp9FPfdivuNFxlD4Q",
-    "contractId2": ""
+    "contractId2": "sPmLaZ1K9AVGdynjXNsJ"
 }
 
+### Compare contract 2
+GET http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/compare?contractId1=og3cp9FPfdivuNFxlD4Q&contractId2=sPmLaZ1K9AVGdynjXNsJ
+Content-Type: application/json
 
 
 # Production Environment
