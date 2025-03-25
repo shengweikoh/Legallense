@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, increment } from "firebase/firestore";
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { FirestoreDB } from '../firebase/firebase_config';  // Firestore instance
 import FBInstanceAuth from "../firebase/firebase_auth";  // Firebase auth helper
@@ -81,6 +81,24 @@ const Signup = () => {
             });
     
             console.log('User document created/updated in Firestore:', user.uid);    
+            if(referral.trim() !== "") {
+                const referralDocRef = doc(FirestoreDB, "Users", referral);
+                const referralSnap = await getDoc(referralDocRef);
+                if(referralSnap.exists()) {
+                    // Increment freeUpgrade by 1 using Firestore's increment operator
+                    await updateDoc(referralDocRef, {
+                        freeUpgrade: increment(1)
+                    });
+    
+                    await updateDoc(userDocRef, {
+                        freeUpgrade: increment(1)
+                    });
+                    console.log("Referral updated successfully.");
+                } else {
+                    console.log("No referral found for ID:", referral);
+                }
+            }
+
             setLoading(false);
         } catch (error) {
             console.error('Error creating user:', error.message);
