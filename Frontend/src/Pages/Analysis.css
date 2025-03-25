@@ -1,7 +1,7 @@
 .page{
     background-color: #f4f4f2; 
     width:100vw;
-    height:100vh;
+    height:1100cdpx;
 
 }
 
@@ -10,14 +10,11 @@
 }
 
 .analysiscontainer {
-    display: flex;
-    justify-content: center;  /* Centers horizontally */
-    align-items: center;  /* Centers vertically (if needed) */
-    text-align: center;
+    
       /* Centers text inside */
     padding-top: 12vh;
     padding-bottom: 2vh;
-    width:100vw;
+    width:95vw;
 }
 
 .contractdetails2{
