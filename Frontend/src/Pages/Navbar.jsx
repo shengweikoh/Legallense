@@ -17,7 +17,7 @@ const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const[user,setUser] = useState(null);
-    const [freeUse, setFreeUse] = useState(null);
+    const [freeUpgrade, setFreeUpgrade] = useState(null);
     const auth = getAuth();
 
 
@@ -34,13 +34,13 @@ const Navbar = () => {
                 const userDocRef = doc(FirestoreDB, "Users", user.uid);
                 const docSnap = await getDoc(userDocRef);
                 if (docSnap.exists) {
-                    setFreeUse(docSnap.data().freeUse);
+                    setFreeUpgrade(docSnap.data().freeUpgrade);
                 } else {
-                    setFreeUse("N/A");
+                    setFreeUpgrade("N/A");
                 }
             } else {
                 setUser(null);
-                setFreeUse(null);
+                setFreeUpgrade(null);
             }
         });
         return () => unsubscribe();
@@ -91,7 +91,7 @@ const Navbar = () => {
                :(
                     <div className="info-container">
                    <span className="info-text"><Handshake className = "handshake"></Handshake>Refer a Friend</span>
-                    <span className="info-text"><HandCoins className = "handcoin"></HandCoins>Free Use: {freeUse != null ? freeUse : "Loading..." } </span>
+                    <span className="info-text"><HandCoins className = "handcoin"></HandCoins>Free Upgrade: {freeUpgrade != null ? freeUpgrade : "Loading..." } </span>
                     {user ? (
                             <button className="logout" onClick={handleLogout}>
                                 <CircleUserRound /> Logout
