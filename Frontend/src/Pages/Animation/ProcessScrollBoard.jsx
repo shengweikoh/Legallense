@@ -8,7 +8,7 @@ import Identifygif from "./Identify.gif";
 import Contract from "./Contract.jpg";
 import Upload from "./Upload.jpg";
 import AI from "./ai.jpeg";
-import insight from "./insight.png";
+import insight from "./Insight.png";
 
 const steps = [
   { id: 1, title: "Find the document or work related contract.", description: "" },
