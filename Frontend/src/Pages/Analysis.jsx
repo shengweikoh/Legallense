@@ -9,7 +9,7 @@ export default function AnalysisPage() {
   return (
     <div className="page">
       <div className="container-fluid m-5 analysiscontainer">
-        <div className="row ">
+        <div className="row g-5">
           {/* Left Section: Contract Details */}
           <div className="col-lg-6 col-md-6 col-sm-6 d-flex flex-column">
             <div className="card contractdetails2 mb-4">
