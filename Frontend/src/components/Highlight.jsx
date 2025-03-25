@@ -50,14 +50,15 @@
 
 import { ContractDataLoader } from './ContractDataLoader';
 import geminiApi from '../services/geminiApi';
+import ReactMarkdown from 'react-markdown';
 
 export const Highlight = () => {
   return (
     <ContractDataLoader request={geminiApi.highlightContract}>
       {data => 
-         <>
+         <ReactMarkdown>
             {data}
-         </>}
+         </ReactMarkdown>}
     </ContractDataLoader>
   );
 };

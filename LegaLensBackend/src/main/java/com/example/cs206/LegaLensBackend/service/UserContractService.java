@@ -96,7 +96,7 @@ public class UserContractService {
         contract.setDocumentId(generatedId);
         contract.setContractName(contractName);
         contract.setFullText(fullText);
-        contract.setPremiumPaid(false); // Default value
+        contract.setPremiumPaid(true); // Default value
         contract.setSummary(""); // Placeholder for summary
         contract.setFlag(""); // Placeholder for flag
         contract.setSuggest(""); // Placeholder for suggestions
