@@ -123,7 +123,7 @@ const geminiApi = {
             return {
                 success: false,
                 message:
-                    error.response?.data || "An error occured while fetching the summary"
+                    error.response?.data || "An error occured while fetching the highlights"
             };
         }
     },
@@ -141,7 +141,7 @@ const geminiApi = {
             return {
                 success: false,
                 message:
-                    error.response?.data || "An error occured while fetching the summary"
+                    error.response?.data || "An error occured while fetching the suggestions"
             };
         }
     },
