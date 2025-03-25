@@ -116,16 +116,10 @@ export default function UploadContract() {
                     >
                       {isAnalyzing ? (
                         <>
-                          <span
-                            className="spinner-border spinner-border-sm me-2"
-                            role="status"
-                            aria-hidden="true"
-                          ></span>
                           Analyzing...
                         </>
                       ) : (
                         <>
-                          <i className="bi bi-upload me-2"></i>
                           Upload
                         </>
                       )}
@@ -156,7 +150,7 @@ export default function UploadContract() {
                     <div
                       className="overflow-auto"
                       style={{
-                        maxHeight: "300px",
+                        maxHeight: "250px",
                         border: "1px solid #ddd",
                         padding: "10px",
                         whiteSpace: "pre-line",
