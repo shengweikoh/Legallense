@@ -68,6 +68,16 @@ const Signup = () => {
                                             />
                                         </div>
 
+                                        <div className="form-group">
+                                            <label className="text">Referral key</label>
+                                            <input
+                                                className="form-control text-left passwordinput"
+                                                type="text"
+                                                placeholder="Confirm your password"
+                                                required
+                                            />
+                                        </div>
+
                                         <div className="auth-links">
                                             <Link to="/login" className="login-link">Already have an account? Log in</Link>
                                         </div>

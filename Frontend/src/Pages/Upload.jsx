@@ -156,7 +156,7 @@ export default function UploadContract() {
                     <div
                       className="overflow-auto"
                       style={{
-                        maxHeight: "130px",
+                        maxHeight: "300px",
                         border: "1px solid #ddd",
                         padding: "10px",
                         whiteSpace: "pre-line",
