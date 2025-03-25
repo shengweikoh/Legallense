@@ -1,0 +1,14 @@
+.bigtitle {
+    font-weight: 600;
+    font-size: 2rem;
+    font-weight: 100;
+  }
+  
+  .description {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-link {
+    text-decoration: none;
+    color: #0d6efd;
+  }

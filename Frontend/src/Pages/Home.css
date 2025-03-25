@@ -23,7 +23,6 @@
  }
 
 .description-container{
-
     width:100%;
     border:bold;
     position: relative;
@@ -35,7 +34,6 @@
     width: 90%; /* Border width only 80% of the container */
     height: 1.5px; /* Border thickness */
     background: rgba(71, 70, 70, 0.3); /* Border color */
-
     position: absolute;
     left: 50%;  /* Move it to center */
     bottom: 0;
@@ -59,12 +57,11 @@
     font-family: 'Noto Sans', sans-serif;
     font-size:18px;
     width:61%;
-    margin-top:40px;
-
+   
     padding-top:60px;
   
     margin-bottom:40px;
-    padding-left:200px;
+
 
     
 }
@@ -92,7 +89,7 @@
     height: 100px;
     color:rgb(43, 42, 42);
     transition: font-size 1s ease;
-    margin-top:200px;
+    margin-top:100px;
     margin-bottom:40px; 
 
 }
