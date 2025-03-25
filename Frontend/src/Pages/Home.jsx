@@ -77,21 +77,11 @@ const Home = () => {
         <ProcessScrollBoard/>
 
         <div className="mission">
-         
             Our mission
-          
         </div>
-
 
         <DescriptionSections></DescriptionSections>
 
-
-
-       
-      
-
-        
-  
          <div className="price">
                 Pricing
             </div>
