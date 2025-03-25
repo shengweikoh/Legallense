@@ -73,7 +73,7 @@ const Signup = () => {
                                             <input
                                                 className="form-control text-left passwordinput"
                                                 type="text"
-                                                placeholder="Confirm your password"
+                                                placeholder="Referral code"
                                                 required
                                             />
                                         </div>
