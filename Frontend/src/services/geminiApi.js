@@ -11,6 +11,33 @@ const axiosInstance = axios.create({
 
 const geminiApi = {
 
+    uploadContract: async(userId, contractFile, contractName) => {
+        try {
+            const formData = new FormData();
+            formData.append("file", contractFile);
+            formData.append("contractName", contractName)
+            const response = await axiosInstance.post(`/users/${userId}/contracts/upload`,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    }
+                }
+            );
+            return {
+                success:true,
+                data: response.data
+            };
+        } 
+        catch (error) {
+            return {
+                success: false,
+                message: 
+                    error.response?.data
+            }
+        }
+    },
+
     fetchHistoryContracts: async (userId) => {
         try {
             const response = await axiosInstance.get(
@@ -64,6 +91,43 @@ const geminiApi = {
             };
         }
     },
+
+    highlightContract : async (userId, contractId) => {
+        try {
+            const response = await axiosInstance.post(
+                `/users/${userId}/contracts/${contractId}/highlight`
+            );
+            return {
+                success: true,
+                data: response.data,
+            };
+        } catch (error) {
+            return {
+                success: false,
+                message:
+                    error.response?.data || "An error occured while fetching the summary"
+            };
+        }
+    },
+
+    suggestContract : async (userId, contractId) => {
+        try {
+            const response = await axiosInstance.post(
+                `/users/${userId}/contracts/${contractId}/suggest`
+            );
+            return {
+                success: true,
+                data: response.data,
+            };
+        } catch (error) {
+            return {
+                success: false,
+                message:
+                    error.response?.data || "An error occured while fetching the summary"
+            };
+        }
+    },
+
 
 
 }

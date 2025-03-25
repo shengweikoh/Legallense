@@ -48,7 +48,7 @@ public class UserContractController {
             }
 
             String contractId = userContractService.uploadContract(userId, file, contractName);
-            return ResponseEntity.ok("Contract uploaded successfully with ID: " + contractId);
+            return ResponseEntity.ok(contractId);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error uploading contract: " + e.getMessage());
         }
