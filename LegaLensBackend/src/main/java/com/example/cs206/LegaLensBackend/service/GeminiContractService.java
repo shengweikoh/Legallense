@@ -64,12 +64,12 @@ public class GeminiContractService {
         // Initialize VertexAI (it will pick up the credentials from the system property)
         try (VertexAI vertexAi = new VertexAI(projectId, REGION)) {
             GenerativeModel model = new GenerativeModel.Builder()
-                    .setModelName("gemini-1.5-flash-001")
+                    .setModelName("gemini-1.5-pro-001")
                     .setVertexAi(vertexAi)
                     .build();
 
             
-            // Load the prompt from the JSON file located in resources/gemini-prompts/summary.json
+            // Load the prompt from the JSON file located in resources/gemini-prompts
             InputStream promptStream = getClass().getResourceAsStream("/gemini-prompts" + endpoint);
             if (promptStream == null) {
                 throw new RuntimeException("Prompt file not found at /gemini-prompts" + endpoint);
