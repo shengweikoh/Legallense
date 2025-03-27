@@ -1,50 +1,53 @@
-import React , {useState} from 'react';
-import { Link } from "react-router-dom";
+import React , {useEffect, useState} from 'react';
+import { useParams, Link } from "react-router-dom";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "./ContractComparison.css";
 import { motion } from "framer-motion";
+import geminiApi from '../services/geminiApi';
+import { useAuth } from '../contexts/AuthContext';
+import { Typography } from '@mui/material';
+
 
 export default function ContractComparison() {
 
-    // const rowData = [
-    //     { 
-    //         label: "Contract", 
-    //         contract1: { name: "Full-Time", file: "/Animation/hi.pdf" }, 
-    //         contract2: { name: "Part-Time", file: "/Animation/hi.pdf"}, 
-    //       },
-    //     { label: "Salary", contract1: "$60,000 / year", contract2: "$30,000 / year" },
-    //     { label: "Healthcare Benefits", contract1: "Yes, includes dental & vision", contract2: "No benefits" },
-    //     { label: "Working Hours", contract1: "9 AM - 5 PM (Mon-Fri)", contract2: "Flexible, 20 hours/week" },
-    //     { label: "Annual Leave", contract1: "15 days + public holidays", contract2: "5 days + public holidays" }
-    //   ];
-    
-      const clauseComparisons = [
-        {
-          clauseNumber: 1,
-          clauseTitle: "Name",
-          contract1: "Uniqlo Part-time associate"  ,
-          contract2: "HaiDiLao part-time associate"
-          }
-        ,
-        {
-          clauseNumber: 2,
-          clauseTitle: "Position",
-            contract1: "Position is part-time XYZ"  ,
-            contract2: "Position is full-time ABC"
-  
-        },
-        {
-          clauseNumber: 3,
-          clauseTitle: "Hourly Gross Salary",
-          contract1: "The gross hourly wage includes salary in lieu of annual leave and public holiday pay.",
-          contract2: "The gross hourly rate is separate from holiday pay, with contributions to statutory funds."
-        }
-      ];
-      
-    const contract1Name = clauseComparisons[0].contract1;
-    const contract2Name = clauseComparisons[0].contract2;
+    const { contractId1, contractId2 } = useParams();
+    const [clauses, setClauses] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const { user } = useAuth();
 
-    const sortedComparisons = clauseComparisons.slice().sort((a, b) => a.clauseNumber - b.clauseNumber);
+    useEffect( () => {
+      if (!user) {
+        return;
+      }
+      if (clauses) {
+        return;
+      }
+
+      const fetchClauses = async (userId, contractId1, contractId2) => {
+        const response = await geminiApi.compareContracts(userId, contractId1, contractId2);
+        if (response.success) {
+          setClauses(response.data);
+        } else {
+          setError(response.message)
+        }
+        setLoading(false);
+      }
+
+      fetchClauses(user.uid, contractId1, contractId2);
+
+    }, [user, contractId1, contractId2, clauses])
+
+
+    if (loading) {
+      return <Typography>Loading...</Typography>;
+    }
+    
+    if (error) {
+      return <Typography color='red'>{error}</Typography>;
+    }
+
+    const contractNames = clauses[0]
 
 
     return (
@@ -57,14 +60,14 @@ export default function ContractComparison() {
           <thead>
               <tr className="table-header-row">
                 <th className="table-heading">Category</th>
-                <th className="table-heading">{contract1Name}</th> 
-                <th className="table-heading">{contract2Name}</th>
+                <th className="table-heading">{contractNames.contract1}</th> 
+                <th className="table-heading">{contractNames.contract2}</th>
               </tr>
             </thead>
             <tbody>
-                {sortedComparisons.filter(clause => clause.clauseNumber >= 2).map((clause) => (
-                  <tr key={clause.clauseNumber} className="table-row">
-                    <td className="table-label">{clause.clauseTitle}</td>
+                {clauses.filter( (clause, index) => index > 0).map((clause, index) => (
+                  <tr key={index} className="table-row">
+                    <td className="table-label">{clause.clauseName}</td>
                     <td className="table-value">{clause.contract1}</td>
                     <td className="table-value">{clause.contract2}</td>
                   </tr>
