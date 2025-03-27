@@ -1,22 +1,24 @@
-import React from "react";
 import PropTypes from "prop-types";
+import "./ContractCard.css";
 
+/* ContractCard.jsx */
 export const ContractCard = ({ contract, onClick, isSelected, buttonText = "Compare Contract" }) => {
   return (
     <div
-      className="card mb-4 shadow-sm mx-auto"
+      className="card mb-4 shadow-sm mx-auto card-height" // add 'card-height'
       style={{
-        opacity: isSelected ? 1 : 1, // adjust opacity if needed
         cursor: "pointer",
-        padding: "20px",
+        padding: "20px"
       }}
       onClick={onClick}
     >
-      <div className="card-body">
-        <h5 className="card-title">{contract.contractName}</h5>
-        <h6 className="card-subtitle mb-2 text-muted">
-          Analyzed on {contract.dateUploaded}
-        </h6>
+      <div className="card-body d-flex flex-column justify-content-between">
+        <div>
+          <h5 className="card-title">{contract.contractName}</h5>
+          <h6 className="card-subtitle mb-2 text-muted">
+            Analyzed on {contract.dateUploaded}
+          </h6>
+        </div>
         <button
           className={`btn w-100 ${isSelected ? "btn-primary" : "btn-outline-dark"}`}
           disabled={isSelected}
@@ -27,6 +29,7 @@ export const ContractCard = ({ contract, onClick, isSelected, buttonText = "Comp
     </div>
   );
 };
+
 
 ContractCard.propTypes = {
     contract: PropTypes.shape({

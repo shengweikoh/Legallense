@@ -107,10 +107,10 @@ export default function AnalysisPage() {
                     role="tabpanel"
                     aria-labelledby="summary-tab"
                     style={{
-                      whiteSpace: "pre-line",
+                      whiteSpace: "normal",
                       maxHeight: "64vh",
-                      maxWidth:"60vw",
                       overflowY: "auto",
+                      lineHeight: 1.8
                     }}
                   >
                     <Summary />
@@ -121,10 +121,10 @@ export default function AnalysisPage() {
                     role="tabpanel"
                     aria-labelledby="review-tab"
                     style={{
-                      whiteSpace: "pre-line",
+                      whiteSpace: "normal",
                       maxHeight: "64vh",
-                      maxWidth:"60vw",
                       overflowY: "auto",
+                      lineHeight: 1.8
                     }}
                   >
                     <Highlight />
@@ -135,10 +135,11 @@ export default function AnalysisPage() {
                     role="tabpanel"
                     aria-labelledby="suggest-tab"
                     style={{
-                      whiteSpace: "pre-line",
+                      whiteSpace: "normal",
                       maxHeight: "64vh",
-                      maxWidth:"60vw",
                       overflowY: "auto",
+                      lineHeight: 1.8
+                      // maxWidth:"60vw",
                     }}
                   >
                     <Suggest />
@@ -149,12 +150,12 @@ export default function AnalysisPage() {
                     role="tabpanel"
                     aria-labelledby="compare-tab"
                     style={{
-                      whiteSpace: "pre-line",
+                      whiteSpace: "normal",
                       maxHeight: "64vh",
-                      maxWidth:"60vw",
                       overflowY: "auto",
                     }}
                   >
+                    <h5 className="text-center">Select another contract to compare against</h5>
                     <ListCompareContracts />
                   </div>
                 </div>
