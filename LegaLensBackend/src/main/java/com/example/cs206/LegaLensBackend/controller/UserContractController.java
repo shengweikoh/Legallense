@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.cs206.LegaLensBackend.service.UserContractService;
+import com.example.cs206.LegaLensBackend.model.Clause;
 import com.example.cs206.LegaLensBackend.model.Contract;
 import com.example.cs206.LegaLensBackend.dto.ContractDetailsDTO;
 import java.util.List;
@@ -107,12 +108,12 @@ public class UserContractController {
     }
 
     @GetMapping("/compare")
-    public ResponseEntity<String> compareContracts(@PathVariable String userId, @RequestParam String contractId1, @RequestParam String contractId2) {
+    public ResponseEntity<List<Clause>> compareContracts(@PathVariable String userId, @RequestParam String contractId1, @RequestParam String contractId2) {
         try {
-            String comparison = userContractService.getUserContractCompare(userId, contractId1, contractId2);
+            List<Clause> comparison = userContractService.getUserContractCompare(userId, contractId1, contractId2);
             return ResponseEntity.ok(comparison);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error comparing contracts: " + e.getMessage());
+            return ResponseEntity.status(500).build();
         }
     }
 }

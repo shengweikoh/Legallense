@@ -34,6 +34,7 @@ Provide concise explanations of each clause and emphasize any terms that the cli
     • Important Details: [Any critical terms or conditions the client should be aware of]
 
 
+
 //Full example prompt//
 Employment Contract:
 ⸻
@@ -219,3 +220,4 @@ Provide concise explanations of each clause and emphasize any terms that the cli
     • Clause 1: [Clause Title]
     • Summary: [Brief summary of the clause]
     • Important Details: [Any critical terms or conditions the client should be aware of]
+    
