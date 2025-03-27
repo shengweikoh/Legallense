@@ -41,7 +41,7 @@ export const ListCompareContracts = () => {
   }
 
   return (
-    <div className="container my-4">
+    <div className="container my-4" style={{borderRadius: "20px"}}>
   
       {/* 1) row-cols classes: 1 col on XS, 2 on SM, 3 on MD, etc. */}
       <div className="row row-cols-1 g-4">
