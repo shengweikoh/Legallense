@@ -7,8 +7,8 @@
 }
 
 .card.job-card{
-    margin-top: 20vh;
-    height:60vh;
+    margin-top: 15vh;
+    max-height:75vh;
     width:2000px;
 }
 
@@ -24,6 +24,7 @@
   /* Table container */
   .table-container {
     width: 100%;
+    overflow-x: auto;
   }
   
   /* Table styling */
