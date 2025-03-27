@@ -162,14 +162,14 @@ public class GeminiContractService {
 
     public String compareContracts(Contract contract1, Contract contract2) {
         try {
-            // Combine the summaries of both contracts
-            String comparisonResult = "Comparison of Contracts:\n\n" +
-                    "Contract 1 Name: " + contract1.getContractName() + "\n" +
-                    "Contract 1 Summary:\n" + contract1.getSummary() + "\n\n" +
-                    "Contract 2 Name: " + contract2.getContractName() + "\n" +
-                    "Contract 2 Summary:\n" + contract2.getSummary();
+            // Prepare the payload for the Gemini API
+            JsonObject payload = new JsonObject();
+            payload.addProperty("contract1", contract1.getSummary());
+            payload.addProperty("contract2", contract2.getSummary());
 
-            return comparisonResult;
+            String compare = callGeminiApi("/compare.json", payload);
+
+            return compare;
         } catch (Exception e) {
             log.severe("Error comparing contracts: " + e.getMessage());
             throw new RuntimeException(e); // Wrap checked exceptions in a RuntimeException
