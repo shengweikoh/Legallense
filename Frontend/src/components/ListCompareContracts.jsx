@@ -6,6 +6,7 @@ import geminiApi from "../services/geminiApi";
 import { useAuth } from "../contexts/AuthContext";
 import { Typography, Button } from "@mui/material";
 import { ContractCard } from './ContractCard';
+import "./ListCompare.css"
 
 export const ListCompareContracts = () => {
   const { user } = useAuth();
@@ -41,7 +42,7 @@ export const ListCompareContracts = () => {
   }
 
   return (
-    <div className="container my-4">
+    <div className="container my-4 smallanalysis">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
