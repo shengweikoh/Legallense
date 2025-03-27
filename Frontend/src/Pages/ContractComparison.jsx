@@ -15,7 +15,14 @@ export default function ContractComparison() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const { user } = useAuth();
-
+    // Helper function to format text by removing extra spaces
+    const formatText = (text) => {
+      return text
+      .replace(/\\"/g, '"') // Replaces \" with "
+      .replace(/\s+/g, ' ')
+      .trim();
+    };
+    
     useEffect( () => {
       if (!user) {
         return;
@@ -68,8 +75,8 @@ export default function ContractComparison() {
                 {clauses.filter( (clause, index) => index > 0).map((clause, index) => (
                   <tr key={index} className="table-row">
                     <td className="table-label">{clause.clauseName}</td>
-                    <td className="table-value">{clause.contract1}</td>
-                    <td className="table-value">{clause.contract2}</td>
+                    <td className="table-value">{formatText(clause.contract1)}</td>
+                    <td className="table-value">{formatText(clause.contract2)}</td>
                   </tr>
                 ))}
             </tbody>

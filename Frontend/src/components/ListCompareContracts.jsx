@@ -6,7 +6,6 @@ import geminiApi from "../services/geminiApi";
 import { useAuth } from "../contexts/AuthContext";
 import { Typography, Button } from "@mui/material";
 import { ContractCard } from './ContractCard';
-import "./ListCompare.css"
 
 export const ListCompareContracts = () => {
   const { user } = useAuth();
