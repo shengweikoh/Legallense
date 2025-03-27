@@ -30,7 +30,7 @@ export const ContractCard = ({ contract, onClick, isSelected, buttonText = "Comp
 
 ContractCard.propTypes = {
     contract: PropTypes.shape({
-      documentId: PropTypes.number.isRequired,
+      documentId: PropTypes.string.isRequired,
       contractName: PropTypes.string.isRequired,
       dateUploaded: PropTypes.string.isRequired,
     }).isRequired,
