@@ -4,6 +4,7 @@ import { ContractDetails } from "../components/ContractDetails";
 import { Summary } from "../components/Summary";
 import { Highlight } from "../components/Highlight";
 import { Suggest } from "../components/Suggest";
+import { ListCompareContracts } from "../components/ListCompareContracts";
 
 export default function AnalysisPage() {
   return (
@@ -154,7 +155,7 @@ export default function AnalysisPage() {
                       overflowY: "auto",
                     }}
                   >
-                    <p>Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...Compare content goes here...</p>
+                    <ListCompareContracts />
                   </div>
                 </div>
               </div>
