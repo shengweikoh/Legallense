@@ -23,7 +23,6 @@ export default function AnalysisPage() {
                     maxHeight: "65vh",
                     minHeight: "65vh",
                     width: "100%",
-                    bo,
                     padding: "0px",
                     whiteSpace: "pre-line",
                   }}
