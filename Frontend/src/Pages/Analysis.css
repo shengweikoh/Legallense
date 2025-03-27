@@ -1,7 +1,8 @@
 .page{
     background-color: #f4f4f2; 
     width:100vw;
-    height:1100px;
+    overflow: hidden;
+    /* height:1100px; */
 
 }
 

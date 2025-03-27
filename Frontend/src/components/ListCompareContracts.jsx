@@ -41,25 +41,23 @@ export const ListCompareContracts = () => {
   }
 
   return (
-    <div className="container my-4 smallanalysis">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h2 className="text-center">Your Contracts</h2>
-      </motion.div>
-      <div className="row">
-        {contracts.filter((contract) => contract.documentId != contractId).map((contract) => (
-          <div key={contract.documentId} className="col-md-4">
-            <ContractCard 
-              contract={contract}
-              onClick={() => setSelectedContract(contract.documentId)}
-              isSelected={selectedContract === contract.documentId}  
-            />
-          </div>
-        ))}
+    <div className="container my-4">
+  
+      {/* 1) row-cols classes: 1 col on XS, 2 on SM, 3 on MD, etc. */}
+      <div className="row row-cols-1 g-4">
+        {contracts
+          .filter((contract) => contract.documentId !== contractId)
+          .map((contract) => (
+            <div key={contract.documentId} className="col d-flex">
+              <ContractCard
+                contract={contract}
+                onClick={() => setSelectedContract(contract.documentId)}
+                isSelected={selectedContract === contract.documentId}
+              />
+            </div>
+          ))}
       </div>
+  
       {selectedContract && (
         <div className="text-center mt-4">
           <Link to={`/contractcompare/${contractId}/${selectedContract}`}>
@@ -68,9 +66,10 @@ export const ListCompareContracts = () => {
             </Button>
           </Link>
         </div>
-      )}      
+      )}
     </div>
   );
+  
 
 
 }
