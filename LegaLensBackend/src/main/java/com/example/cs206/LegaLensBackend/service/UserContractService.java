@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.cs206.LegaLensBackend.model.Clause;
 import com.example.cs206.LegaLensBackend.model.Contract;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
@@ -232,7 +233,7 @@ public class UserContractService {
         return suggest;
     }
 
-    public String getUserContractCompare(String userId, String contractId1, String contractId2) throws Exception {
+    public List<Clause> getUserContractCompare(String userId, String contractId1, String contractId2) throws Exception {
         log.info("Comparing contracts with IDs: " + contractId1 + " and " + contractId2 + " for user ID: " + userId);
         // Retrieve the first contract
         Contract contract1 = getUserContractById(userId, contractId1);
@@ -245,10 +246,46 @@ public class UserContractService {
         if (contract2 == null) {
             throw new IllegalArgumentException("Contract not found for ID: " + contractId2);
         }
-        
+
         try {
             String comparisonResult = geminiContractService.compareContracts(contract1, contract2);
-            return comparisonResult;
+            String[] clauseSegments = comparisonResult.split(";");
+            List<Clause> clauses = new ArrayList<>();
+
+            Clause clauseName = new Clause();
+            clauseName.setClauseName("Contract Name");
+            clauseName.setContract1(contract1.getContractName());
+            clauseName.setContract2(contract2.getContractName());
+            clauses.add(clauseName);
+            
+            for (String segment : clauseSegments) {
+                segment = segment.trim();
+                if (segment.isEmpty()) {
+                    continue;
+                }
+                
+                
+                if (segment.startsWith("[")) {
+                    segment = segment.substring(1);
+                }
+                if (segment.startsWith("\"[")) {
+                    segment = segment.substring(3);
+                }
+                if (segment.endsWith("]")) {
+                    segment = segment.substring(0, segment.length() - 1);
+                }
+                
+                String[] parts = segment.split("\\],\\s*\\[");
+                
+                if (parts.length >= 3) {
+                    Clause clause = new Clause();
+                    clause.setClauseName(parts[0].trim());
+                    clause.setContract1(parts[1].trim());
+                    clause.setContract2(parts[2].trim());
+                    clauses.add(clause);
+                }
+            }
+            return clauses;
         } catch (RuntimeException ex) {
             log.severe("Error comparing contracts: " + ex.getMessage());
             throw ex;
