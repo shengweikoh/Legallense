@@ -1,11 +1,11 @@
 import React , {useEffect, useState} from 'react';
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "./ContractComparison.css";
 import { motion } from "framer-motion";
 import geminiApi from '../services/geminiApi';
 import { useAuth } from '../contexts/AuthContext';
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
 
 export default function ContractComparison() {
@@ -22,6 +22,8 @@ export default function ContractComparison() {
       .replace(/\s+/g, ' ')
       .trim();
     };
+
+    const navigate = useNavigate(-1);
     
     useEffect( () => {
       if (!user) {
@@ -58,33 +60,54 @@ export default function ContractComparison() {
 
 
     return (
-    <div className = "ContractComparisonBackground">
-
-    <div className=" container d-flex justify-content-center">
-      <div className="card job-card">
-        <div className="table-container">
-          <table className="table borderless">
-          <thead>
-              <tr className="table-header-row">
-                <th className="table-heading">Category</th>
-                <th className="table-heading">{contractNames.contract1}</th> 
-                <th className="table-heading">{contractNames.contract2}</th>
-              </tr>
-            </thead>
-            <tbody>
-                {clauses.filter( (clause, index) => index > 0).map((clause, index) => (
-                  <tr key={index} className="table-row">
-                    <td className="table-label">{clause.clauseName}</td>
-                    <td className="table-value">{formatText(clause.contract1)}</td>
-                    <td className="table-value">{formatText(clause.contract2)}</td>
-                  </tr>
-                ))}
-            </tbody>
-            </table>
+      <div className="ContractComparisonBackground">
+        <div className="container">
+          <div className="d-flex justify-content-center">
+            <div className="card job-card">
+              {/* Put your button here, above the table */}
+              <Button
+                color='back'
+                variant='contained'
+                onClick={() => navigate(-1)}
+                sx = {{
+                  maxWidth: 20,
+                  marginBottom: 1,
+                  marginLeft: 1,
+                  textTransform: 'capitalize'
+                }}
+                >
+                  Back
+                  </Button>
+              <div className="table-container">
+                <table className="table borderless">
+                  <thead>
+                    <tr className="table-header-row">
+                      <th className="table-heading">Category</th>
+                      <th className="table-heading">{contractNames.contract1}</th>
+                      <th className="table-heading">{contractNames.contract2}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {clauses
+                      .filter((clause, index) => index > 0)
+                      .map((clause, index) => (
+                        <tr key={index} className="table-row">
+                          <td className="table-label">{clause.clauseName}</td>
+                          <td className="table-value">
+                            {formatText(clause.contract1)}
+                          </td>
+                          <td className="table-value">
+                            {formatText(clause.contract2)}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
     );
 
 
