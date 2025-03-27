@@ -146,9 +146,9 @@ export default function ContractCompare() {
         {/* Compare Button */}
         {selectedLeft && selectedRight && (
           <div className="text-center mt-4">
-            <Link to = "/contractcompare" >
-            <button className="btn btn-success btn-lg">Compare Selected Contracts</button>
-            </Link>
+              <Link to={`/contractcompare/${selectedLeft}/${selectedRight}`}>
+                <button className="btn btn-success btn-lg">Compare Selected Contracts</button>
+              </Link>
           </div>
         )}
       </div>
