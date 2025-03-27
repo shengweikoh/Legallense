@@ -66,7 +66,7 @@ export default function ContractComparison() {
             <div className="card job-card">
               {/* Put your button here, above the table */}
               <Button
-                color='back'
+                color='black'
                 variant='contained'
                 onClick={() => navigate(-1)}
                 sx = {{
