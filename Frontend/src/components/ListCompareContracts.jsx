@@ -1,11 +1,10 @@
-import {useEffect, useState} from 'react';
 import { Link, useParams } from "react-router-dom";
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { motion } from "framer-motion";
+import { Button, Typography } from "@mui/material";
 import geminiApi from "../services/geminiApi";
 import { useAuth } from "../contexts/AuthContext";
-import { Typography, Button } from "@mui/material";
-import { ContractCard } from './ContractCard';
+import { ContractCard } from "./ContractCard";
+import { useEffect, useState } from "react";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export const ListCompareContracts = () => {
   const { user } = useAuth();
@@ -14,7 +13,6 @@ export const ListCompareContracts = () => {
   const [selectedContract, setSelectedContract] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     if (!user) return;
@@ -30,7 +28,7 @@ export const ListCompareContracts = () => {
     };
     
     fetchContracts(user.uid);
-  }, [user])
+  }, [user]);
 
   if (loading) {
     return <Typography>Loading contracts...</Typography>;
@@ -41,35 +39,37 @@ export const ListCompareContracts = () => {
   }
 
   return (
-    <div className="container my-4" style={{borderRadius: "20px"}}>
-  
-      {/* 1) row-cols classes: 1 col on XS, 2 on SM, 3 on MD, etc. */}
+    <div className="container my-4" style={{ borderRadius: "20px" }}>
       <div className="row row-cols-1 g-4">
         {contracts
           .filter((contract) => contract.documentId !== contractId)
           .map((contract) => (
-            <div key={contract.documentId} className="col d-flex">
-              <ContractCard
-                contract={contract}
-                onClick={() => setSelectedContract(contract.documentId)}
-                isSelected={selectedContract === contract.documentId}
-              />
+            <div key={contract.documentId} className="col">
+              {/* Each card is a flex container so the footer can stick to the bottom */}
+              <div className="card d-flex flex-column h-100">
+                <div className="card-body">
+                  <ContractCard
+                    contract={contract}
+                    onClick={() => setSelectedContract(contract.documentId)}
+                    isSelected={selectedContract === contract.documentId}
+                  />
+                </div>
+
+                {/* Only show button if this card is the currently selected one */}
+                {selectedContract === contract.documentId && (
+                  <div className="card-footer text-center mt-auto"
+                    style={{ backgroundColor: "transparent", border: "none" }}>
+                    <Link to={`/contractcompare/${contractId}/${selectedContract}`}>
+                      <Button variant="outlined" color="primary" size="large">
+                        Continue to compare
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
           ))}
       </div>
-  
-      {selectedContract && (
-        <div className="text-center mt-4">
-          <Link to={`/contractcompare/${contractId}/${selectedContract}`}>
-            <Button variant="outlined" color="primary" size="large">
-              Continue
-            </Button>
-          </Link>
-        </div>
-      )}
     </div>
   );
-  
-
-
-}
+};
