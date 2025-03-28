@@ -6,7 +6,7 @@ import { Summary } from "../components/Summary";
 import { Highlight } from "../components/Highlight";
 import { Suggest } from "../components/Suggest";
 import { ListCompareContracts } from "../components/ListCompareContracts";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 
 export default function AnalysisPage() {
   const [activeTab, setActiveTab] = useState("summary");
@@ -174,7 +174,6 @@ export default function AnalysisPage() {
                   >
                     {activeTab === "compare" && (
                       <>
-                        <h5 className="text-center">Select another contract to compare against</h5>
                         <ListCompareContracts />
                       </>
                     )}
