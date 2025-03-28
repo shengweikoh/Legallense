@@ -100,7 +100,7 @@ const Login = () => {
                 <div className="content-wrapper">
                     <div className="container">
                         <div className="col-12">
-                            <h1 className="LegaLens">LegaLens.</h1>
+                            <h1 className="LegaLens">LegaLens</h1>
                         </div>
 
                         <div className="row">

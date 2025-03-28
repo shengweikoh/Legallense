@@ -79,18 +79,19 @@ export default function Dashboard() {
           <div className="col-md-6 d-flex mb-3">
             <AlertTriangleIcon className="me-3" size={24} color="orange" />
             <div>
-              <h5>Highlight Concerning Clauses</h5>
+              <h5>Summarise contracts</h5>
               <p className="mb-0">
-                We identify and explain potentially problematic contract terms.
+                Read through the key details of your contract immediately.
               </p>
             </div>
+
           </div>
           <div className="col-md-6 d-flex mb-3">
             <EditIcon className="me-3" size={24} color="green" />
             <div>
-              <h5>Suggest Improvements</h5>
+              <h5>Highlight Concerning Clauses</h5>
               <p className="mb-0">
-                Get AI-powered suggestions for contract negotiations.
+                We identify and explain potentially problematic contract terms.
               </p>
             </div>
           </div>
@@ -100,7 +101,7 @@ export default function Dashboard() {
           <div className="col-md-6 d-flex mt-5">
             <AlertTriangleIcon className="me-3" size={24} color="orange" />
             <div>
-              <h5>Suggest</h5>
+              <h5>Suggest improvements</h5>
               <p className="mb-0">
                 Get AI-Powered suggestions for negotiating better terms.
               </p>
