@@ -40,7 +40,13 @@ export const ListCompareContracts = () => {
 
   return (
     <div className="container my-4" style={{ borderRadius: "20px" }}>
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
+      {/* <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1"> */}
+      <div className="d-grid"
+      style = {{
+        gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+        gap: "1rem",
+      }}>
+
         {contracts
           .filter((contract) => contract.documentId !== contractId)
           .map((contract) => (
@@ -50,7 +56,7 @@ export const ListCompareContracts = () => {
                 <div className="card-body">
                   <ContractCard
                     contract={contract}
-                    onClick={() => setSelectedContract(contract.documentId)}
+                    onClick={() => (contract.documentId)}
                     isSelected={selectedContract === contract.documentId}
                     compareLink={`/contractcompare/${contractId}/${contract.documentId}`}
                   />
