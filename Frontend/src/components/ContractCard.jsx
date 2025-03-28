@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-import "./ContractCard.css";
 
 /* ContractCard.jsx */
 export const ContractCard = ({
