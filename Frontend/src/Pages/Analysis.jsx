@@ -1,5 +1,6 @@
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Analysis.css";
+import { useState } from "react";
 import { ContractDetails } from "../components/ContractDetails";
 import { Summary } from "../components/Summary";
 import { Highlight } from "../components/Highlight";
@@ -7,6 +8,8 @@ import { Suggest } from "../components/Suggest";
 import { ListCompareContracts } from "../components/ListCompareContracts";
 
 export default function AnalysisPage() {
+  const [activeTab, setActiveTab] = useState("summary");
+
   return (
     <div className="page">
       <div className="container-fluid m-4 analysiscontainer">
@@ -28,7 +31,6 @@ export default function AnalysisPage() {
                     whiteSpace: "pre-line",
                   }}
                 >
-                  {/* Replace with your contract details */}
                   <ContractDetails />
                 </div>
               </div>
@@ -36,7 +38,7 @@ export default function AnalysisPage() {
           </div>
 
           {/* Right Section: Tabs */}
-          <div className="col-lg-6  d-flex flex-column resultcontainer">
+          <div className="col-lg-6 d-flex flex-column resultcontainer">
             <div className="card result">
               <div className="card-header">
                 <ul
@@ -46,53 +48,48 @@ export default function AnalysisPage() {
                 >
                   <li className="nav-item">
                     <a
-                      className="nav-link active"
+                      className={`nav-link ${activeTab === "summary" ? "active" : ""}`}
                       id="summary-tab"
-                      data-bs-toggle="tab"
-                      href="#summary"
+                      onClick={() => setActiveTab("summary")}
                       role="tab"
                       aria-controls="summary"
-                      aria-selected="true"
-
+                      aria-selected={activeTab === "summary"}
                     >
                       Summary
                     </a>
                   </li>
                   <li className="nav-item">
                     <a
-                      className="nav-link"
+                      className={`nav-link ${activeTab === "review" ? "active" : ""}`}
                       id="review-tab"
-                      data-bs-toggle="tab"
-                      href="#review"
+                      onClick={() => setActiveTab("review")}
                       role="tab"
                       aria-controls="review"
-                      aria-selected="false"
+                      aria-selected={activeTab === "review"}
                     >
                       Review
                     </a>
                   </li>
                   <li className="nav-item">
                     <a
-                      className="nav-link"
+                      className={`nav-link ${activeTab === "suggest" ? "active" : ""}`}
                       id="suggest-tab"
-                      data-bs-toggle="tab"
-                      href="#suggest"
+                      onClick={() => setActiveTab("suggest")}
                       role="tab"
                       aria-controls="suggest"
-                      aria-selected="false"
+                      aria-selected={activeTab === "suggest"}
                     >
                       Suggest
                     </a>
                   </li>
                   <li className="nav-item">
                     <a
-                      className="nav-link"
+                      className={`nav-link ${activeTab === "compare" ? "active" : ""}`}
                       id="compare-tab"
-                      data-bs-toggle="tab"
-                      href="#compare"
+                      onClick={() => setActiveTab("compare")}
                       role="tab"
                       aria-controls="compare"
-                      aria-selected="false"
+                      aria-selected={activeTab === "compare"}
                     >
                       Compare
                     </a>
@@ -102,7 +99,7 @@ export default function AnalysisPage() {
               <div className="card-body">
                 <div className="tab-content" id="analysisTabsContent">
                   <div
-                    className="tab-pane fade show active"
+                    className={`tab-pane fade ${activeTab === "summary" ? "show active" : ""}`}
                     id="summary"
                     role="tabpanel"
                     aria-labelledby="summary-tab"
@@ -110,13 +107,13 @@ export default function AnalysisPage() {
                       whiteSpace: "normal",
                       maxHeight: "64vh",
                       overflowY: "auto",
-                      lineHeight: 1.8
+                      lineHeight: 1.8,
                     }}
                   >
-                    <Summary />
+                    {activeTab === "summary" && <Summary />}
                   </div>
                   <div
-                    className="tab-pane fade"
+                    className={`tab-pane fade ${activeTab === "review" ? "show active" : ""}`}
                     id="review"
                     role="tabpanel"
                     aria-labelledby="review-tab"
@@ -124,13 +121,13 @@ export default function AnalysisPage() {
                       whiteSpace: "normal",
                       maxHeight: "64vh",
                       overflowY: "auto",
-                      lineHeight: 1.8
+                      lineHeight: 1.8,
                     }}
                   >
-                    <Highlight />
+                    {activeTab === "review" && <Highlight />}
                   </div>
                   <div
-                    className="tab-pane fade"
+                    className={`tab-pane fade ${activeTab === "suggest" ? "show active" : ""}`}
                     id="suggest"
                     role="tabpanel"
                     aria-labelledby="suggest-tab"
@@ -138,14 +135,13 @@ export default function AnalysisPage() {
                       whiteSpace: "normal",
                       maxHeight: "64vh",
                       overflowY: "auto",
-                      lineHeight: 1.8
-                      // maxWidth:"60vw",
+                      lineHeight: 1.8,
                     }}
                   >
-                    <Suggest />
+                    {activeTab === "suggest" && <Suggest />}
                   </div>
                   <div
-                    className="tab-pane fade"
+                    className={`tab-pane fade ${activeTab === "compare" ? "show active" : ""}`}
                     id="compare"
                     role="tabpanel"
                     aria-labelledby="compare-tab"
@@ -155,8 +151,12 @@ export default function AnalysisPage() {
                       overflowY: "auto",
                     }}
                   >
-                    <h5 className="text-center">Select another contract to compare against</h5>
-                    <ListCompareContracts />
+                    {activeTab === "compare" && (
+                      <>
+                        <h5 className="text-center">Select another contract to compare against</h5>
+                        <ListCompareContracts />
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
