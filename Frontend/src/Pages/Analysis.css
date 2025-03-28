@@ -19,14 +19,9 @@
       /* Centers text inside */
     padding-top: 12vh;
     padding-bottom: 2vh;
-    width:95vw;
+    max-width:95vw;
 }
 
-.contractdetails2{
-  
-
-  
-}
 
 .nav-item{
 

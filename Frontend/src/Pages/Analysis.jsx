@@ -6,15 +6,23 @@ import { Summary } from "../components/Summary";
 import { Highlight } from "../components/Highlight";
 import { Suggest } from "../components/Suggest";
 import { ListCompareContracts } from "../components/ListCompareContracts";
+import { Box, Button } from "@mui/material";
 
 export default function AnalysisPage() {
   const [activeTab, setActiveTab] = useState("summary");
+  const [contractDetails, setContractDetails] = useState(false);
+
+  const handleToggleContractDetails = () => {
+    setContractDetails(!contractDetails);
+  }
 
   return (
     <div className="page">
       <div className="container-fluid m-4 analysiscontainer">
         <div className="row g-4">
+
           {/* Left Section: Contract Details */}
+          {contractDetails &&  
           <div className="col-lg-6 d-flex flex-column">
             <div className="card contractdetails2 mb-4">
               <div className="card-header">
@@ -36,16 +44,29 @@ export default function AnalysisPage() {
               </div>
             </div>
           </div>
+          }
+
+
+
 
           {/* Right Section: Tabs */}
-          <div className="col-lg-6 d-flex flex-column resultcontainer">
+          <div
+            className={`col-lg-${contractDetails ? 6 : 12} d-flex flex-column resultcontainer`}
+          >
             <div className="card result">
               <div className="card-header">
+              <Button 
+                  onClick={handleToggleContractDetails}
+                  color="primary"
+                  sx={{marginBottom: 1}}
+                  >{contractDetails ? 'Hide' : 'Show'} Contract Details
+                  </Button>
                 <ul
                   className="nav nav-tabs card-header-tabs d-flex justify-content-center gap-4"
                   id="analysisTabs"
                   role="tablist"
                 >
+ 
                   <li className="nav-item">
                     <a
                       className={`nav-link ${activeTab === "summary" ? "active" : ""}`}
