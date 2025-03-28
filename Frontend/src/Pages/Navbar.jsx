@@ -63,7 +63,7 @@ const Navbar = () => {
     setOpen(false);
   }
 
-  const handleAction = () => {
+  const handleCopy = () => {
     if (user && user.uid) {
         navigator.clipboard.writeText(user.uid)
             .then(() => {
@@ -109,17 +109,17 @@ const Navbar = () => {
   return (
     <nav className="navbar fixed-top">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-          <HomeIcon style={{ marginRight: "10px" }} /> LegaLens.
+        <Link className="navbar-brand" to={user ? "/home" : "/"}>
+          <HomeIcon style={{ marginRight: "10px" }} /> LegaLens
         </Link>
 
         {isHome ? (
           <div className="button-container">
-            <Link to="/home">
+            {/* <Link to="/home">
               <button className="upload">
                 <AppWindow /> Dashboard
               </button>
-            </Link>
+            </Link> */}
 
             {user ? (
               <button className="logout" onClick={handleLogout}>
@@ -138,9 +138,10 @@ const Navbar = () => {
           <div className="info-container">
 
             <ThemeProvider theme={theme}>
-                <Button className="info-text" onClick={handleOpen} sx = {{textTransform: 'capitalize'}}>
+                
+                {user && <Button className="info-text" onClick={handleOpen} sx = {{textTransform: 'capitalize'}}>
                     <Handshake className="handshake"></Handshake>Refer a Friend
-                </Button>
+                </Button> }
 
                 <Dialog
                     open={open}
@@ -159,7 +160,7 @@ const Navbar = () => {
                     </DialogContent>
 
                     <DialogActions>
-                        <Button variant='contained' onClick={handleAction} sx={{ textTransform: 'capitalize'}}>
+                        <Button variant='contained' onClick={handleCopy} sx={{ textTransform: 'capitalize'}}>
                             Copy to clipboard
                         </Button>
                         <Button variant='outlined' onClick = {handleClose} sx={{ textTransform: 'capitalize'}}>
@@ -189,7 +190,7 @@ const Navbar = () => {
                     </DialogContent>
 
                     <DialogActions>
-                        <Button variant='contained' onClick={handleAction} sx={{ textTransform: 'capitalize'}}>
+                        <Button variant='contained' onClick={handleCopy} sx={{ textTransform: 'capitalize'}}>
                             Copy to clipboard
                         </Button>
                         <Button variant='outlined' onClick = {handleClose} sx={{ textTransform: 'capitalize'}}>
@@ -199,10 +200,11 @@ const Navbar = () => {
                     </DialogActions>
                 </Dialog>
 
-            <span className="info-text">
+            {user && <span className="info-text">
               <HandCoins className="handcoin"></HandCoins>Free Upgrade:{" "}
               {freeUpgrade != null ? freeUpgrade : "Loading..."}{" "}
-            </span>
+            </span>}
+            
             {user ? (
               <button className="logout" onClick={handleLogout}>
                 <CircleUserRound /> Logout
