@@ -56,7 +56,7 @@ export const ListCompareContracts = () => {
                 <div className="card-body">
                   <ContractCard
                     contract={contract}
-                    onClick={() => (contract.documentId)}
+                    onClick={() => setSelectedContract(contract.documentId)}
                     isSelected={selectedContract === contract.documentId}
                     compareLink={`/contractcompare/${contractId}/${contract.documentId}`}
                   />
