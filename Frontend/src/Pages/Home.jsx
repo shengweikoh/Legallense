@@ -68,7 +68,7 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 2 }}
           >
-            Legal Lens.
+            LegaLens
           </motion.div>
           <TypingEffect />
         </div>

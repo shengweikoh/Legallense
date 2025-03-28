@@ -115,6 +115,7 @@ const Navbar = () => {
 
         {isHome ? (
           <div className="button-container">
+            
             {/* <Link to="/home">
               <button className="upload">
                 <AppWindow /> Dashboard
@@ -204,7 +205,7 @@ const Navbar = () => {
               <HandCoins className="handcoin"></HandCoins>Free Upgrade:{" "}
               {freeUpgrade != null ? freeUpgrade : "Loading..."}{" "}
             </span>}
-            
+
             {user ? (
               <button className="logout" onClick={handleLogout}>
                 <CircleUserRound /> Logout
