@@ -34,19 +34,20 @@ function App() {
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
+            <Route path = "/signup" element= {<Signup/>}/>
             <Route path="/login" element={<Login />} />
-            <Route path="/upload" element={<UploadContract />} />
-            <Route path="/home" element={<Dashboard />} />
-            <Route path="/analysis/:contractId" element={<AnalysisPage />} />
-            <Route path="/history" element={<History />} />
-            <Route path="/compare" element={<ContractCompare />} />
-            <Route path="/contractcompare/:contractId1/:contractId2" element={<ContractComparison />} />
-            <Route path = "signup" element= {<Signup/>}/>
+
+            <Route element = {<ProtectedRoute />}>
+                <Route path="/upload" element={<UploadContract />} />
+                <Route path="/home" element={<Dashboard />} />
+                <Route path="/analysis/:contractId" element={<AnalysisPage />} />
+                <Route path="/history" element={<History />} />
+                <Route path="/compare" element={<ContractCompare />} />
+                <Route path="/contractcompare/:contractId1/:contractId2" element={<ContractComparison />} />
+              </Route>
 
             {/* Protected Routes for Authenticated Users */}
-            <Route element={<ProtectedRoute />}>
-            {/* Place protected routes here */}
-            </Route>
+ 
         </Routes>
       </AuthProvider>
     </Router>
