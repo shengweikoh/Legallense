@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom"; // Use react-router-dom for client-side routing
 import {
   UploadIcon,

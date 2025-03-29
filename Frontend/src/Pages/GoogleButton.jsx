@@ -1,6 +1,5 @@
-import React from 'react';
 import GoogleLogo from './Animation/Google.png';
-
+import PropTypes from 'prop-types';
 
 
 export default function GoogleCustomButton({ onClick }) {
@@ -57,4 +56,8 @@ const wrapperStyle = {
 
 
   );
+}
+
+GoogleCustomButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
 }
