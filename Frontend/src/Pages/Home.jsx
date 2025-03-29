@@ -92,11 +92,11 @@ const Home = () => {
 
         <DescriptionSections></DescriptionSections>
 
-         <div className="price">
+         {/* <div className="price">
                 Pricing
-            </div>
+            </div> */}
 
-            <Pricing></Pricing>
+            {/* <Pricing></Pricing> */}
       
       </div>
     );

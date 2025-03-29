@@ -19,7 +19,7 @@
     background-color: #f4f4f2;  /* this is the entire container. */
     margin-top:75px;
     width:100%;
-    height:4500px;
+    min-height:220vh;
  }
 
 .description-container{
