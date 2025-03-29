@@ -110,10 +110,10 @@ const geminiApi = {
         }
     },
 
-    highlightContract : async (userId, contractId) => {
+    reviewContract : async (userId, contractId) => {
         try {
             const response = await axiosInstance.post(
-                `/users/${userId}/contracts/${contractId}/highlight`
+                `/users/${userId}/contracts/${contractId}/review`
             );
             return {
                 success: true,
@@ -123,28 +123,28 @@ const geminiApi = {
             return {
                 success: false,
                 message:
-                    error.response?.data || "An error occured while fetching the highlights"
+                    error.response?.data || "An error occured while fetching the review"
             };
         }
     },
 
-    suggestContract : async (userId, contractId) => {
-        try {
-            const response = await axiosInstance.post(
-                `/users/${userId}/contracts/${contractId}/suggest`
-            );
-            return {
-                success: true,
-                data: response.data,
-            };
-        } catch (error) {
-            return {
-                success: false,
-                message:
-                    error.response?.data || "An error occured while fetching the suggestions"
-            };
-        }
-    },
+    // suggestContract : async (userId, contractId) => {
+    //     try {
+    //         const response = await axiosInstance.post(
+    //             `/users/${userId}/contracts/${contractId}/suggest`
+    //         );
+    //         return {
+    //             success: true,
+    //             data: response.data,
+    //         };
+    //     } catch (error) {
+    //         return {
+    //             success: false,
+    //             message:
+    //                 error.response?.data || "An error occured while fetching the suggestions"
+    //         };
+    //     }
+    // },
 
 
 

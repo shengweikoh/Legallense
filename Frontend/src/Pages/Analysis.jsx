@@ -3,8 +3,7 @@ import "./Analysis.css";
 import { useState } from "react";
 import { ContractDetails } from "../components/ContractDetails";
 import { Summary } from "../components/Summary";
-import { Highlight } from "../components/Highlight";
-import { Suggest } from "../components/Suggest";
+import { Review } from "../components/Review";
 import { ListCompareContracts } from "../components/ListCompareContracts";
 import { Button } from "@mui/material";
 
@@ -93,7 +92,7 @@ export default function AnalysisPage() {
                       Review
                     </a>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <a
                       className={`nav-link ${activeTab === "suggest" ? "active" : ""}`}
                       id="suggest-tab"
@@ -104,7 +103,7 @@ export default function AnalysisPage() {
                     >
                       Suggest
                     </a>
-                  </li>
+                  </li> */}
                   <li className="nav-item">
                     <a
                       className={`nav-link ${activeTab === "compare" ? "active" : ""}`}
@@ -147,9 +146,10 @@ export default function AnalysisPage() {
                       lineHeight: 1.8,
                     }}
                   >
-                    {activeTab === "review" && <Highlight />}
+                    {activeTab === "review" && <Review />}
                   </div>
-                  <div
+
+                  {/* <div
                     className={`tab-pane fade ${activeTab === "suggest" ? "show active" : ""}`}
                     id="suggest"
                     role="tabpanel"
@@ -162,7 +162,7 @@ export default function AnalysisPage() {
                     }}
                   >
                     {activeTab === "suggest" && <Suggest />}
-                  </div>
+                  </div> */}
                   <div
                     className={`tab-pane fade ${activeTab === "compare" ? "show active" : ""}`}
                     id="compare"

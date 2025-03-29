@@ -8,9 +8,9 @@ import {
 } from '@mui/material';
 import "./markdown.css";
 
-export const Summary = () => {
+export const Review = () => {
   return (
-    <ContractDataLoader request={geminiApi.summariseContract}>
+    <ContractDataLoader request={geminiApi.reviewContract}>
       {(data) => (
         <div className="markdown" style={{ textAlign: "left" }}>
           {data.map((clause, index) => (
@@ -22,13 +22,16 @@ export const Summary = () => {
               <CardHeader
                 title={
                   <Typography variant="h5" component="div">
-                    <strong>Clause {index+1}: {clause.clauseName}</strong>
+                    <strong>Problem {index+1}: {clause.clauseName}</strong>
                   </Typography>
                 }
               />
-              <CardContent sx = {{paddingBottom:0, marginBottom:0}}>
+              <CardContent>
                 <Typography variant="body2">
-                  <strong>Description: </strong> {clause.content1}
+                  <strong>Description:</strong> {clause.content1}
+                </Typography>
+                <Typography variant="body2">
+                  <strong>Suggestion:</strong> {clause.content2}
                 </Typography>
               </CardContent>
             </Card>
