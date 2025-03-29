@@ -8,22 +8,33 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import ProcessScrollBoard from "./Animation/ProcessScrollBoard";
 import Pricing from "./Pricing.jsx";
 import DescriptionSections from "./DescriptionSection.jsx";
+import { useAuth } from "../contexts/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 
 gsap.registerPlugin(ScrollTrigger);
 
 
 const Home = () => {
-    const descriptionsRef = useRef([]);
+    // const descriptionsRef = useRef([]);
 
     const [hasAnimated, setHasAnimated] = useState(false);
 
     const leftRef = useRef([]);
     const rightRef = useRef([]);
+    const navigate = useNavigate();
+
+    const { user } = useAuth();
+
 
 
   
     useEffect(() => {
+
+        if (user) {
+          navigate("/home");
+        }
+        
         const handleScroll = () => {
           if (window.scrollY > 1200 && !hasAnimated) {
 
@@ -55,7 +66,7 @@ const Home = () => {
         }
     
         return () => window.removeEventListener("scroll", handleScroll);
-      }, [hasAnimated]);
+      }, [user, navigate, hasAnimated]);
       // Select all elements with the class 'description'
     
   
