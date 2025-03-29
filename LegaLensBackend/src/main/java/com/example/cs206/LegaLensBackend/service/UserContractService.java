@@ -199,7 +199,7 @@ public class UserContractService {
             contract.setSummary(summary);
             updateContractInFirestore(userId, contractId, contract);
         }
-        String[] clauseSegments = summary.split(";");
+        String[] clauseSegments = summary.split(";;");
         List<Clause> clauses = new ArrayList<>();
 
         parseClauseSegments(clauseSegments, clauses);
@@ -221,7 +221,7 @@ public class UserContractService {
             contract.setReview(review);
             updateContractInFirestore(userId, contractId, contract);
         }
-        String[] clauseSegments = review.split(";");
+        String[] clauseSegments = review.split(";;");
         List<Clause> clauses = new ArrayList<>();
 
         parseClauseSegments(clauseSegments, clauses);
