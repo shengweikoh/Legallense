@@ -1,6 +1,5 @@
 package com.example.cs206.LegaLensBackend.service;
 
-import com.example.cs206.LegaLensBackend.model.Contract;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -94,7 +93,7 @@ public class GeminiContractService {
         }
     }
 
-    public String summarizeContract(Contract contract, String userId, String contractId) {
+    public String summarizeContract(String contract, String userId, String contractId) {
         try {
             log.info("Summarizing contract with ID: " + contractId + " for user ID: " + userId);
 
@@ -102,7 +101,7 @@ public class GeminiContractService {
             JsonObject payload = new JsonObject();
 
             // Now add the contract text to the payload
-            payload.addProperty("contract", contract.getFullText());
+            payload.addProperty("contract", contract);
 
             // Call the Gemini API
             String summary = callGeminiApi("/summary.json", payload);
@@ -114,18 +113,13 @@ public class GeminiContractService {
         }
     }
 
-    public String highlightContract(Contract contract, String userId, String contractId) {
+    public String highlightContract(String contract, String userId, String contractId) {
         try {
             log.info("Highlighting contract with ID: " + contractId + " for user ID: " + userId);
 
-            // Check if the contract is marked as premium
-            if (!contract.isPremiumPaid()) {
-                throw new IllegalArgumentException("Contract is not marked as premium: " + contractId);
-            }
-
             // Prepare the payload for the Gemini API
             JsonObject payload = new JsonObject();
-            payload.addProperty("contract", contract.getFullText());
+            payload.addProperty("contract", contract);
 
             // Call the Gemini API
             String highlights = callGeminiApi("/highlight.json", payload);
@@ -137,18 +131,13 @@ public class GeminiContractService {
         }
     }
 
-    public String suggestContract(Contract contract, String userId, String contractId) {
+    public String suggestContract(String contract, String userId, String contractId) {
         try {
             log.info("Suggesting changes for contract with ID: " + contractId + " for user ID: " + userId);
 
-            // Check if the contract is marked as premium
-            if (!contract.isPremiumPaid()) {
-                throw new IllegalArgumentException("Contract is not marked as premium: " + contractId);
-            }
-
             // Prepare the payload for the Gemini API
             JsonObject payload = new JsonObject();
-            payload.addProperty("contract", contract.getFullText());
+            payload.addProperty("contract", contract);
 
             // Call the Gemini API
             String suggest = callGeminiApi("/suggest.json", payload);
@@ -160,12 +149,13 @@ public class GeminiContractService {
         }
     }
 
-    public String compareContracts(Contract contract1, Contract contract2) {
+    public String compareContracts(String contract1, String contract2) {
         try {
             // Prepare the payload for the Gemini API
             JsonObject payload = new JsonObject();
-            payload.addProperty("contract1", contract1.getSummary());
-            payload.addProperty("contract2", contract2.getSummary());
+
+            payload.addProperty("contract1", contract1);
+            payload.addProperty("contract2", contract2);
 
             String compare = callGeminiApi("/compare.json", payload);
 
