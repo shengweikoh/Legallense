@@ -26,9 +26,9 @@ export const Summary = () => {
                   </Typography>
                 }
               />
-              <CardContent sx = {{paddingBottom:0, marginBottom:0}}>
-                <Typography variant="body2">
-                  <strong>Description: </strong> {clause.content1}
+              <CardContent sx={{ pb: 0, '&:last-child': { pb: 0 } }}>
+                <Typography>
+                  {clause.content1}
                 </Typography>
               </CardContent>
             </Card>
