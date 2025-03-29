@@ -14,6 +14,9 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
+
+import io.github.jonathanlink.PDFLayoutTextStripper;
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import com.google.cloud.firestore.CollectionReference;
@@ -78,7 +81,7 @@ public class UserContractService {
         // Extract text from the PDF
         String fullText;
         try (PDDocument document = PDDocument.load(tempFile)) {
-            PDFTextStripper pdfStripper = new PDFTextStripper();
+            PDFTextStripper pdfStripper = new PDFLayoutTextStripper();
             fullText = pdfStripper.getText(document);
         } catch (IOException e) {
             throw new IllegalArgumentException("Failed to extract text from PDF: " + e.getMessage());
@@ -187,7 +190,7 @@ public class UserContractService {
         String summary = contract.getSummary();
         if (summary == null || summary == "") {
             try {
-                summary = geminiContractService.summarizeContract(contract, userId, contractId);
+                summary = geminiContractService.summarizeContract(contract.getFullText(), userId, contractId);
             } catch (RuntimeException ex) {
                 log.severe("Error summarizing contract: " + ex.getMessage());
                 throw ex;
@@ -204,7 +207,7 @@ public class UserContractService {
         String highlight = contract.getFlag();
         if (highlight == null || highlight == "") {
             try {
-                highlight = geminiContractService.highlightContract(contract, userId, contractId);
+                highlight = geminiContractService.highlightContract(contract.getFullText(), userId, contractId);
             } catch (RuntimeException ex) {
                 log.severe("Error generating contract highlight: " + ex.getMessage());
                 throw ex;
@@ -221,7 +224,7 @@ public class UserContractService {
         String suggest = contract.getSuggest();
         if (suggest == null || suggest == "") {
             try {
-                suggest = geminiContractService.suggestContract(contract, userId, contractId);
+                suggest = geminiContractService.suggestContract(contract.getFlag(), userId, contractId);
             } catch (RuntimeException ex) {
                 log.severe("Error generating contract suggestion: " + ex.getMessage());
                 throw ex;
@@ -248,7 +251,7 @@ public class UserContractService {
         }
 
         try {
-            String comparisonResult = geminiContractService.compareContracts(contract1, contract2);
+            String comparisonResult = geminiContractService.compareContracts(contract1.getSummary(), contract2.getSummary());
             String[] clauseSegments = comparisonResult.split(";");
             List<Clause> clauses = new ArrayList<>();
 
