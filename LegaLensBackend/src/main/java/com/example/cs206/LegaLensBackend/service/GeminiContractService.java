@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 public class GeminiContractService {
     // The project ID will be loaded from the credentials file
     private final String projectId;
-    private static final String REGION = "asia-southeast1";
+    private static final String REGION = "us-central1";
     private static final String DEFAULT_CREDENTIALS_FILE = "vertex-api-key.json"; // Place this in src/main/resources
 
     private static final Logger log = Logger.getLogger(GeminiContractService.class.getName());
@@ -63,7 +63,7 @@ public class GeminiContractService {
         // Initialize VertexAI (it will pick up the credentials from the system property)
         try (VertexAI vertexAi = new VertexAI(projectId, REGION)) {
             GenerativeModel model = new GenerativeModel.Builder()
-                    .setModelName("gemini-1.5-pro-001")
+                    .setModelName("gemini-2.0-flash-001")
                     .setVertexAi(vertexAi)
                     .build();
 
@@ -145,6 +145,24 @@ public class GeminiContractService {
             return suggest;
         } catch (Exception e) {
             log.severe("Error suggesting contract: " + e.getMessage());
+            throw new RuntimeException(e); // Wrap checked exceptions in a RuntimeException
+        }
+    }
+
+    public String reviewContract(String contract, String userId, String contractId) {
+        try {
+            log.info("Reviewing changes for contract with ID: " + contractId + " for user ID: " + userId);
+
+            // Prepare the payload for the Gemini API
+            JsonObject payload = new JsonObject();
+            payload.addProperty("contract", contract);
+
+            // Call the Gemini API
+            String review = callGeminiApi("/review.json", payload);
+
+            return review;
+        } catch (Exception e) {
+            log.severe("Error reviewing contract: " + e.getMessage());
             throw new RuntimeException(e); // Wrap checked exceptions in a RuntimeException
         }
     }

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class GeminiService {
 
     private final String projectId;
-    private static final String REGION = "asia-southeast1"; // Example: Singapore region.
+    private static final String REGION = "us-central1"; // Example: Singapore region.
     private static final String DEFAULT_CREDENTIALS_FILE = "vertex-api-key.json";
 
     public GeminiService(@Value("${VERTEX_API_KEY:}") String vertexApiKeyJson) throws IOException {
@@ -57,7 +57,7 @@ public class GeminiService {
 
         try (VertexAI vertexAi = new VertexAI(projectId, REGION)) {
             GenerativeModel model = new GenerativeModel.Builder()
-                    .setModelName("gemini-1.5-flash-001")
+                    .setModelName("gemini-2.0-flash-001")
                     .setVertexAi(vertexAi)
                     .build();
 

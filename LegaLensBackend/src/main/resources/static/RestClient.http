@@ -28,6 +28,10 @@ Content-Type: application/json
 POST http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/suggest
 Content-Type: application/json
 
+### Review Contract
+POST http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/review
+Content-Type: application/json
+
 ### Compare Contract
 GET http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/compare?contractId1=movUCr0Jm5FExePzc0ZG&contractId2=pL6DxxdgxZgif67vcaYk
 Content-Type: application/json
