@@ -113,42 +113,6 @@ public class GeminiContractService {
         }
     }
 
-    public String highlightContract(String contract, String userId, String contractId) {
-        try {
-            log.info("Highlighting contract with ID: " + contractId + " for user ID: " + userId);
-
-            // Prepare the payload for the Gemini API
-            JsonObject payload = new JsonObject();
-            payload.addProperty("contract", contract);
-
-            // Call the Gemini API
-            String highlights = callGeminiApi("/highlight.json", payload);
-
-            return highlights;
-        } catch (Exception e) {
-            log.severe("Error highlighting contract: " + e.getMessage());
-            throw new RuntimeException(e); // Wrap checked exceptions in a RuntimeException
-        }
-    }
-
-    public String suggestContract(String contract, String userId, String contractId) {
-        try {
-            log.info("Suggesting changes for contract with ID: " + contractId + " for user ID: " + userId);
-
-            // Prepare the payload for the Gemini API
-            JsonObject payload = new JsonObject();
-            payload.addProperty("contract", contract);
-
-            // Call the Gemini API
-            String suggest = callGeminiApi("/suggest.json", payload);
-
-            return suggest;
-        } catch (Exception e) {
-            log.severe("Error suggesting contract: " + e.getMessage());
-            throw new RuntimeException(e); // Wrap checked exceptions in a RuntimeException
-        }
-    }
-
     public String reviewContract(String contract, String userId, String contractId) {
         try {
             log.info("Reviewing changes for contract with ID: " + contractId + " for user ID: " + userId);

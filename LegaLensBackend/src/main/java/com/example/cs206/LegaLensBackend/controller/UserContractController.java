@@ -85,26 +85,6 @@ public class UserContractController {
         }
     }
 
-    @PostMapping("/{contractId}/highlight")
-    public ResponseEntity<String> highlightContract(@PathVariable String userId, @PathVariable String contractId) {
-        try {
-            String highlights = userContractService.getUserContractHighlight(userId, contractId);
-            return ResponseEntity.ok(highlights);
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error highlighting contract: " + e.getMessage());
-        }
-    }
-
-    @PostMapping("/{contractId}/suggest")
-    public ResponseEntity<String> suggestContract(@PathVariable String userId, @PathVariable String contractId) {
-        try {
-            String suggestions = userContractService.getUserContractSuggest(userId, contractId);
-            return ResponseEntity.ok(suggestions);
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error suggesting contract: " + e.getMessage());
-        }
-    }
-
     @PostMapping("/{contractId}/review")
     public ResponseEntity<List<Clause>>  reviewContract(@PathVariable String userId, @PathVariable String contractId) {
         try {
