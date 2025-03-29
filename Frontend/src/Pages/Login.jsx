@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
@@ -13,7 +13,6 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
 
     const auth = getAuth();
     const navigate = useNavigate();
@@ -23,7 +22,6 @@ const Login = () => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 try {
-                    setLoading(true);
                     console.log("User logged in:", user.email);
                     const role = await getUserRole(user.email);
 
@@ -32,14 +30,10 @@ const Login = () => {
                     } else {
                         setError('User role not found.');
                     }
-                } catch (error) {
-                    setError('Error retrieving user role.');
-                } finally {
-                    setLoading(false);
-                }
-            } else {
-                setLoading(false);
-            }
+                } catch (e) {
+                    setError(e.message);
+                } 
+            } 
         });
 
         return () => unsubscribe();
@@ -70,7 +64,6 @@ const Login = () => {
         } catch (error) {
             console.error("Login error:", error.message);
             setError("Invalid email or password.");
-            setLoading(false);
         }
     };
 
@@ -85,7 +78,6 @@ const Login = () => {
         } catch (error) {
             console.error("Google login error:", error.message);
             setError("Google login failed.");
-            setLoading(false);
         }
     };
 

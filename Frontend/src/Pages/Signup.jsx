@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc, getDoc, updateDoc, increment } from "firebase/firestore";
-import { collection, query, where, getDocs } from 'firebase/firestore';
 import { FirestoreDB } from '../firebase/firebase_config';  // Firestore instance
-import FBInstanceAuth from "../firebase/firebase_auth";  // Firebase auth helper
 import NavBar from './Navbar.jsx';
-import GoogleCustomButton from "./GoogleButton.jsx";
 import './Signup.css';
 import { Typography } from '@mui/material';
 
