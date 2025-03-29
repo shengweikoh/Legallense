@@ -2,6 +2,7 @@
     background-color: #f4f4f2; 
     width:100vw;
     overflow: hidden;
+    min-height: 100vh; /* Ensure the page covers the full viewport height */
     /* height:1100px; */
 
 }

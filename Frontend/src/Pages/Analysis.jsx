@@ -33,7 +33,6 @@ export default function AnalysisPage() {
                   className="overflow-auto"
                   style={{
                     maxHeight: "65vh",
-                    minHeight: "65vh",
                     width: "100%",
                     padding: "0px",
                     whiteSpace: "pre-line",
@@ -55,17 +54,20 @@ export default function AnalysisPage() {
           >
             <div className="card result">
               <div className="card-header">
-              <Button 
-                  onClick={handleToggleContractDetails}
-                  color="primary"
-                  sx={{marginBottom: 1}}
-                  >{contractDetails ? 'Hide' : 'Show'} Contract Details
-                  </Button>
+
                 <ul
                   className="nav nav-tabs card-header-tabs d-flex justify-content-center gap-4"
                   id="analysisTabs"
                   role="tablist"
                 >
+                  <li className="nav-item">
+                      <Button 
+                      onClick={handleToggleContractDetails}
+                      color="primary"
+                      sx={{marginTop: 1}}
+                      >{contractDetails ? 'Hide' : 'Show'} Contract Details
+                      </Button>
+                  </li>
  
                   <li className="nav-item">
                     <a
@@ -126,7 +128,7 @@ export default function AnalysisPage() {
                     aria-labelledby="summary-tab"
                     style={{
                       whiteSpace: "normal",
-                      maxHeight: "64vh",
+                      maxHeight: "65vh",
                       overflowY: "auto",
                       lineHeight: 1.8,
                     }}

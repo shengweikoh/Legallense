@@ -8,8 +8,8 @@
 
 .card.job-card{
     margin-top: 15vh;
-    max-height:75vh;
-    width:2000px;
+    max-height:85vh;
+    min-width:90vw;
 }
 
 .job-card {
