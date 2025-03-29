@@ -17,23 +17,15 @@ GET http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUC
 PUT http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/set-premium
 
 ### Summarize Contract
-POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/y0Qm7gV3HH7dHFlaOIh1/summarize
-Content-Type: application/json
-
-### Highlight Contract
-POST http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/highlight
-Content-Type: application/json
-
-### Suggest Contract
-POST http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/suggest
+POST http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/summarize
 Content-Type: application/json
 
 ### Review Contract
-POST http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/review
+POST http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/OcwAFZQTUrt9oH1OGcsm/review
 Content-Type: application/json
 
 ### Compare Contract
-GET http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/compare?contractId1=movUCr0Jm5FExePzc0ZG&contractId2=pL6DxxdgxZgif67vcaYk
+GET http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/compare?contractId1=OcwAFZQTUrt9oH1OGcsm&contractId2=movUCr0Jm5FExePzc0ZG
 Content-Type: application/json
 
 

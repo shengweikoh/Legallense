@@ -55,7 +55,7 @@ public class UserContractService {
         DocumentSnapshot document = future.get();
 
         if (document.exists()) {
-            log.info("Contract found: " + document.getData());
+            log.info("Contract found: " + contractId);
             // Map the Firestore document to the Contract object
             return document.toObject(Contract.class);
         } else {
@@ -102,9 +102,7 @@ public class UserContractService {
         contract.setFullText(fullText);
         contract.setPremiumPaid(true); // Default value
         contract.setSummary(""); // Placeholder for summary
-        contract.setFlag(""); // Placeholder for flag
-        contract.setReview(""); // Placeholder for flag
-        contract.setSuggest(""); // Placeholder for suggestions
+        contract.setReview(""); // Placeholder for review
         contract.setDateUploaded(); // Set the current date as a String
 
         // Save the contract to Firestore
@@ -186,7 +184,7 @@ public class UserContractService {
         return contractDetailsList;
     }
 
-    public  List<Clause> getUserContractSummary(String userId, String contractId) throws Exception {
+    public List<Clause> getUserContractSummary(String userId, String contractId) throws Exception {
         Contract contract = getUserContractById(userId, contractId);
         String summary = contract.getSummary();
         if (summary == null || summary == "") {
@@ -206,40 +204,6 @@ public class UserContractService {
 
         parseClauseSegments(clauseSegments, clauses);
         return clauses;
-    }
-
-    public String getUserContractHighlight(String userId, String contractId) throws Exception {
-        Contract contract = getUserContractById(userId, contractId);
-        String highlight = contract.getFlag();
-        if (highlight == null || highlight == "") {
-            try {
-                highlight = geminiContractService.highlightContract(contract.getFullText(), userId, contractId);
-            } catch (RuntimeException ex) {
-                log.severe("Error generating contract highlight: " + ex.getMessage());
-                throw ex;
-            }
-            // Update the flag field in Firestore
-            contract.setFlag(highlight);
-            updateContractInFirestore(userId, contractId, contract);
-        }
-        return highlight;
-    }
-
-    public String getUserContractSuggest(String userId, String contractId) throws Exception {
-        Contract contract = getUserContractById(userId, contractId);
-        String suggest = contract.getSuggest();
-        if (suggest == null || suggest == "") {
-            try {
-                suggest = geminiContractService.suggestContract(contract.getFlag(), userId, contractId);
-            } catch (RuntimeException ex) {
-                log.severe("Error generating contract suggestion: " + ex.getMessage());
-                throw ex;
-            }
-            // Update the suggest field in Firestore
-            contract.setSuggest(suggest);
-            updateContractInFirestore(userId, contractId, contract);
-        }
-        return suggest;
     }
 
     public  List<Clause> getUserContractReview(String userId, String contractId) throws Exception {
@@ -280,7 +244,7 @@ public class UserContractService {
 
         try {
             String comparisonResult = geminiContractService.compareContracts(contract1.getSummary(), contract2.getSummary());
-            String[] clauseSegments = comparisonResult.split(";");
+            String[] clauseSegments = comparisonResult.split(";;");
             List<Clause> clauses = new ArrayList<>();
 
             Clause clauseName = new Clause();
@@ -318,7 +282,6 @@ public class UserContractService {
             }
             
             String[] parts = segment.split("\\],\\s*\\[");
-            
             Clause clause = new Clause();
             clause.setClauseName(parts[0].trim().replaceAll("\\s{2,}", " "));
             clause.setContent1(parts[1].trim().replaceAll("\\s{2,}", " "));
