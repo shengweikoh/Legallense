@@ -13,6 +13,7 @@ Content-Type: application/json
 ### Get contract
 GET http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp9FPfdivuNFxlD4Q
 
+
 ### Upgrade contract to premium
 PUT http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp9FPfdivuNFxlD4Q/set-premium
 
