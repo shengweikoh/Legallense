@@ -7,6 +7,7 @@ public class Contract {
     private String fullText;
     private String summary;
     private String flag;
+    private String review;
     private String suggest;
     private String dateUploaded; // Change to String for compatibility
 
@@ -57,6 +58,14 @@ public class Contract {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
     }
 
     public String getSuggest() {

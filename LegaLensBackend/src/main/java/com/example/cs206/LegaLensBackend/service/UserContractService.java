@@ -103,6 +103,7 @@ public class UserContractService {
         contract.setPremiumPaid(true); // Default value
         contract.setSummary(""); // Placeholder for summary
         contract.setFlag(""); // Placeholder for flag
+        contract.setReview(""); // Placeholder for flag
         contract.setSuggest(""); // Placeholder for suggestions
         contract.setDateUploaded(); // Set the current date as a String
 
@@ -241,6 +242,28 @@ public class UserContractService {
         return suggest;
     }
 
+    public  List<Clause> getUserContractReview(String userId, String contractId) throws Exception {
+        Contract contract = getUserContractById(userId, contractId);
+        String review = contract.getReview();
+        if (review == null || review == "") {
+            try {
+                review = geminiContractService.reviewContract(contract.getFullText(), userId, contractId);
+            } catch (RuntimeException ex) {
+                log.severe("Error summarizing contract: " + ex.getMessage());
+                throw ex;
+            }
+            
+            // Update the review field in Firestore
+            contract.setReview(review);
+            updateContractInFirestore(userId, contractId, contract);
+        }
+        String[] clauseSegments = review.split(";");
+        List<Clause> clauses = new ArrayList<>();
+
+        parseClauseSegments(clauseSegments, clauses);
+        return clauses;
+    }
+
     public List<Clause> getUserContractCompare(String userId, String contractId1, String contractId2) throws Exception {
         log.info("Comparing contracts with IDs: " + contractId1 + " and " + contractId2 + " for user ID: " + userId);
         // Retrieve the first contract
@@ -297,7 +320,7 @@ public class UserContractService {
             String[] parts = segment.split("\\],\\s*\\[");
             
             Clause clause = new Clause();
-            clause.setClauseName(parts[0].trim());
+            clause.setClauseName(parts[0].trim().replaceAll("\\s{2,}", " "));
             clause.setContent1(parts[1].trim().replaceAll("\\s{2,}", " "));
             if (parts.length > 2) {
                 clause.setContent2(parts[2].trim().replaceAll("\\s{2,}", " "));

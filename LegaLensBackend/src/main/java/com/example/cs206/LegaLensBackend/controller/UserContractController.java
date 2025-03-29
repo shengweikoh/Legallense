@@ -74,7 +74,6 @@ public class UserContractController {
             return ResponseEntity.status(500).body("Error fetching contracts: " + e.getMessage());
         }
     }
-    // here
 
     @PostMapping("/{contractId}/summarize")
     public ResponseEntity<List<Clause>>  summarizeContract(@PathVariable String userId, @PathVariable String contractId) {
@@ -103,6 +102,16 @@ public class UserContractController {
             return ResponseEntity.ok(suggestions);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error suggesting contract: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/{contractId}/review")
+    public ResponseEntity<List<Clause>>  reviewContract(@PathVariable String userId, @PathVariable String contractId) {
+        try {
+            List<Clause> review = userContractService.getUserContractReview(userId, contractId);
+            return ResponseEntity.ok(review);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
         }
     }
 
