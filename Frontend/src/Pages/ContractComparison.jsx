@@ -14,6 +14,7 @@ export default function ContractComparison() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const { user } = useAuth();
+    
     // Helper function to format text by removing extra spaces
     const formatText = (text) => {
       return text
@@ -93,10 +94,10 @@ export default function ContractComparison() {
                         <tr key={index} className="table-row">
                           <td className="table-label">{clause.clauseName}</td>
                           <td className="table-value">
-                            {formatText(clause.content1)}
+                            {clause.content1}
                           </td>
                           <td className="table-value">
-                            {formatText(clause.content2)}
+                            {clause.content2}
                           </td>
                         </tr>
                       ))}
