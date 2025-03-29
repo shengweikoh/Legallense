@@ -135,7 +135,7 @@ const cleanContractText = (text) => {
   
   return (
         
-    <div style = {{textAlign: 'left'}}>
+    <div style = {{textAlign: 'center'}}>
       {renderHighlightedText(cleanContractText(details))}
     </div>
   );
