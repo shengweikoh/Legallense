@@ -54,17 +54,20 @@ export default function AnalysisPage() {
           >
             <div className="card result">
               <div className="card-header">
-              <Button 
-                  onClick={handleToggleContractDetails}
-                  color="primary"
-                  sx={{marginBottom: 1}}
-                  >{contractDetails ? 'Hide' : 'Show'} Contract Details
-                  </Button>
+
                 <ul
                   className="nav nav-tabs card-header-tabs d-flex justify-content-center gap-4"
                   id="analysisTabs"
                   role="tablist"
                 >
+                  <li className="nav-item">
+                      <Button 
+                      onClick={handleToggleContractDetails}
+                      color="primary"
+                      sx={{marginTop: 1}}
+                      >{contractDetails ? 'Hide' : 'Show'} Contract Details
+                      </Button>
+                  </li>
  
                   <li className="nav-item">
                     <a
