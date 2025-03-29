@@ -2,8 +2,8 @@ package com.example.cs206.LegaLensBackend.model;
 
 public class Clause {
     private String clauseName;
-    private String contract1;
-    private String contract2;
+    private String content1;
+    private String content2;
 
     public String getClauseName() {
         return clauseName;
@@ -11,16 +11,16 @@ public class Clause {
     public void setClauseName(String clauseName) {
         this.clauseName = clauseName;
     }
-    public String getContract1() {
-        return contract1;
+    public String getContent1() {
+        return content1;
     }
-    public void setContract1(String contract1) {
-        this.contract1 = contract1;
+    public void setContent1(String content1) {
+        this.content1 = content1;
     }
-    public String getContract2() {
-        return contract2;
+    public String getContent2() {
+        return content2;
     }
-    public void setContract2(String contract2) {
-        this.contract2 = contract2;
+    public void setContent2(String content2) {
+        this.content2 = content2;
     }
 }

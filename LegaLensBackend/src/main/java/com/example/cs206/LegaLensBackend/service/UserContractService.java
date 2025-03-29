@@ -185,7 +185,7 @@ public class UserContractService {
         return contractDetailsList;
     }
 
-    public String getUserContractSummary(String userId, String contractId) throws Exception {
+    public  List<Clause> getUserContractSummary(String userId, String contractId) throws Exception {
         Contract contract = getUserContractById(userId, contractId);
         String summary = contract.getSummary();
         if (summary == null || summary == "") {
@@ -195,11 +195,16 @@ public class UserContractService {
                 log.severe("Error summarizing contract: " + ex.getMessage());
                 throw ex;
             }
+            
             // Update the summary field in Firestore
             contract.setSummary(summary);
             updateContractInFirestore(userId, contractId, contract);
         }
-        return summary;
+        String[] clauseSegments = summary.split(";");
+        List<Clause> clauses = new ArrayList<>();
+
+        parseClauseSegments(clauseSegments, clauses);
+        return clauses;
     }
 
     public String getUserContractHighlight(String userId, String contractId) throws Exception {
@@ -257,41 +262,47 @@ public class UserContractService {
 
             Clause clauseName = new Clause();
             clauseName.setClauseName("Contract Name");
-            clauseName.setContract1(contract1.getContractName());
-            clauseName.setContract2(contract2.getContractName());
+            clauseName.setContent1(contract1.getContractName());
+            clauseName.setContent2(contract2.getContractName());
             clauses.add(clauseName);
-            
-            for (String segment : clauseSegments) {
-                segment = segment.trim();
-                if (segment.isEmpty()) {
-                    continue;
-                }
-                
-                
-                if (segment.startsWith("[")) {
-                    segment = segment.substring(1);
-                }
-                if (segment.startsWith("\"[")) {
-                    segment = segment.substring(3);
-                }
-                if (segment.endsWith("]")) {
-                    segment = segment.substring(0, segment.length() - 1);
-                }
-                
-                String[] parts = segment.split("\\],\\s*\\[");
-                
-                if (parts.length >= 3) {
-                    Clause clause = new Clause();
-                    clause.setClauseName(parts[0].trim());
-                    clause.setContract1(parts[1].trim());
-                    clause.setContract2(parts[2].trim());
-                    clauses.add(clause);
-                }
-            }
+
+            parseClauseSegments(clauseSegments, clauses);
             return clauses;
         } catch (RuntimeException ex) {
             log.severe("Error comparing contracts: " + ex.getMessage());
             throw ex;
+        }
+    }
+
+    private void parseClauseSegments(String[] clauseSegments, List<Clause> clauses) {
+        for (String segment : clauseSegments) {
+            segment = segment.trim();
+            if (segment.isEmpty()) {
+                continue;
+            }
+            
+            if (segment.startsWith("[")) {
+                segment = segment.substring(1);
+            }
+            if (segment.startsWith("\"[")) {
+                segment = segment.substring(3);
+            }
+            if (segment.endsWith("]")) {
+                segment = segment.substring(0, segment.length() - 1);
+            }
+            if (segment.endsWith("]\"")) {
+                segment = segment.substring(0, segment.length() - 2);
+            }
+            
+            String[] parts = segment.split("\\],\\s*\\[");
+            
+            Clause clause = new Clause();
+            clause.setClauseName(parts[0].trim());
+            clause.setContent1(parts[1].trim().replaceAll("\\s{2,}", " "));
+            if (parts.length > 2) {
+                clause.setContent2(parts[2].trim().replaceAll("\\s{2,}", " "));
+            }
+            clauses.add(clause);
         }
     }
 }

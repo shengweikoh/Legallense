@@ -11,26 +11,25 @@ Content-Type: application/json
 }
 
 ### Get contract
-GET http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp9FPfdivuNFxlD4Q
-
+GET http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG
 
 ### Upgrade contract to premium
-PUT http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp9FPfdivuNFxlD4Q/set-premium
+PUT http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/set-premium
 
 ### Summarize Contract
-POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp9FPfdivuNFxlD4Q/summarize
+POST http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/summarize
 Content-Type: application/json
 
 ### Highlight Contract
-POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp9FPfdivuNFxlD4Q/highlight
+POST http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/highlight
 Content-Type: application/json
 
 ### Suggest Contract
-POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp9FPfdivuNFxlD4Q/suggest
+POST http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/suggest
 Content-Type: application/json
 
 ### Compare Contract
-GET http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/compare?contractId1=og3cp9FPfdivuNFxlD4Q&contractId2=pL6DxxdgxZgif67vcaYk
+GET http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/compare?contractId1=movUCr0Jm5FExePzc0ZG&contractId2=pL6DxxdgxZgif67vcaYk
 Content-Type: application/json
 
 
@@ -39,7 +38,7 @@ Content-Type: application/json
 GET https://legalens.onrender.com/health
 
 ### Get contract
-GET https://legalens.onrender.com/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp9FPfdivuNFxlD4Q
+GET https://legalens.onrender.com/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG
 
 ### Test if Gemini Works
 POST https://legalens.onrender.com/api/gemini/chat
@@ -50,5 +49,5 @@ Content-Type: application/json
 }
 
 ### Summarize Contract
-POST https://legalens.onrender.com/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/og3cp9FPfdivuNFxlD4Q/summarize
+POST https://legalens.onrender.com/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/summarize
 Content-Type: application/json 

@@ -77,13 +77,12 @@ public class UserContractController {
     // here
 
     @PostMapping("/{contractId}/summarize")
-    public ResponseEntity<String> summarizeContract(@PathVariable String userId, @PathVariable String contractId) {
+    public ResponseEntity<List<Clause>>  summarizeContract(@PathVariable String userId, @PathVariable String contractId) {
         try {
-            String summary = userContractService.getUserContractSummary(userId, contractId);
+            List<Clause> summary = userContractService.getUserContractSummary(userId, contractId);
             return ResponseEntity.ok(summary);
         } catch (Exception e) {
-
-            return ResponseEntity.status(500).body("Error summarizing contract: " + e.getMessage());
+            return ResponseEntity.status(500).build();
         }
     }
 
