@@ -1,21 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
-import Logo from "./Animation/LegalLense.png";
 import { useNavigate } from "react-router-dom";
 import {
-  AppWindow,
   HandCoins,
   Handshake,
-  GavelIcon,
-  HistoryIcon,
-  UploadIcon,
   HomeIcon,
-  Home,
   CircleUserRound,
 } from "lucide-react";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import FBInstanceAuth from "../firebase/firebase_auth";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { FirestoreDB } from "../firebase/firebase_config";
 import { Button, createTheme, ThemeProvider } from "@mui/material";
@@ -51,9 +45,6 @@ const Navbar = () => {
       },
     });
 
-  const handleLoginClick = () => {
-    navigate("/login");
-  };
 
   const handleOpen = () => {
     setOpen(true);

@@ -1,8 +1,7 @@
-import React , {useEffect, useState} from 'react';
-import { useParams, Link, useNavigate } from "react-router-dom";
+import {useEffect, useState} from 'react';
+import { useParams, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "./ContractComparison.css";
-import { motion } from "framer-motion";
 import geminiApi from '../services/geminiApi';
 import { useAuth } from '../contexts/AuthContext';
 import { Button, Typography } from '@mui/material';
@@ -83,8 +82,8 @@ export default function ContractComparison() {
                   <thead>
                     <tr className="table-header-row">
                       <th className="table-heading">Category</th>
-                      <th className="table-heading">{contractNames.contract1}</th>
-                      <th className="table-heading">{contractNames.contract2}</th>
+                      <th className="table-heading">{contractNames.content1}</th>
+                      <th className="table-heading">{contractNames.content2}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -94,10 +93,10 @@ export default function ContractComparison() {
                         <tr key={index} className="table-row">
                           <td className="table-label">{clause.clauseName}</td>
                           <td className="table-value">
-                            {formatText(clause.contract1)}
+                            {formatText(clause.content1)}
                           </td>
                           <td className="table-value">
-                            {formatText(clause.contract2)}
+                            {formatText(clause.content2)}
                           </td>
                         </tr>
                       ))}

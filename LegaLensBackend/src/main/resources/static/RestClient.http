@@ -17,7 +17,7 @@ GET http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUC
 PUT http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/set-premium
 
 ### Summarize Contract
-POST http://localhost:8080/api/users/6SUmHWN1wEbVNKMfV9uA2wh0rF03/contracts/movUCr0Jm5FExePzc0ZG/summarize
+POST http://localhost:8080/api/users/ri9dBBETxnc7rtvav1faXE1NaoB3/contracts/y0Qm7gV3HH7dHFlaOIh1/summarize
 Content-Type: application/json
 
 ### Highlight Contract

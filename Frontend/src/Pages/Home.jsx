@@ -1,8 +1,7 @@
 import "./Home.css";
-import React, { useEffect, useRef , useState} from 'react';
+import { useEffect, useRef , useState} from 'react';
 import { motion } from "framer-motion";
 import TypingEffect from "./Animation/Typing";
-import chatbotGif from "./Animation/Chatbot.gif";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
