@@ -26,11 +26,11 @@ export const Review = () => {
                   </Typography>
                 }
               />
-              <CardContent>
-                <Typography variant="body2">
+          <CardContent sx={{ pb: 0, '&:last-child': { pb: 0 } }}> 
+            <Typography>
                   <strong>Description:</strong> {clause.content1}
                 </Typography>
-                <Typography variant="body2">
+                <Typography>
                   <strong>Suggestion:</strong> {clause.content2}
                 </Typography>
               </CardContent>
