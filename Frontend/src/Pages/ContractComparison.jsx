@@ -5,6 +5,7 @@ import "./ContractComparison.css";
 import geminiApi from '../services/geminiApi';
 import { useAuth } from '../contexts/AuthContext';
 import { Button, Typography } from '@mui/material';
+import "../components/markdown.css";
 
 
 export default function ContractComparison() {
@@ -92,12 +93,12 @@ export default function ContractComparison() {
                       .filter((clause, index) => index > 0)
                       .map((clause, index) => (
                         <tr key={index} className="table-row">
-                          <td className="table-label">{clause.clauseName}</td>
-                          <td className="table-value">
-                            {clause.content1}
+                          <td className="table-label markdown"><p>{clause.clauseName}</p></td>
+                          <td className="table-value markdown">
+                            <p>{clause.content1}</p>
                           </td>
-                          <td className="table-value">
-                            {clause.content2}
+                          <td className="table-value markdown">
+                            <p>{clause.content2}</p>
                           </td>
                         </tr>
                       ))}
