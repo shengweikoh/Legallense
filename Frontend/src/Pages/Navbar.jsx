@@ -128,7 +128,7 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="info-container">
-
+{/* 
             <ThemeProvider theme={theme}>
                 
                 {user && <Button className="info-text" onClick={handleOpen} sx = {{textTransform: 'capitalize'}}>
@@ -162,9 +162,9 @@ const Navbar = () => {
                     </DialogActions>
                 </Dialog>
 
-            </ThemeProvider>
+            </ThemeProvider> */}
 
-
+{/* 
             <Dialog
                     open={open}
                     onClose={handleClose}
@@ -190,12 +190,12 @@ const Navbar = () => {
                         </Button>
 
                     </DialogActions>
-                </Dialog>
+                </Dialog> */}
 
-            {user && <span className="info-text">
+            {/* {user && <span className="info-text">
               <HandCoins className="handcoin"></HandCoins>Free Upgrade:{" "}
               {freeUpgrade != null ? freeUpgrade : "Loading..."}{" "}
-            </span>}
+            </span>} */}
 
             {user ? (
               <button className="logout" onClick={handleLogout}>
