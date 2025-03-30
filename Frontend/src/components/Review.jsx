@@ -10,9 +10,9 @@ export const Review = () => {
         <div className="markdown" style={{ textAlign: "left" }}>
           {data.map((clause, index) => (
             <Card key={index} variant="outlined" sx={{ mb: 2, borderRadius: 2, boxShadow: '0px 4px 10px rgba(0,0,0,0.15)',}}>
-              <CardHeader
+              <CardHeader sx = {{"&:first-child": {pb: 0}}}
                 title={
-                  <Typography variant="h5" component="div">
+                  <Typography variant="h6" component="div">
                     <strong>
                       Problem {index + 1}: {clause.clauseName}
                     </strong>

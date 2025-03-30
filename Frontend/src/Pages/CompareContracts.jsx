@@ -117,53 +117,51 @@ export default function ContractCompare() {
               </div>
 
               {/* Right Selection Column */}
-              {selectedLeft &&               <div className="col-md-6 px-2 ">
-                <h4 className="text-center">Select another contract</h4>
-                <p className="text-center">
-                  Select the second contract for comparison
-                </p>
-                <div style={{ maxHeight: "60vh", overflowY: "auto" }}>
-                  {contracts.map((contract) => (
-                    <div
-                      key={contract.documentId}
-                      className={`card mb-4 shadow-sm mx-auto ${
-                        selectedRight === contract.documentId
-                          ? "border-primary"
-                          : ""
-                      }`}
-                      style={{
-                        opacity:
-                          selectedRight && selectedRight !== contract.documentId
-                            ? 0.5
-                            : 1,
-                        cursor: "pointer",
-                        padding: "5px",
-                      }}
-                      onClick={() => handleSelect(contract.documentId, "right")}
-                    >
-                      <div className="card-body">
-                        <h5 className="card-title">{contract.contractName}</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">
-                          Analyzed on {contract.dateUploaded}
-                        </h6>
-                        <button
-                          className={`btn w-100 ${
-                            selectedRight === contract.documentId
-                              ? "btn-primary"
-                              : "btn-outline-dark"
-                          }`}
-                          disabled={selectedRight === contract.documentId}
-                        >
-                          {selectedRight === contract.documentId
-                            ? "Selected"
-                            : "Compare"}
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>}
+              {selectedLeft && (
+                <div className="col-md-6 px-2 ">
+                  <h4 className="text-center">Select another contract</h4>
+                  <p className="text-center">
+                    Select the second contract for comparison
+                  </p>
+                  <div style={{ maxHeight: "60vh", overflowY: "auto" }}>
+                  {contracts.map((contract) => {
+  const isSelectedOnLeft = selectedLeft === contract.documentId;
+  const isSelectedOnRight = selectedRight === contract.documentId;
 
+  return (
+    <div
+      key={contract.documentId}
+      className={`card mb-4 shadow-sm mx-auto ${isSelectedOnRight ? "border-primary" : ""}`}
+      style={{
+        opacity: isSelectedOnLeft || (selectedRight && !isSelectedOnRight) ? 0.5 : 1,
+        cursor: isSelectedOnLeft ? "not-allowed" : "pointer",
+        padding: "5px",
+      }}
+      onClick={() => {
+        // Do nothing if it's disabled
+        if (!isSelectedOnLeft) {
+          handleSelect(contract.documentId, "right");
+        }
+      }}
+    >
+      <div className="card-body">
+        <h5 className="card-title">{contract.contractName}</h5>
+        <h6 className="card-subtitle mb-2 text-muted">
+          Analyzed on {contract.dateUploaded}
+        </h6>
+        <button
+          className={`btn w-100 ${isSelectedOnRight ? "btn-primary" : "btn-outline-dark"}`}
+          disabled={isSelectedOnRight || isSelectedOnLeft}
+        >
+          {isSelectedOnRight ? "Selected" : "Compare"}
+        </button>
+      </div>
+    </div>
+  );
+})}
+                  </div>
+                </div>
+              )}
             </div>
           </motion.div>
 
