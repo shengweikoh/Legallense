@@ -181,7 +181,7 @@ const Signup = () => {
                                         </div>
 
 
-                                        <div className="form-group">
+                                        {/* <div className="form-group">
                                             <label className="referral">Referral code</label>
                                             <input
                                                 name="referral"
@@ -191,7 +191,7 @@ const Signup = () => {
                                                 value={formData.referral}
                                                 onChange={handleChange}
                                             />
-                                        </div>
+                                        </div> */}
 
                                         <div className="auth-links">
                                             <Link to="/login" className="login-link">Already have an account? Log in</Link>
