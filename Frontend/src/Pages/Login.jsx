@@ -123,12 +123,12 @@ const Login = () => {
                                         </div>
                                         <div className="auth-links">
                                             <Link to="/signup" className="register-link">Register an Account</Link>
-                                            <Link to="/forgot-password">Forgot your password?</Link>
+                                            {/* <Link to="/forgot-password">Forgot your password?</Link> */}
                                         </div>
                                         <button type="submit">Login</button>
-                                        <small className="text2">Or</small>
+                                        {/* <small className="text2">Or</small> */}
 
-                                        <GoogleCustomButton onClick={handleGoogleLogin} />
+                                        {/* <GoogleCustomButton onClick={handleGoogleLogin} /> */}
                                     </form>
                                 </div>
                             </div>
