@@ -43,7 +43,7 @@ export default function Dashboard() {
           <div className="card h-100">
             <div className="card-header">
               <h5 className="card-title">Contract History</h5>
-              <small className="text-muted">View your past analyses. Note that only paid notes are stored in your history.</small>
+              <small className="text-muted">View the analyses of your past contracts.</small>
             </div>
             <div className="card-body d-flex align-items-center justify-content-center">
               <Link to="/history" className="history btn btn-primary w-100">
@@ -58,7 +58,7 @@ export default function Dashboard() {
           <div className="card h-100">
             <div className="card-header">
               <h5 className="card-title">Compare Contracts</h5>
-              <small className="text-muted">Compare across 2 contracts. Note that you can only compare paid contracts</small>
+              <small className="text-muted">Compare terms and clauses across 2 contracts.</small>
             </div>
             <div className="card-body d-flex align-items-center justify-content-center">
               <Link to="/compare" className="history btn btn-primary w-100">
