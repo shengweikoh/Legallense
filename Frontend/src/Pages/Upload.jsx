@@ -179,9 +179,9 @@ export default function UploadContract() {
           handleOpen={handleOpen}
           handleClose={handleClose}
           dialogButtonText="Continue to analysis"
-          dialogTitle="Important notice : Not legal advice"
-          dialogContent="This application is not a substitute for professional legal counsel. By continuing, you acknowledge
-      that any information provided is purely for reference and should not be taken as legal advice."
+          dialogTitle="Please read and acknowledge before continuing"
+          dialogContent={`All information provided herein is solely for informational purposes and should not be construed as legal advice.
+            By proceeding, you acknowledge your understanding of these terms and consent to the processing, storage, and analysis of your contract within our database.`}         
           handleAction={handleRedirect}
           actionButtonText="Yes, I acknowledge"
         />
