@@ -4,6 +4,9 @@ import {
   HistoryIcon,
   AlertTriangleIcon,
   EditIcon,
+  FileCheck,
+  Speech,
+  ArrowLeftRight,
 } from "lucide-react";
 import "./Dashboard.css"; // Import custom CSS
 import { motion } from "framer-motion";
@@ -76,7 +79,7 @@ export default function Dashboard() {
 
         <div className="row mt-5">
           <div className="col-md-6 d-flex mb-3">
-            <AlertTriangleIcon className="me-3" size={24} color="orange" />
+            <FileCheck className="me-3" size={24} color="green"/>
             <div>
               <h5>Summarise contracts</h5>
               <p className="mb-0">
@@ -86,7 +89,7 @@ export default function Dashboard() {
 
           </div>
           <div className="col-md-6 d-flex mb-3">
-            <EditIcon className="me-3" size={24} color="green" />
+            <EditIcon className="me-3" size={24}color="orange"/>
             <div>
               <h5>Highlight Concerning Clauses</h5>
               <p className="mb-0">
@@ -98,7 +101,7 @@ export default function Dashboard() {
 
         <div className="row ">
           <div className="col-md-6 d-flex mt-5">
-            <AlertTriangleIcon className="me-3" size={24} color="orange" />
+            <Speech className="me-3" size={24} color="green"/>
             <div>
               <h5>Suggest improvements</h5>
               <p className="mb-0">
@@ -108,7 +111,7 @@ export default function Dashboard() {
           </div>
 
           <div className="col-md-6 d-flex mt-5">
-            <EditIcon className="me-3" size={24} color="green" />
+            <ArrowLeftRight className="me-3" size={24} color="orange" />
             <div>
               <h5>Compare</h5>
               <p className="mb-0 ">
