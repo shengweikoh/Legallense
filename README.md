@@ -1,3 +1,7 @@
+## Website ##
+https://legalens.vercel.app
+
+## Local deployment ##
 Place .env.local in Frontend folder
 Place serviceAccountKey in root
 
