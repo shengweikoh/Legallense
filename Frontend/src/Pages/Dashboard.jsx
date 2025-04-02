@@ -32,7 +32,7 @@ export default function Dashboard() {
           <div className="card h-100">
             <div className="card-header">
               <h5 className="card-title ">Upload Contract</h5>
-              <small className="text-muted  ">Analyze a new contract</small>
+              <small className="text-muted  ">Analyse a new contract</small>
             </div>
             <div className="card-body d-flex align-items-center justify-content-center">
               <Link to="/upload" className="btn btn-primary w-100 mt-4">
