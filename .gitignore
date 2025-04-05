@@ -2,7 +2,6 @@
 .env*.local
 
 ./Frontend/.env
-
 # vercel
 .vercel
 
