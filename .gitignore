@@ -11,3 +11,4 @@ LegaLensBackend/src/main/resources/vertex-api-key.json
 LegaLensBackend/src/main/resources/serviceAccountKey.json
 Frontend/.env.development
 Frontend/.env.production
+Frontend/.env
