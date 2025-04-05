@@ -1,6 +1,8 @@
 # local env files
 .env*.local
 
+./Frontend/.env
+
 # vercel
 .vercel
 
